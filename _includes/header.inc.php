@@ -17,7 +17,7 @@
 		<h2><?php echo $header_subtitle; ?></h2>
 	</div>
 	
-	<div id="content">
+	<div id="page_content">
 	
 <?php   //  Show system messages; useful for info or for debugging
 	if (isset($_SESSION['message']) && $_SESSION['message'] != '') {

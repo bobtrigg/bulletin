@@ -38,7 +38,7 @@
 	<?php include('../../_includes/Header.htm');?>
 	<?php include('../../_includes/LeftCol.htm');?>
 	<?php include('../../_includes/RightCol.htm');?>
-  <div id="content">
+  <div id="page_content">
 	<?php include('../../_includes/share.htm');?>
 
 	<div id="wbHeader">

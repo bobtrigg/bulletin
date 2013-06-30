@@ -1,7 +1,7 @@
 /*
 Author:	Christopher Robinson
-Revised by: Bob Trigg, March, 2012
-Email: christopher@edg3.co.uk
+Revised by: Bob Trigg, various times
+Email: christopher@edg3.co.uk, bobtrigg94930@gmail.com
 Website: http://www.edg3.co.uk/
 */
 * {
@@ -78,31 +78,31 @@ p.clear {
 	padding:0 20px 20px 20px;
 }
 
-/* content */
-#content {
+/* page_content */
+#page_content {
 	width:722px;
 	padding: 15px;
 	background-color: #f8f8f8;
 	border: solid #ccc 1px;
 	clear:both;
 }
-#content h1 {
+#page_content h1 {
 	border-bottom:1px dashed #999;
 	font-size:1.8em;
 	padding:20px 0 0;
 }
-#content p {
+#page_content p {
 	padding:20px 20px 0 20px;
 }
-#content ul{
+#page_content ul{
 	margin:1em 0 0 40px;
 }
 
 /*  form styles  */
-#content form {
+#page_content form {
 	margin: 10px 0;
 }
-#content form p {
+#page_content form p {
 	padding: 10px 0 10px 45px;
 }
 form input , form textarea, form select {
@@ -120,20 +120,13 @@ form select option {
 	padding: 0 5px;
 	font-size: 90%;
 }
-.instruction {
-	color: #666;
-	padding-left: 130px;
-	font-size: 75%;
+textarea {
+	width:625px;
 }
 .required {
 	float: left;
 	font-weight: bold;
 	color: #C00;
-}
-.formats {
-	float: left;
-	padding-top: 30px;
-	font-size: 100%;
 }
 .event_selector {
 	float:left;
@@ -152,19 +145,6 @@ form select option {
 #datatable td {
 	font-size: 75%;
 	padding: 0 5px;
-}
-/*  calendar grid table  */
-#cal_table {
-	margin: 10px auto;
-	border-collapse:collapse;
-}
-#cal_table .cell {
-	width: 90px;
-	height: 90px;
-	text-align: left;
-	border: 1px solid #999;
-	padding: 5px;
-	font-size:75%;
 }
 /* footer */
 #footer {
