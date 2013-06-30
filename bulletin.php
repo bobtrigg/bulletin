@@ -38,14 +38,14 @@
 	<?php include('../../_includes/Header.htm');?>
 	<?php include('../../_includes/LeftCol.htm');?>
 	<?php include('../../_includes/RightCol.htm');?>
-  <div id="page_content">
+  <div id="content">
 	<?php include('../../_includes/share.htm');?>
 
 	<div id="wbHeader">
 	<p><strong>MARIN COUNTY BICYCLE COALITION (MCBC)<br>WEEKLY BULLETIN</strong><br>
 	
 	<?php
-		include('../../_includes/functions.inc.php');
+		include('_includes/functions.inc.php');
 
 		//  Check for date in $_GET superglobal; set default if not provided
 		if (isset($_GET['date'])) {
@@ -58,12 +58,12 @@
 		$stamp = getstamp($wb_date);
 		echo date('F j, Y',$stamp) . '</p>'	;
 		
-		require_once('../../classes/item.class.php');
-		require_once('../../_includes/db_functions.inc.php');
+		require_once('classes/item.class.php');
+		require_once('_includes/db_functions.inc.php');
 	
 		//  Reformat date for database use and create query string
 		$db_date = db_format_date($wb_date);
-		$query_string = 'SELECT * FROM bulletin WHERE bulletin_date = "' . $wb_date . '" ORDER BY position';
+		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date . '" ORDER BY position';
 		
 		//  1st query: linked TOC
 		$item_list = mysqli_query($dbc, $query_string);
@@ -71,7 +71,7 @@
 		
 		echo "<ol>\n";
 		
-		//  Loop through items 
+		//  Loop through items -- **** This logic woill be replaced with JavaScript in a later release!!!
 		while ($item = mysqli_fetch_array($item_list)) {
 			echo '<li><a href="#' . str_replace(' ','',$item['title']) . '">' . $item['title'] . '</a></li>';
 		}
@@ -95,7 +95,7 @@
 			echo $item['subtitle'] . '</p>';
 			
 			//  Code image, with link to fancybox popup
-			if (!is_null($item['image_link_url'])) {
+			if (!is_null($item['graphic_link'])) {
 			
 				//  Set image height and width
 				$image_size_info = getimagesize($item['image_link_url']);
@@ -118,7 +118,7 @@
 			}
 			
 			//  Print content and close div
-			echo $item['blurb'];
+			echo $item['content'];
 			echo '</div>';
 		}
 	
