@@ -2,8 +2,8 @@
 session_start();
 
 // include database functions, and general functions
-require_once('../../_includes/db_functions.inc.php');
-require_once('../../_includes/functions.inc.php');
+require_once('_includes/db_functions.inc.php');
+require_once('_includes/functions.inc.php');
 
 // Item ID must be provided!
 if (isset($_GET['id'])) {
@@ -23,16 +23,16 @@ if (isset($_GET['id'])) {
 $errors = array();
 
 // Include item class (and table class)
-require_once('../../classes/item.class.php');
+require_once('classes/item.class.php');
 
 if (isset($_POST['submitted'])) {
 
-	include_once('../../_includes/item_validate.inc.php');
+	include_once('_includes/item_validate.inc.php');
 
 	if (empty($errors)) { //  Data is valid
 	
 		//  Create a new object for new event; include necessary code files
-		$item_object = new Item($bulletin_date, $position, $title, $subtitle, $blurb, $excerpt, // $image, $caption, $image_link_url
+		$item_object = new Item($bulletin_date, $position, $title, $subtitle, $content, $excerpt, // $image, $caption, $image_link_url
 		$item_id);
 		
 		//  Insert new record
@@ -50,7 +50,7 @@ if (isset($_POST['submitted'])) {
 }  else {
 
 	//  Get data for specified primary key
-	if (!$return_row = Table::select_by_unique_key($dbc, 'bulletin', 'item_id', $item_id)) {
+	if (!$return_row = Table::select_by_unique_key($dbc, 'items', 'item_id', $item_id)) {
 		die("Could not access item data" . mysqli_error($dbc));
 	}
 	
@@ -59,7 +59,7 @@ if (isset($_POST['submitted'])) {
 	$pos = $return_row['position'];
 	$title = $return_row['title'];
 	$subtitle = $return_row['subtitle'];
-	$blurb = $return_row['blurb'];
+	$content = $return_row['content'];
 	$excerpt = $return_row['excerpt'];
 	// $image = $return_row['image'];
 	// $caption = $return_row['caption'];
@@ -70,7 +70,7 @@ if (isset($_POST['submitted'])) {
 $page_title = 'MCBC Weekly Bulletin. provisional';
 $header_title = 'MCBC Weekly Bulletin';
 $header_subtitle = 'Content Entry';
-include('../../_includes/header.inc.php');
+include('_includes/header.inc.php');
 
 if (!empty($errors)) {
 
@@ -93,9 +93,9 @@ if (!empty($errors)) {
         <input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="60">
     </p>
     <p>
-        <label for="blurb">Content:<br>
+        <label for="content">Content:<br>
         </label>
-        <textarea name="blurb" id="blurb" cols="70" rows="10"><?php echo $blurb; ?></textarea>
+        <textarea name="content" id="content" cols="70" rows="10"><?php echo $content; ?></textarea>
     </p>
     <p>
         <label for="excerpt">Excerpt: </label>

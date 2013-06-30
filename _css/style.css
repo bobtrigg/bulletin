@@ -1,0 +1,188 @@
+/*
+Author:	Christopher Robinson
+Revised by: Bob Trigg, March, 2012
+Email: christopher@edg3.co.uk
+Website: http://www.edg3.co.uk/
+*/
+* {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+/* general */
+a {
+	color:#B0811C;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#006C00;
+	text-decoration:none;
+}
+
+/* body */
+body {
+	color:#666;
+	background: #F5F0BC url(../_images/BlueSwirls.gif);
+	font-family: Calibri, Verdana, Arial, sans-serif;
+	font-size: 100%;
+}
+#wrapper {
+	height:auto;
+	margin:20px auto;
+	padding:0 10px 20px;
+	width:752px;
+}
+/* header */
+#header {
+	margin:25px auto 0;
+	border: solid 1px #ccc;
+    padding: 0;
+	width:752px;
+	background-color: #ffda4a;
+}
+h1,h2,h3,h4 {
+	color:#666;
+	font-family: Calibri, "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#header h1, h2 {
+	color: #0c525f;
+}
+h3 {
+	font-size: 100%;
+	line-height:1.6em;
+	padding: 5px 0;
+}
+blockquote {
+	margin-left: 25px;
+}
+ul {
+	margin: 0;
+	padding: 0;
+}
+p.clear {
+	clear:both;
+	height:0;
+	margin:0;
+	padding:0;
+}
+#header h1 {
+	font-size:150%;
+	text-align:left;
+	padding:20px;
+}
+#header h2 {
+	font-size:125%;
+	text-align:left;
+	padding:0 20px 20px 20px;
+}
+
+/* content */
+#content {
+	width:722px;
+	padding: 15px;
+	background-color: #f8f8f8;
+	border: solid #ccc 1px;
+	clear:both;
+}
+#content h1 {
+	border-bottom:1px dashed #999;
+	font-size:1.8em;
+	padding:20px 0 0;
+}
+#content p {
+	padding:20px 20px 0 20px;
+}
+#content ul{
+	margin:1em 0 0 40px;
+}
+
+/*  form styles  */
+#content form {
+	margin: 10px 0;
+}
+#content form p {
+	padding: 10px 0 10px 45px;
+}
+form input , form textarea, form select {
+	border: 1px #999 solid;
+	font-family: Calibri, Verdana, Arial, sans-serif;
+	font-size: 80%;
+}
+form select option {
+	padding: 0 10px;
+}
+.label {
+	width: 120px;
+	text-align: right;
+	float: left;
+	padding: 0 5px;
+	font-size: 90%;
+}
+.instruction {
+	color: #666;
+	padding-left: 130px;
+	font-size: 75%;
+}
+.required {
+	float: left;
+	font-weight: bold;
+	color: #C00;
+}
+.formats {
+	float: left;
+	padding-top: 30px;
+	font-size: 100%;
+}
+.event_selector {
+	float:left;
+	padding: 5px 10px;
+}
+
+/*  data table */
+#datatable {
+	margin: 5px auto;
+}
+#datatable th {
+	text-align: left;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+}
+#datatable td {
+	font-size: 75%;
+	padding: 0 5px;
+}
+/*  calendar grid table  */
+#cal_table {
+	margin: 10px auto;
+	border-collapse:collapse;
+}
+#cal_table .cell {
+	width: 90px;
+	height: 90px;
+	text-align: left;
+	border: 1px solid #999;
+	padding: 5px;
+	font-size:75%;
+}
+/* footer */
+#footer {
+	border:1px solid #ccc;
+	margin:0 auto;
+	padding:10px 0;
+	width:752px;
+	background-color: #ffda4a;
+	height:1.6em;
+}
+#footer .admin {
+	float: right;
+	padding-right: 25px;
+	text-align: right;
+}
+
+/* Added by Larry Ullman: */
+.error {
+	font-weight: bold;
+	color: #C00;
+}

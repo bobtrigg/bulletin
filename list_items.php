@@ -5,9 +5,9 @@ session_start();
 DEFINE('ROWS_PER_PAGE', 15);
 
 //  Include database functions and utility functions
-require_once('../../_includes/db_functions.inc.php');
-require_once('../../_includes/functions.inc.php');
-require_once('../../classes/table.class.php');
+require_once('_includes/db_functions.inc.php');
+require_once('_includes/functions.inc.php');
+require_once('classes/table.class.php');
 
 $errors = array();
 $where_clause = '';
@@ -35,7 +35,7 @@ if (isset($_POST['submitted'])) {
 $page_title = 'Bulletin Items';
 $header_title = 'Bulletin Items';
 $header_subtitle = 'Click any item to edit';
-include('../../_includes/header.inc.php');
+include('_includes/header.inc.php');
 
 if (!empty($errors)) {
 
@@ -61,13 +61,13 @@ $wb_date = date('Y-m-d',$stamp);
 #####  Determine parameters for call to select function
 
 //  Retrieve total number of rows in bulletin table
-$total_num_rows = Table::get_num_rows($dbc, 'bulletin');
-
+$total_num_rows = Table::get_num_rows($dbc, 'items');
 //  Include logic to assign pagination variables
-require_once('../../_includes/set_page_vars.inc.php');
+require_once('_includes/set_page_vars.inc.php');
 
 //  Call get_list to parse select query
-$row_resource = Table::get_list($dbc, 'bulletin', $start_rec, $num_page_rows, 'bulletin_date DESC, position ASC', '', $where_clause);
+$row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bulletin_date DESC, position ASC', '', $where_clause);
+
 ?>
 
 <h3>Choose categories and date range you wish to display</h3>

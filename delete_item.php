@@ -21,7 +21,7 @@ if (isset($_POST['submitted'])) {
 	if (isset($_POST['submit'])) {   //  Deletion OK'd: proceed to delete row
 	
 		//  Include table class definition (to allow use of static delete function)
-		require_once('../../classes/table.class.php');
+		require_once('classes/table.class.php');
 
 		if (Table::delete_row($dbc, 'bulletin', 'item_id', $item_id)) {
 			$_SESSION['message'] = "Deletion succeeded";
@@ -46,7 +46,7 @@ if (isset($_POST['submitted'])) {
 $page_title = 'Bulletin Items';
 $header_title = 'Bulletin Items';
 $header_subtitle = 'Click any item to edit';
-include('../../_includes/header.inc.php');
+include('_includes/header.inc.php');
 
 ?>
 <form name="delete_item" method="post" action="delete_item.php?id=<?php echo $item_id; ?>">
