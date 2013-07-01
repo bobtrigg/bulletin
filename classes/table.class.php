@@ -1,7 +1,4 @@
 <?php
-#  PHP Programming for the Web
-#  Final Project
-#  Created April, 2012, by Bob Trigg
 #  table.class.php - defines table class, used to generate database functions based on class properties
 
 //  Let's assume if we're working with tables we need a database connection:

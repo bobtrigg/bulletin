@@ -1,5 +1,5 @@
 <?php
-	include('../../_includes/functions.inc.php');
+	include('_includes/functions.inc.php');
 
 	//  Check for date in $_GET superglobal; set default if not provided
 	if (isset($_GET['date'])) {
@@ -14,12 +14,12 @@
 	
 	include('email_header.inc.php');
 	
-	require_once('../../classes/item.class.php');
-	require_once('../../_includes/db_functions.inc.php');
+	require_once('classes/item.class.php');
+	require_once('_includes/db_functions.inc.php');
 
 	
 	//  Set up query to loop thru items
-	$query_string = 'SELECT * FROM bulletin WHERE bulletin_date = "' . $wb_date . '" ORDER BY position';
+	$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date . '" ORDER BY position';
 	$item_list = mysqli_query($dbc, $query_string);
 	
 	//  Loop through items 
@@ -27,7 +27,7 @@
 	
 		$item_title = $item['title'];
 		$item_excerpt = $item['excerpt'];
-		$image_url = $item['image_link_url'];
+		$image_url = $item['graphic_link'];
 
 		include('email_item.inc.php');
 		

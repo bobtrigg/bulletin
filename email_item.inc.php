@@ -14,7 +14,7 @@
 					<td width="110" valign="top">
 						<p align="center"  style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
 						
-							<?php $dimensions = resize_picture($image_url, 100);?>
+							<?php $dimensions = isset($image_url) ? resize_picture($image_url, 100) : [0,0];?>
 
 							<?php echo '<a href="bulletin.php?date=' . $wb_date . '#' . str_replace(' ','',$item_title) . '" target="_blank">'; ?>
 
