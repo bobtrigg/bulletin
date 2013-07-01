@@ -110,3 +110,5 @@ while ($item = mysqli_fetch_array($row_resource)) {
 
   </tr>
 </table>
+
+<p><a href="create_bulletin.php?date=<?php echo $wb_date; ?>" target="_blank">Generate email bulletin</a>
