@@ -6,7 +6,7 @@ require_once('classes/table.class.php');
 // $where_clause = " WHERE bulletin_date = '" . number_format_date($wb_date) . "' ";
 $where_clause = " WHERE bulletin_date = '2013-07-03' ";
 
-$row_resource = Table::get_list($dbc, 'items', 0, 25, NULL, NULL, $where_clause);
+$row_resource = Table::get_list($dbc, 'items', 0, 25, 'bulletin_date DESC, position ASC', NULL, $where_clause);
 ?>
 
 <html>
@@ -87,7 +87,7 @@ body,td,th {
 					
 					
 					
-<!-- Start logic here -->
+<!-- Start code loop here -->
 
 <?php
 //  Read each row from events table and display data, with edit and delete links
@@ -109,9 +109,9 @@ while ($item = mysqli_fetch_array($row_resource)) {
                               </p>
                             </td>
                             <td valign="top">
-                                <p style="font-size:12px;font-family:Arial,Helvetica,sans-serif;margin-top:10px;margin-left:10px;margin-bottom:0;padding-top:0;padding-bottom:0;">Award will be presented at Ales and Trails on June 29</p>
+                                <p style="font-size:12px;font-family:Arial,Helvetica,sans-serif;margin-top:10px;margin-left:10px;margin-bottom:0;padding-top:0;padding-bottom:0;"><?php echo $item['excerpt']; ?></p>
                                 <p style="font-size:12px;font-family:Arial,Helvetica,sans-serif;margin-top:10px;margin-left:10px;margin-bottom:0;padding-top:0;padding-bottom:0;">
-                                  <a href="http://www.marinbike.org/News/Bulletin/20130612.shtml#IMBA" target="_blank">
+                                  <a href="bulletin.php?date=20130703#<?php echo str_replace(' ','',$item['title']); ?>" target='_blank'">
                                     <b>Read more &gt;&gt;</b>
                                   </a>
                                 </p>
@@ -123,7 +123,7 @@ while ($item = mysqli_fetch_array($row_resource)) {
 <?php
 }
 ?>
-<!-- Stop logic here -->
+<!-- Stop code loop here -->
 
  <tr>
                         <td>

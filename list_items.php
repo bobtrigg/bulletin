@@ -20,7 +20,6 @@ if (isset($_POST['submitted'])) {
 		if ($validated_date = valid_date($_POST['wb_date'])) {
 			$wb_date = $validated_date;
 			$where_clause = " WHERE bulletin_date = '" . number_format_date($wb_date) . "' ";
-			echo "good";
 		} else {
 			$errors[] = "Bulletin date is not valid";
 			echo "Bulletin date is not valid";
@@ -56,7 +55,7 @@ if (isset($_GET['date'])) {
 
 //  Get formatted database date
 $stamp = getstamp($date);
-$wb_date = date('Y-m-d',$stamp);
+$db_date = date('Y-m-d',$stamp);
 
 #####  Determine parameters for call to select function
 
@@ -76,7 +75,7 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 
 	<p class="event_selector" style="padding:0 0 0 30px;">
 		<label for="wb_date">Bulletin date:</label><br>
-		<input name="wb_date" type="text" id="wb_date" size="15" maxlength="15" value="<?php echo $wb_date; ?>">
+		<input name="wb_date" type="text" id="wb_date" size="15" maxlength="15" value="<?php echo display_date($db_date); ?>">
 		<br><span style="font-size:75%">Format: mm/dd/yyyy</span>
 	</p>
 

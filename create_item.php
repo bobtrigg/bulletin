@@ -49,7 +49,7 @@ $header_subtitle = 'Content Entry';
 include('_includes/header.inc.php');
 
 ?>
-<form name="form1" method="post" action="create_item.php">
+<form name="form1" method="post" action="create_item.php" enctype=“mulitpart/form-data”>
     <p>
         <label for="title">Title: </label>
         <input type="text" name="title" id="title" size="40" maxlength="60">
@@ -68,8 +68,24 @@ include('_includes/header.inc.php');
         <br>
 		<input type="text" name="excerpt" id="excerpt" size="80" maxlength="200">
     </p>
-    <p>Image: </p>
-    <p>
+	<p>Specify an image URL, or upload a file:
+    </p>
+	
+	<blockquote>
+		<p>
+			<label for="img_file">Upload</label>
+			<br>
+			<input type="file" name="img_file" id="img_file" >
+		</p>
+		
+		<p>
+			<label for="graphic">File URL: </label>
+			<br>
+			<input type="input" name="graphic_link" id="graphic_link" size="80" maxlength="200">
+		</p>
+	</blockquote>
+	
+	<p>
         <label for="bulletin_date">Date: </label>
         <select name="bulletin_date" id="bulletin_date">
             <option value="20130626">June 26, 2013</option>
@@ -89,5 +105,8 @@ include('_includes/header.inc.php');
         <input name="submitted" type="hidden" id="submitted" value="true">
     </p>
 </form>
+
+<p><a href="create_bulletin.php?date=<?php echo $bulletin_date; ?>" target="_blank">Generate email bulletin</a>
+
 </body>
 </html>
