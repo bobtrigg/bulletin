@@ -1,18 +1,18 @@
 <?php
 
 // include database functions, and general functions
-require_once('../../_includes/db_functions.inc.php');
-require_once('../../_includes/functions.inc.php');
+require_once('_includes/db_functions.inc.php');
+require_once('_includes/functions.inc.php');
 
 $errors = array();
 
 if (isset($_POST['submitted'])) {
 
-	include_once('../../_includes/item_validate.inc.php');
+	include_once('_includes/item_validate.inc.php');
 
 	//  Create a new object for new event; include necessary code files
-	require_once('../../classes/item.class.php');
-	require_once('../../_includes/functions.inc.php');
+	require_once('classes/item.class.php');
+	require_once('_includes/functions.inc.php');
 	$item_object = new Item($bulletin_date, $position, $title, $subtitle, $content, $excerpt//, $image, $caption, $image_link_url
 	);
 	
@@ -46,7 +46,7 @@ if (isset($_POST['submitted'])) {
 $page_title = 'MCBC Weekly Bulletin';
 $header_title = 'MCBC Weekly Bulletin';
 $header_subtitle = 'Content Entry';
-include('../../_includes/header.inc.php');
+include('_includes/header.inc.php');
 
 ?>
 <form name="form1" method="post" action="create_item.php">
