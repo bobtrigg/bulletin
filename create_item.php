@@ -21,15 +21,15 @@ if (isset($_POST['submitted'])) {
 	
 	if ($result) { 
 	
-		// //  New row inserted - Return to list page
-			// if (!headers_sent($filename, $linenum)) {
-				// header("Location: list_events.php");
-				// exit();
-			// } else {
-				// die ( "Headers already sent in $filename on line $linenum<br>\n" .
-					  // "Please report the above information to your <a href=\"mailto:bobtrigg94930@gmail.com\">system administrator</a>.<br>\n" .
-					  // "<a href=\"login.php\">Click here</a> to re-login\n");
-			// }
+		//  New row inserted - Return to list page
+			if (!headers_sent($filename, $linenum)) {
+				header("Location: list_items.php?date=$bulletin_date");
+				exit();
+			} else {
+				die ( "Headers already sent in $filename on line $linenum<br>\n" .
+					  "Please report the above information to your <a href=\"mailto:bobtrigg94930@gmail.com\">system administrator</a>.<br>\n" .
+					  "<a href=\"list_items.php\">Click here</a> to return to items list.\n");
+			}
 					
 	} else {
 		

@@ -139,4 +139,24 @@ function convert_numeric_to_display($date) {  // yyyymmdd -> mm/dd/yyyy
 
 	return $month . "/" . $day . "/" . $year;
 }
+
+function convert_display_to_numeric($date) {  //  yyyy-mm-dd -> yyyymmdd
+
+# Converts a numeric date in yyyy-mm-dd format to yyyymmdd format
+#  Returns reformated date
+
+	#####  Get date components
+	list($year,$month,$day) = explode('-',$date);
+	
+	if (strlen($month) == 1) {
+		$month = '0' . $month;
+	}
+	if (strlen($day) == 1) {
+		$day = '0' . $day;
+	}
+
+	#####  Reformat using components
+	
+	return $year . $month . $day;
+}
 ?>

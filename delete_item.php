@@ -16,6 +16,12 @@ if (isset($_GET['id'])) {
 	}
 }
 
+//  Get item data; include necessary code files
+require_once('classes/table.class.php');
+require_once('_includes/db_functions.inc.php');
+require_once('_includes/functions.inc.php');
+$item_data = Table::select_by_unique_key($dbc, 'items', 'item_id', $item_id);
+
 if (isset($_POST['submitted'])) {
 
 	if (isset($_POST['submit'])) {   //  Deletion OK'd: proceed to delete row
@@ -23,17 +29,17 @@ if (isset($_POST['submitted'])) {
 		//  Include table class definition (to allow use of static delete function)
 		require_once('classes/table.class.php');
 
-		if (Table::delete_row($dbc, 'bulletin', 'item_id', $item_id)) {
+		if (Table::delete_row($dbc, 'items', 'item_id', $item_id)) {
 			$_SESSION['message'] = "Deletion succeeded";
 		} else {
-			$_SESSION['message'] = "Deletion was NOT successful! ";
+			$_SESSION['message'] = "Deletion was NOT successful: " . mysqli_error($dbc);
 		}
 	} else {
 		$_SESSION['message'] = "Deletion cancelled";
 	}
 	
 	if (!headers_sent($filename, $linenum)) {
-		header ("Location:list_items.php");
+		header ("Location:list_items.php?date=" . convert_display_to_numeric($item_data['bulletin_date']));
 		exit();
 	} else {
 		die ( "Headers already sent in $filename on line $linenum<br>\n" .
@@ -50,6 +56,8 @@ include('_includes/header.inc.php');
 
 ?>
 <form name="delete_item" method="post" action="delete_item.php?id=<?php echo $item_id; ?>">
+
+	<p>Really delete <?php echo $item_data['title']; ?>?</p>
 
     <p>&nbsp;&nbsp;&nbsp;
         <input type="submit" name="submit" id="submit" value="Submit">

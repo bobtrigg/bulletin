@@ -12,8 +12,8 @@ class Item extends Table {
 ######  Constructor function creates a new bulletin item
 ######  function assigns primary key value and an array of other column values, then calls parent (table) constructor
 	
-	public function __construct($bulletin_date, 
-								$position, 
+	public function __construct($bulletin_date=NULL, 
+								$position=NULL, 
 								$title=NULL, 
 								$subtitle=NULL, 
 								$content=NULL, 

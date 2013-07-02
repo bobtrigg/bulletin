@@ -1,11 +1,4 @@
 <?php
-/*
-$wb_date is mm/dd/yyyy
-$date is yyyymmdd
-
-
-
-*/
 session_start();
 
 //  Set time zone for Bob's house...NOT in L.A.
@@ -47,6 +40,7 @@ if (isset($_POST['submitted'])) {
 		$date = date('Ymd');
 	}
 	$wb_date = convert_numeric_to_display($date);
+	$where_clause = " WHERE bulletin_date = '" . $date . "' ";
 }
 
 //  Display header and session message if set
@@ -123,3 +117,4 @@ while ($item = mysqli_fetch_array($row_resource)) {
 </table>
 
 <p><a href="email_bulletin.php?date=<?php echo $date; ?>" target="_blank">Generate email bulletin</a>
+<p><a href="create_item.php" target="_blank">Create a new bulletin item</a>
