@@ -49,6 +49,13 @@ $header_title = 'Bulletin Items';
 $header_subtitle = 'Click any item to edit';
 include('_includes/header.inc.php');
 
+//  Check for page number in $_GET superglobal
+if (isset($_GET['page_num'])) {
+	$page_num = $_GET['page_num'];
+} else {
+	$page_num = 1;
+}
+
 if (!empty($errors)) {
 
 	echo "<p>";

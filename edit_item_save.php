@@ -19,20 +19,22 @@ if (isset($_GET['id'])) {
 // Include item class (and table class)
 require_once('classes/item.class.php');
 
-// include database, validation, and general functions
+// include database functions, and general functions
 require_once('_includes/db_functions.inc.php');
-require_once('_includes/item_validate.inc.php');
 require_once('_includes/functions.inc.php');
 
 $errors = array();
 
 if (isset($_POST['submitted'])) {
 
-	$item_object = validate_all_items($dbc);
-	$item_object->set_pk_id($item_id);
+	include_once('_includes/item_validate.inc.php');
 
 	if (empty($errors)) { //  Data is valid
 	
+		//  Create a new object for new event; include necessary code files
+		$item_object = new Item($bulletin_date, $position, $title, $subtitle, $content, $excerpt, // $image, $caption, $image_link_url
+		$item_id);
+		
 		//  Update record
 		if ($result = $item_object->update_row($dbc)) {
 			$_SESSION['message'] = "Update succeeded";
@@ -43,13 +45,6 @@ if (isset($_POST['submitted'])) {
 		//  Return to list page
 		header("Location: list_items.php");
 		exit();
-	} else {
-		$title = $item_object->get_value('title');
-		$subtitle = $item_object->get_value('subtitle');
-		$content = $item_object->get_value('content');
-		$excerpt = $item_object->get_value('excerpt');
-		$position = $item_object->get_value('position');
-		$bulletin_date = $item_object->get_value('bulletin_date');
 	}
 	
 }  else {
@@ -89,14 +84,36 @@ if (!empty($errors)) {
 
 ?>
 <form name="form1" method="post" action="edit_item.php?id=<?php echo $item_id; ?>">
-
- 	
-	<!--  Copy in boilerplate form fields -->
-	<?php require('_includes/data_form.inc.php'); ?>
-	
-	<p><input name="bulletin_date" type="hidden" id="bulletin_date" value="<?php echo $bulletin_date; ?>">
-	</p>
-	
+    <p>
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title" value="<?php echo $title; ?>" size="40" maxlength="60">
+    </p>
+    <p>
+        <label for="subtitle">Subtitle: </label>
+        <input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="60">
+    </p>
+    <p>
+        <label for="content">Content:<br>
+        </label>
+        <textarea name="content" id="content" cols="70" rows="10"><?php echo $content; ?></textarea>
+    </p>
+    <p>
+        <label for="excerpt">Excerpt: </label>
+        <br>
+		<input type="text" name="excerpt" id="excerpt" value="<?php echo $excerpt; ?>" size="80" maxlength="200">
+    </p>
+    <p>Image: </p>
+    <p>
+        <label for="position">Position: </label>
+        <input type="text" name="position" id="position" value="<?php echo $position; ?>" size="2" maxlength="2">
+    </p>
+    <p>&nbsp;&nbsp;&nbsp;
+        <input type="submit" name="submit" id="submit" value="Submit">
+    </p>
+    <p>
+        <input name="submitted" type="hidden" id="submitted" value="true">
+        <input name="bulletin_date" type="hidden" id="bulletin_date" value="<?php echo $bulletin_date; ?>">
+    </p>
 </form>
 </body>
 </html>

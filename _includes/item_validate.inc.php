@@ -3,56 +3,39 @@
 #  This include file contains validation code for bulletin item entry fields
 #  It checks to see that all required data was entered and that all entered data is valid.
 
-# Variables used: errors[], $dbc, item object content
+function validate_item($dbc,$name,$required,$numeric) {
 
-	# Validate entry of title
-	if (isset($_POST['title']) && (!is_null($_POST['title'])) && ($_POST['title'] != '')) {
-		$title = mysqli_real_escape_string($dbc, trim($_POST['title']));
+	global $errors;
+
+	if (isset($_POST[$name]) && (!is_null($_POST[$name])) && ($_POST[$name] != '')) {
+	
+		$value = mysqli_real_escape_string($dbc, trim($_POST[$name]));
+		
 	} else {
-		$errors[] = 'You must enter a title';
-		$title = "''";
-	}
-
-	# Validate entry of subtitle: subtitle is not a required field
-	if (isset($_POST['subtitle']) && (!is_null($_POST['subtitle'])) && ($_POST['subtitle'] != '')) {
-		$subtitle = mysqli_real_escape_string($dbc, trim($_POST['subtitle']));
-	} else {
-		$subtitle = "''";
-	}
-
-	# Validate entry of content
-	if (isset($_POST['content']) && (!is_null($_POST['content'])) && ($_POST['content'] != '')) {
-		$content = mysqli_real_escape_string($dbc, trim($_POST['content']));
-	} else {
-		$errors[] = 'You must enter content';
-		$content = "''";
-	}
-
-	# Validate entry of excerpt
-	if (isset($_POST['excerpt']) && (!is_null($_POST['excerpt'])) && ($_POST['excerpt'] != '')) {
-		$excerpt = mysqli_real_escape_string($dbc, trim($_POST['excerpt']));
-	} else {
-		$errors[] = 'You must enter an excerpt';
-		$excerpt = "''";
-	}
-
-	# Validate entry of bulletin_date
-	if (isset($_POST['bulletin_date']) && (!is_null($_POST['bulletin_date'])) && ($_POST['bulletin_date'] != '')) {
-		$bulletin_date = $_POST['bulletin_date'];
-	} else {
-		$errors[] = 'You must enter a date';
-		$bulletin_date = "''";
-	}
-
-	# Validate entry of position: position is not a required field
-	if (isset($_POST['position']) && (!is_null($_POST['position'])) && ($_POST['position'] != '')) {
-		if (is_numeric($_POST['position']) && $_POST['position'] > 0) {
-			$position = $_POST['position'];
-		} else {
-			$position = "''";
+		if ($required) {
+			$errors[] = 'You must enter a ' . $name;
 		}
-	} else {
-		$position = "''";
+		$value = "";
 	}
+	
+	if ($numeric && (!is_numeric($value) || $value < 0)) {
+		$errors[] = $name . " must be numeric and > 0";
+	}
+	
+	return $value;
+}
 
+function validate_all_items($dbc) {
+
+	$item = new Item();
+	
+	$item->set_value('title', validate_item($dbc,'title',true,false));
+	$item->set_value('subtitle', validate_item($dbc,'subtitle',false,false));
+	$item->set_value('content', validate_item($dbc,'content',true,false));
+	$item->set_value('excerpt', validate_item($dbc,'excerpt',true,false));
+	$item->set_value('bulletin_date', validate_item($dbc,'bulletin_date',true,false));
+	$item->set_value('position', validate_item($dbc,'position',true,true));
+	
+	return $item;
+}
 ?>

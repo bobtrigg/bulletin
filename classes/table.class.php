@@ -7,6 +7,7 @@ include_once('_includes/db_connect.inc.php');
 class Table {
 
 	private $table_name;               //  Name of database table
+	protected $pk_id;                  //  Primary key
 	private $id_col_name;              //  Name of primary key id column
 	private $col_array;                //  Array of names of all other columns
 	private $num_cols;                 //  Number of non-key columns
@@ -30,6 +31,19 @@ class Table {
 		//  Assign the number of columns property
 		$this->num_cols = count($col_array);
 	}  //  END __construct
+	
+	public function get_value($name) {
+	//  Generic getter function
+		return $this->data_array[$name];
+	}
+	
+	public function set_value($name,$value) {
+	//  Generic setter function
+		$this->data_array[$name] = $value;
+	}
+	public function set_pk_id($value) {
+		$this->pk_id = $value;
+	}
 	
 	public function select_by_pk ($dbc) {
 		
@@ -91,7 +105,7 @@ class Table {
 		//  But first: if arrays aren't equal length we're in trouble...
 		//  This shouldn't happen, since arrays are controlled w/in the object; but...
 		if (count($this->col_array) != count($this->data_array)) {
-			die("Update failed: number of column names not equal to number of values supplied.");
+			die("Update failed: number of column names (" . count($this->col_array) . ") not equal to number of values supplied (" . count($this->data_array) . ").");
 		}
 		
 		$query_string = "UPDATE $this->table_name SET ";

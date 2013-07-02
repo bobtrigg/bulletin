@@ -6,7 +6,6 @@ require_once('classes/table.class.php');
 
 class Item extends Table {
 
-	protected $pk_id;
 	protected $data_array;
 
 ######  Constructor function creates a new bulletin item
