@@ -27,7 +27,7 @@
 	
 		$item_title = $item['title'];
 		$item_excerpt = $item['excerpt'];
-		$image_url = $item['graphic_link'];
+		$image_url = $item['graphic'];
 
 		include('email_item.inc.php');
 		

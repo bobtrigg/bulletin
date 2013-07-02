@@ -1,5 +1,15 @@
 <?php
+/*
+$wb_date is mm/dd/yyyy
+$date is yyyymmdd
+
+
+
+*/
 session_start();
+
+//  Set time zone for Bob's house...NOT in L.A.
+date_default_timezone_set('America/Los_Angeles');
 
 //  Set number of rows per page.
 DEFINE('ROWS_PER_PAGE', 15);
@@ -19,7 +29,8 @@ if (isset($_POST['submitted'])) {
 	if (isset($_POST['wb_date']) && !is_null($_POST['wb_date']) && $_POST['wb_date'] != '') {
 		if ($validated_date = valid_date($_POST['wb_date'])) {
 			$wb_date = $validated_date;
-			$where_clause = " WHERE bulletin_date = '" . number_format_date($wb_date) . "' ";
+			$date = number_format_date($wb_date);
+			$where_clause = " WHERE bulletin_date = '" . $date . "' ";
 		} else {
 			$errors[] = "Bulletin date is not valid";
 			echo "Bulletin date is not valid";
@@ -28,6 +39,14 @@ if (isset($_POST['submitted'])) {
 		$errors[] = 'You <i>must</i> enter a start date!';
 		echo 'You <i>must</i> enter a start date!';
 	}
+} else {  //  Check for date in $_GET superglobal
+
+	if (isset($_GET['date']) and is_numeric($_GET['date'])) {
+		$date = $_GET['date'];
+	} else {
+		$date = date('Ymd');
+	}
+	$wb_date = convert_numeric_to_display($date);
 }
 
 //  Display header and session message if set
@@ -44,13 +63,6 @@ if (!empty($errors)) {
 		echo "$msg<br>\n";
 	}
 	echo "</p>\n";
-}
-
-//  Check for page number in $_GET superglobal
-if (isset($_GET['date'])) {
-	$date = $_GET['date'];
-} else {
-	$date = date('Ymd');
 }
 
 //  Get formatted database date
@@ -110,4 +122,4 @@ while ($item = mysqli_fetch_array($row_resource)) {
   </tr>
 </table>
 
-<p><a href="create_bulletin.php?date=<?php echo $wb_date; ?>" target="_blank">Generate email bulletin</a>
+<p><a href="email_bulletin.php?date=<?php echo $date; ?>" target="_blank">Generate email bulletin</a>

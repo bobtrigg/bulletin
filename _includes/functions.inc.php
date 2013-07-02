@@ -2,7 +2,7 @@
 // functions.php
 // includes functions for Automated Bulletin
 
-function valid_date($date_str) {
+function valid_date($date_str) {  // mm/dd/yyyy -> mm/dd/yyyy
 
 #  Checks entered date for valid format.
 #  Date is requested in mm/dd/yyyy format
@@ -125,6 +125,18 @@ function display_date($date) {     //  yyyy-mm-dd -> mm/dd/yyyy
 	$month = (int) $month;
 	$day = (int) $day;
 	
+	return $month . "/" . $day . "/" . $year;
+}
+function convert_numeric_to_display($date) {  // yyyymmdd -> mm/dd/yyyy
+
+# Converts a numeric date in yyyymmdd format to mm/dd/yyyy format
+#  Returns reformated date
+
+	#####  Get date components
+	$year = substr($date, 0,4);
+	$month = substr($date, 4,2);
+	$day = substr($date, 6,2);
+
 	return $month . "/" . $day . "/" . $year;
 }
 ?>
