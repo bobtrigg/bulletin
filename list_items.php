@@ -42,6 +42,7 @@ if (isset($_POST['submitted'])) {
 	$wb_date = convert_numeric_to_display($date);
 	$where_clause = " WHERE bulletin_date = '" . $date . "' ";
 }
+$_SESSION['date'] = $date;  //  For returning from item entry
 
 //  Display header and session message if set
 $page_title = 'Bulletin Items';
@@ -124,4 +125,4 @@ while ($item = mysqli_fetch_array($row_resource)) {
 </table>
 
 <p><a href="email_bulletin.php?date=<?php echo $date; ?>" target="_blank">Generate email bulletin</a>
-<p><a href="create_item.php" target="_blank">Create a new bulletin item</a>
+<p><a href="create_item.php">Create a new bulletin item</a>

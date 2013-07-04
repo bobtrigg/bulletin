@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once('_includes/opening_housekeeping.inc.php');
 
 // Item ID must be provided!
 if (isset($_GET['id'])) {
@@ -16,16 +16,6 @@ if (isset($_GET['id'])) {
 	}
 }
 
-// Include item class (and table class)
-require_once('classes/item.class.php');
-
-// include database, validation, and general functions
-require_once('_includes/db_functions.inc.php');
-require_once('_includes/item_validate.inc.php');
-require_once('_includes/functions.inc.php');
-
-$errors = array();
-
 if (isset($_POST['submitted'])) {
 
 	$item_object = validate_all_items($dbc);
@@ -41,8 +31,14 @@ if (isset($_POST['submitted'])) {
 		}
 
 		//  Return to list page
-		header("Location: list_items.php?date=" . convert_display_to_numeric($item_object->get_value('bulletin_date')));
-		exit();
+		if (!headers_sent($filename, $linenum)) {
+			header("Location: list_items.php?date=" . convert_display_to_numeric($item_object->get_value('bulletin_date')));
+			exit();
+		} else {
+			die ( "Headers already sent in $filename on line $linenum<br>\n" .
+				  "Please report the above information to your <a href=\"mailto:bob@marinbike.org\">system administrator</a>.<br>\n" .
+				  "<a href=\"login.php\">Click here</a> to re-login\n");
+		}
 	} else {
 		$title = $item_object->get_value('title');
 		$subtitle = $item_object->get_value('subtitle');

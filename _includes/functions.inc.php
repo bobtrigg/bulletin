@@ -16,8 +16,17 @@ function valid_date($date_str) {  // mm/dd/yyyy -> mm/dd/yyyy
 	if ($date_str == '') {
 		$errors[] = 'Event date entry is required';
 	}
+	
+	$components = explode('/', $date_str);
+	
+	if (count($components) < 3) {
+		return "";
+	}
 
-	list($month,$day,$year) = explode('/', $date_str);
+	// list($month,$day,$year) = explode('/', $date_str);
+	$month = $components[0];
+	$day = $components[1];
+	$year = $components[2];
 	
 	//  Convert string to an array of month, date, year, and use checkdate() to validate
 	if (!checkdate($month,$day,$year)) {

@@ -41,9 +41,21 @@
 	<label for="position">Position: </label>
 	<input type="text" name="position" id="position" value="<?php echo $position; ?>" size="2" maxlength="2">
 </p>
+
+<?php //(isset($_SESSION['date']) && $_SESSION['date'] != '') ? $return_str = "?date=$_SESSION['date']" : $return_str = ""; } ?>
+<?php 
+	if (isset($_SESSION['date']) && $_SESSION['date'] != '') {
+		$return_str = "?date=" . $_SESSION['date'];
+	} else {
+		$return_str = ""; 
+	}
+?>
+
 <p>&nbsp;&nbsp;&nbsp;
-	<input type="submit" name="submit" id="submit" value="Submit">
-</p>
+	<input type="submit" name="submit" id="submit" value="Submit">&nbsp;&nbsp;
+	<a href="list_items.php<?php echo $return_str; ?>"><input type="button" name="cancel" id="cancel" value="Cancel"></a>
+
+	</p>
 <p>
 	<input name="submitted" type="hidden" id="submitted" value="true">
 </p>
