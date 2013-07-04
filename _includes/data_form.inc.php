@@ -1,4 +1,8 @@
 <p>
+	<label for="bulletin_date">Date: </label>
+	<input type="text" name="bulletin_date" id="bulletin_date" value="<?php echo display_date($bulletin_date); ?>" size="40" maxlength="60">
+</p>
+<p>
 	<label for="title">Title: </label>
 	<input type="text" name="title" id="title" value="<?php echo $title; ?>" size="40" maxlength="60">
 </p>

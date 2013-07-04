@@ -16,7 +16,7 @@ function valid_date($date_str) {  // mm/dd/yyyy -> mm/dd/yyyy
 	if ($date_str == '') {
 		$errors[] = 'Event date entry is required';
 	}
-	
+
 	list($month,$day,$year) = explode('/', $date_str);
 	
 	//  Convert string to an array of month, date, year, and use checkdate() to validate
@@ -25,7 +25,6 @@ function valid_date($date_str) {  // mm/dd/yyyy -> mm/dd/yyyy
 	}
 	
 	$iyear = (int)$year;
-	
 	
 	if ($iyear < 100) {
 		$year = ($iyear > 50) ? ($iyear + 1900) : ($iyear + 2000);
@@ -56,7 +55,7 @@ function db_format_date($date) {     //   yyyymmdd -> yyyy-mm-dd
 	
 	return $year . "-" . $month . "-" . $day;
 }
-function number_format_date($date) {    //  mm/dd/yyyy -> yyyymmdd
+function number_format_date($date, $separator=NULL) {    //  mm/dd/yyyy -> yyyymmdd
 
 #  Converts a date in mm/dd/yyyy format to a yyyymmdd format 
 #  Returns reformated date
@@ -73,7 +72,7 @@ function number_format_date($date) {    //  mm/dd/yyyy -> yyyymmdd
 
 	#####  Reformat using components
 	
-	return $year . $month . $day;
+	return $year . $separator . $month . $separator . $day;
 }
 function getstamp($date) {
 
@@ -117,7 +116,13 @@ function display_date($date) {     //  yyyy-mm-dd -> mm/dd/yyyy
 #  Returns reformated date
 
 	#####  Get date components
-	list($year,$month,$day) = explode('-',$date);
+	$components = explode('-',$date);
+	if (count($components) < 3) {
+		return "";
+	}
+	$year = $components[0];
+	$month = $components[1];
+	$day = $components[2];
 	
 	#####  Reformat using components
 	

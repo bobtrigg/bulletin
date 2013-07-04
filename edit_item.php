@@ -41,7 +41,7 @@ if (isset($_POST['submitted'])) {
 		}
 
 		//  Return to list page
-		header("Location: list_items.php");
+		header("Location: list_items.php?date=" . convert_display_to_numeric($item_object->get_value('bulletin_date')));
 		exit();
 	} else {
 		$title = $item_object->get_value('title');
@@ -93,9 +93,6 @@ if (!empty($errors)) {
  	
 	<!--  Copy in boilerplate form fields -->
 	<?php require('_includes/data_form.inc.php'); ?>
-	
-	<p><input name="bulletin_date" type="hidden" id="bulletin_date" value="<?php echo $bulletin_date; ?>">
-	</p>
 	
 </form>
 </body>

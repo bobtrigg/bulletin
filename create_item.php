@@ -23,7 +23,7 @@ if (isset($_POST['submitted'])) {
 		
 			//  New row inserted - Return to list page
 				if (!headers_sent($filename, $linenum)) {
-					header("Location: list_items.php?date=$bulletin_date");
+					header("Location: list_items.php?date=" . convert_display_to_numeric($item_object->get_value('bulletin_date')));
 					exit();
 				} else {
 					die ( "Headers already sent in $filename on line $linenum<br>\n" .
@@ -52,7 +52,7 @@ if (isset($_POST['submitted'])) {
 }
 
 //  Display header, and errors if any 
-$page_title = 'MCBC Weekly Bulletin';
+$page_title = 'Create item - MCBC Weekly Bulletin';
 $header_title = 'MCBC Weekly Bulletin';
 $header_subtitle = 'Content Entry';
 include('_includes/header.inc.php');
@@ -69,16 +69,7 @@ if (!empty($errors)) {
 
 ?>
 <form name="form1" method="post" action="create_item.php" enctype=“mulitpart/form-data”>
- 	<p>
-        <label for="bulletin_date">Bulletin Date: </label>
-        <select name="bulletin_date" id="bulletin_date">
-            <option value="20130626">June 26, 2013</option>
-            <option value="20130703">July 3, 2013</option>
-            <option value="20130710">July 10, 2013</option>
-            <option value="20130717">July 17, 2013</option>
-        </select>
-    </p>
-	
+
 	<!--  Copy in boilerplate form fields -->
 	<?php require('_includes/data_form.inc.php'); ?>
 	
