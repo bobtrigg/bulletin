@@ -63,7 +63,7 @@
 	
 		//  Reformat date for database use and create query string
 		$db_date = db_format_date($wb_date);
-		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date . '" ORDER BY position';
+		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $db_date . '" ORDER BY position';
 		
 		//  1st query: linked TOC
 		$item_list = mysqli_query($dbc, $query_string);

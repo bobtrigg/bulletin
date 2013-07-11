@@ -43,7 +43,7 @@ if (isset($_POST['submitted'])) {
 }
 
 //  Display header, and errors if any 
-$page_title = 'Create item - MCBC Weekly Bulletin';
+$page_title = 'Create bulletin item';
 $header_title = 'MCBC Weekly Bulletin';
 $header_subtitle = 'Content Entry';
 include('_includes/header.inc.php');

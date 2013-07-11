@@ -55,7 +55,7 @@ if (isset($_POST['submitted'])) {
 		die("Could not access item data" . mysqli_error($dbc));
 	}
 	
-	//  Assign event data to variables (use display_date() to reformat date)
+	//  Assign event data to variables
 	$bulletin_date = $return_row['bulletin_date'];
 	$position = $return_row['position'];
 	$title = $return_row['title'];
@@ -68,7 +68,7 @@ if (isset($_POST['submitted'])) {
 }
 
 //  Display header, and errors if any 
-$page_title = 'MCBC Weekly Bulletin. provisional';
+$page_title = 'Edit bulletin item';
 $header_title = 'MCBC Weekly Bulletin';
 $header_subtitle = 'Content Entry';
 include('_includes/header.inc.php');
