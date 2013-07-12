@@ -32,7 +32,7 @@ if (isset($_POST['submitted'])) {
 
 		//  Return to list page
 		if (!headers_sent($filename, $linenum)) {
-			header("Location: list_items.php?date=" . $item_object->get_value('bulletin_date')->get_numeric_date());
+			header("Location: list_items.php?date=" . preg_replace('/\-/','',$item_object->get_value('bulletin_date')));
 			exit();
 		} else {
 			die ( "Headers already sent in $filename on line $linenum<br>\n" .
@@ -45,7 +45,7 @@ if (isset($_POST['submitted'])) {
 		$content = $item_object->get_value('content');
 		$excerpt = $item_object->get_value('excerpt');
 		$position = $item_object->get_value('position');
-		$bulletin_date = new Date($item_object->get_value('bulletin_date'));
+		$bulletin_date = (new DateTime($item_object->get_value('bulletin_date')))->format('n/j/Y');
 	}
 	
 }  else {
@@ -56,7 +56,7 @@ if (isset($_POST['submitted'])) {
 	}
 	
 	//  Assign event data to variables
-	$bulletin_date = new Date($return_row['bulletin_date']);
+	$bulletin_date = (new DateTime($return_row['bulletin_date']))->format('n/j/Y');
 	$position = $return_row['position'];
 	$title = $return_row['title'];
 	$subtitle = $return_row['subtitle'];

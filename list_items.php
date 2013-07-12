@@ -22,29 +22,29 @@ if (isset($_POST['submitted'])) {
 
 	if (isset($_POST['wb_date']) && !is_null($_POST['wb_date']) && $_POST['wb_date'] != '') {
 	
-		$date = Date::valid_date($_POST['wb_date']);
+		$date = valid_date($_POST['wb_date']);
 		
 		if (!$date) {
 			$errors[] = "Bulletin date is not valid";
-			$date = new Date();  // Defaults to today
+			$date = new DateTime();  // Defaults to today
 		}
 	} else {
 		$errors[] = 'You <i>must</i> enter a start date!';
-		$date = new Date();  // Defaults to today
+		$date = new DateTime();  // Defaults to today
 	}
 	
-	$where_clause = " WHERE bulletin_date = '" . $date->get_db_date() . "' ";
+	$where_clause = " WHERE bulletin_date = '" . $date->format('Y-m-d') . "' ";
 	
 } else {  //  Check for date in $_GET superglobal
 
 	if (isset($_GET['date']) and is_numeric($_GET['date'])) {
-		$date = new Date($_GET['date']);
+		$date = new DateTime($_GET['date']);
 	} else {
-		$date = new Date();
+		$date = new DateTime();
 	}
-	$where_clause = " WHERE bulletin_date = '" . $date->get_db_date() . "' ";
+	$where_clause = " WHERE bulletin_date = '" . $date->format('Y-m-d') . "' ";
 }
-$_SESSION['date'] = $date->get_numeric_date();  //  For returning from item entry
+$_SESSION['date'] = $date->format('Ymd');  //  For returning from item entry
 
 //  Display header and session message if set
 $page_title = 'Bulletin Items';
@@ -87,7 +87,7 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 
 	<p class="event_selector" style="padding:0 0 0 30px;">
 		<label for="wb_date">Bulletin date:</label><br>
-		<input name="wb_date" type="text" id="wb_date" size="15" maxlength="15" value="<?php echo $date->get_display_date(); ?>">
+		<input name="wb_date" type="text" id="wb_date" size="15" maxlength="15" value="<?php echo $date->format('n/j/Y'); ?>">
 		<br><span style="font-size:75%">Format: mm/dd/yyyy</span>
 	</p>
 
@@ -110,7 +110,7 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 while ($item = mysqli_fetch_array($row_resource)) {
 
 	echo "  <tr>\n";
-	echo "    <td>" . (new Date($item['bulletin_date']))->get_display_date() . "</td>\n";
+	echo "    <td>" . (new DateTime($item['bulletin_date']))->format('n/j/Y') . "</td>\n";
 	echo "    <td>" . $item['position'] . "</td>\n";
 	echo "    <td>" . $item['title'] . "</td>\n";
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";
@@ -122,5 +122,5 @@ while ($item = mysqli_fetch_array($row_resource)) {
   </tr>
 </table>
 
-<p><a href="email_bulletin.php?date=<?php echo $date->get_numeric_date(); ?>" target="_blank">Generate email bulletin</a>
+<p><a href="email_bulletin.php?date=<?php echo $date->format('Ymd'); ?>" target="_blank">Generate email bulletin</a>
 <p><a href="create_item.php">Create a new bulletin item</a>

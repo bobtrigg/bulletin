@@ -3,6 +3,7 @@
 #  This include file contains validation code for bulletin item entry fields
 #  It checks to see that all required data was entered and that all entered data is valid.
 
+require_once('_includes/functions.inc.php'); 
 include_once('classes/date.class.php'); 
 
 function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
@@ -25,7 +26,7 @@ function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 	}
 	
 	if ($date) {
-		$value = Date::valid_date($value);
+		$value = valid_date($value);
 		
 		if (!$value) {
 			$errors[] = "Date is not valid; must be mm/dd/yyyy";
@@ -43,7 +44,7 @@ function validate_all_items($dbc) {
 	$item->set_value('subtitle', validate_item($dbc,'subtitle',false,false));
 	$item->set_value('content', validate_item($dbc,'content',true,false));
 	$item->set_value('excerpt', validate_item($dbc,'excerpt',true,false));
-	$item->set_value('bulletin_date', validate_item($dbc,'bulletin_date',true,false,true));
+	$item->set_value('bulletin_date', validate_item($dbc,'bulletin_date',true,false,true)->format('Y-m-d'));
 	$item->set_value('position', validate_item($dbc,'position',true,true));
 	
 	return $item;

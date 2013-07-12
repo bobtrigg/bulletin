@@ -54,18 +54,18 @@ date_default_timezone_set('America/Los_Angeles');
 
 		//  Check for date in $_GET superglobal; set default if not provided
 		if (isset($_GET['date'])) {
-			$wb_date = new Date($_GET['date']);
+			$wb_date = new DateTime($_GET['date']);
 		} else {
-			$wb_date = new Date();  // Default to today
+			$wb_date = new DateTime();  // Default to today
 		}
 		
 		//  Get formatted bulletin date and display on page
-		echo date('F j, Y',$wb_date->get_date_stamp()) . '</p>'	;
+		echo $wb_date->format('F j, Y') . '</p>';
 		
 		require_once('classes/item.class.php');
 		require_once('_includes/db_functions.inc.php');
 	
-		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->get_db_date() . '" ORDER BY position';
+		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
 		
 		//  1st query: linked TOC
 		$item_list = mysqli_query($dbc, $query_string);
