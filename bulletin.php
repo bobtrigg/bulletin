@@ -1,6 +1,11 @@
 <?php
 //  Set time zone for Bob's house...NOT in L.A.
 date_default_timezone_set('America/Los_Angeles');
+
+require_once('classes/item.class.php');
+require_once('_includes/db_functions.inc.php');
+require_once('_includes/functions.inc.php');
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,7 +55,6 @@ date_default_timezone_set('America/Los_Angeles');
 	<p><strong>MARIN COUNTY BICYCLE COALITION (MCBC)<br>WEEKLY BULLETIN</strong><br>
 	
 	<?php
-		include('_includes/functions.inc.php');
 
 		//  Check for date in $_GET superglobal; set default if not provided
 		if (isset($_GET['date'])) {
@@ -62,9 +66,6 @@ date_default_timezone_set('America/Los_Angeles');
 		//  Get formatted bulletin date and display on page
 		echo $wb_date->format('F j, Y') . '</p>';
 		
-		require_once('classes/item.class.php');
-		require_once('_includes/db_functions.inc.php');
-	
 		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
 		
 		//  1st query: linked TOC

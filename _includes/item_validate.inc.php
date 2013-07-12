@@ -4,7 +4,6 @@
 #  It checks to see that all required data was entered and that all entered data is valid.
 
 require_once('_includes/functions.inc.php'); 
-include_once('classes/date.class.php'); 
 
 function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 

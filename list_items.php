@@ -1,19 +1,9 @@
 <?php
-session_start();
-
-//  Set time zone for Bob's house...NOT in L.A.
-date_default_timezone_set('America/Los_Angeles');
+require_once('_includes/opening_housekeeping.inc.php');
 
 //  Set number of rows per page.
 DEFINE('ROWS_PER_PAGE', 15);
 
-//  Include database functions and utility functions
-require_once('_includes/db_functions.inc.php');
-require_once('_includes/functions.inc.php');
-require_once('classes/table.class.php');
-require_once('classes/date.class.php');
-
-$errors = array();
 $where_clause = '';
 
 if (isset($_POST['submitted'])) {

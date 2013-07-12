@@ -20,15 +20,13 @@ if (isset($_GET['id'])) {
 require_once('classes/table.class.php');
 require_once('_includes/db_functions.inc.php');
 require_once('_includes/functions.inc.php');
+
 $item_data = Table::select_by_unique_key($dbc, 'items', 'item_id', $item_id);
 
 if (isset($_POST['submitted'])) {
 
 	if (isset($_POST['submit'])) {   //  Deletion OK'd: proceed to delete row
 	
-		//  Include table class definition (to allow use of static delete function)
-		require_once('classes/table.class.php');
-
 		if (Table::delete_row($dbc, 'items', 'item_id', $item_id)) {
 			$_SESSION['message'] = "Deletion succeeded";
 		} else {
