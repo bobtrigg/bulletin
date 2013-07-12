@@ -11,6 +11,7 @@ DEFINE('ROWS_PER_PAGE', 15);
 require_once('_includes/db_functions.inc.php');
 require_once('_includes/functions.inc.php');
 require_once('classes/table.class.php');
+require_once('classes/date.class.php');
 
 $errors = array();
 $where_clause = '';
@@ -20,29 +21,30 @@ if (isset($_POST['submitted'])) {
 	//  Validate date entries
 
 	if (isset($_POST['wb_date']) && !is_null($_POST['wb_date']) && $_POST['wb_date'] != '') {
-		if ($validated_date = valid_date($_POST['wb_date'])) {
-			$wb_date = $validated_date;
-			$date = number_format_date($wb_date);
-			$where_clause = " WHERE bulletin_date = '" . $date . "' ";
-		} else {
+	
+		$date = Date::valid_date($_POST['wb_date']);
+		
+		if (!$date) {
 			$errors[] = "Bulletin date is not valid";
-			echo "Bulletin date is not valid";
+			$date = new Date();  // Defaults to today
 		}
 	} else {
 		$errors[] = 'You <i>must</i> enter a start date!';
-		echo 'You <i>must</i> enter a start date!';
+		$date = new Date();  // Defaults to today
 	}
+	
+	$where_clause = " WHERE bulletin_date = '" . $date->get_db_date() . "' ";
+	
 } else {  //  Check for date in $_GET superglobal
 
 	if (isset($_GET['date']) and is_numeric($_GET['date'])) {
-		$date = $_GET['date'];
+		$date = new Date($_GET['date']);
 	} else {
-		$date = date('Ymd');
+		$date = new Date();
 	}
-	$wb_date = convert_numeric_to_display($date);
-	$where_clause = " WHERE bulletin_date = '" . $date . "' ";
+	$where_clause = " WHERE bulletin_date = '" . $date->get_db_date() . "' ";
 }
-$_SESSION['date'] = $date;  //  For returning from item entry
+$_SESSION['date'] = $date->get_numeric_date();  //  For returning from item entry
 
 //  Display header and session message if set
 $page_title = 'Bulletin Items';
@@ -67,10 +69,6 @@ if (!empty($errors)) {
 	echo "</p>\n";
 }
 
-//  Get formatted database date
-$stamp = getstamp($date);
-$db_date = date('Y-m-d',$stamp);
-
 #####  Determine parameters for call to select function
 
 //  Retrieve total number of rows in bulletin table
@@ -89,7 +87,7 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 
 	<p class="event_selector" style="padding:0 0 0 30px;">
 		<label for="wb_date">Bulletin date:</label><br>
-		<input name="wb_date" type="text" id="wb_date" size="15" maxlength="15" value="<?php echo display_date($db_date); ?>">
+		<input name="wb_date" type="text" id="wb_date" size="15" maxlength="15" value="<?php echo $date->get_display_date(); ?>">
 		<br><span style="font-size:75%">Format: mm/dd/yyyy</span>
 	</p>
 
@@ -112,7 +110,7 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 while ($item = mysqli_fetch_array($row_resource)) {
 
 	echo "  <tr>\n";
-	echo "    <td>" . display_date($item['bulletin_date']) . "</td>\n";
+	echo "    <td>" . (new Date($item['bulletin_date']))->get_display_date() . "</td>\n";
 	echo "    <td>" . $item['position'] . "</td>\n";
 	echo "    <td>" . $item['title'] . "</td>\n";
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";
@@ -124,5 +122,5 @@ while ($item = mysqli_fetch_array($row_resource)) {
   </tr>
 </table>
 
-<p><a href="email_bulletin.php?date=<?php echo $date; ?>" target="_blank">Generate email bulletin</a>
+<p><a href="email_bulletin.php?date=<?php echo $date->get_numeric_date(); ?>" target="_blank">Generate email bulletin</a>
 <p><a href="create_item.php">Create a new bulletin item</a>

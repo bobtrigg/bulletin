@@ -14,7 +14,7 @@ if (isset($_POST['submitted'])) {
 		
 			//  New row inserted - Return to list page
 				if (!headers_sent($filename, $linenum)) {
-					header("Location: list_items.php?date=" . convert_display_to_numeric($item_object->get_value('bulletin_date')));
+					header("Location: list_items.php?date=" . $item_object->get_value('bulletin_date')->get_numeric_date());
 					exit();
 				} else {
 					die ( "Headers already sent in $filename on line $linenum<br>\n" .

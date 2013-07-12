@@ -3,6 +3,8 @@
 #  This include file contains validation code for bulletin item entry fields
 #  It checks to see that all required data was entered and that all entered data is valid.
 
+include_once('classes/date.class.php'); 
+
 function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 
 	global $errors;
@@ -23,11 +25,10 @@ function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 	}
 	
 	if ($date) {
-		if ($value = valid_date($value)) {
-			$value = number_format_date($value,"-");
-		} else {
+		$value = Date::valid_date($value);
+		
+		if (!$value) {
 			$errors[] = "Date is not valid; must be mm/dd/yyyy";
-			$value = "";
 		}
 	}
 	

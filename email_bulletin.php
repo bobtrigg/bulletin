@@ -1,16 +1,18 @@
 <?php
+	//  Set time zone for Bob's house...NOT in L.A.
+	date_default_timezone_set('America/Los_Angeles');
+
 	include('_includes/functions.inc.php');
 
 	//  Check for date in $_GET superglobal; set default if not provided
 	if (isset($_GET['date'])) {
-		$wb_date = $_GET['date'];
+		$wb_date = new Date($_GET['date']);
 	} else {
-		$wb_date = date('Ymd');
+		$wb_date = new Date();  // Default to today
 	}
 	
 	//  Get formatted bulletin date and display on page
-	$stamp = getstamp($wb_date);
-	$display_date = date('F j, Y',$stamp);
+	$display_date = date('F j, Y',$wb_date->get_date_stamp());
 	
 	include('email_header.inc.php');
 	
