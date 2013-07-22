@@ -52,12 +52,12 @@ function valid_date($date_str) {  // mm/dd/yyyy -> DateTime object
 	}
 }
 
-function resize_picture($image_link_url, $max_side_len) {
+function resize_picture($graphic, $max_side_len) {
 
 //  Set image height and width
 
 	//  Get raw image dimensions
-	$image_size_info = getimagesize($image_link_url);
+	$image_size_info = getimagesize($graphic);
 	
 	//  Set dimension values for image
 	$width = $image_size_info[0];
@@ -74,5 +74,48 @@ function resize_picture($image_link_url, $max_side_len) {
 		}
 	}
 	return array($width,$height);
+}
+function upload_file($file) {
+
+	// Pass in $_FILES['file_upload'] as an argument
+	// Perform error checking on the form parameters
+	
+	$errors = array();
+	
+	$upload_errors = array(
+		// This array contains upload error codes and their user friendly equivalents.
+		// We can use this for reporting errors.
+		UPLOAD_ERR_OK => "No errors",
+		UPLOAD_ERR_INI_SIZE => "Larger than upload_max_filesize",
+		UPLOAD_ERR_FORM_SIZE => "Larger than form MAX_FILE_SIZE",
+		UPLOAD_ERR_PARTIAL => "Partial upload",
+		UPLOAD_ERR_NO_FILE => "No file",
+		UPLOAD_ERR_NO_TMP_DIR => "No temporary directory",
+		UPLOAD_ERR_CANT_WRITE => "Can't write to disk",
+		UPLOAD_ERR_EXTENSION => "File upload stopped by extension"
+	);
+
+	
+	if(!$file || empty($file) || !is_array($file)) {
+	
+		// error: nothing uploaded or wrong argument usage
+		$errors[] = "No file was uploaded";
+		
+	} elseif($file['error'] != 0) {
+	
+		// error: report what PHP says went wrong
+		$errors[] = $upload_errors[$file['error']];
+		
+	} else {
+	
+		// Set object attributes to the form parameters
+		$source_path = $file['tmp_name'];
+		$target_path = "Images/2013/" . basename($file['name']);
+		$rtn_status = move_uploaded_file($source_path,$target_path);
+		if (!$rtn_status) {
+			$errors[] = "The file upload failed, possibly due to incorrect permissions on the upload folder.";
+		}
+	}
+	return $errors;
 }
 ?>

@@ -17,9 +17,10 @@ class Item extends Table {
 								$subtitle=NULL, 
 								$content=NULL, 
 								$excerpt=NULL, 
-								// $image=NULL, 
 								// $caption=NULL, 
-								// $image_link_url=NULL
+								$graphic=NULL,
+								$alt_text=NULL,
+								$thumbnail=NULL,
 								$item_id=NULL	) 
 	{
 		$this->pk_id = (int)$item_id;
@@ -30,14 +31,15 @@ class Item extends Table {
 								  'subtitle' => $subtitle,
 								  'content' => (string)$content,
 								  'excerpt' => (string)$excerpt,
-								  //'image' => (string)$image,
 								  //'caption' => (string)$caption,
-								  //'image_link_url' => $image_link_url
+								  'graphic' => $graphic,
+								  'alt_text' => $alt_text,
+								  'thumbnail' => $thumbnail
 								  );
 								  
 		parent::__construct('items', 'item_id', 
 		                     array('bulletin_date', 'position','title','subtitle','content',
-							       'excerpt'/*,'image','caption','image_link_url'*/));
+							       'excerpt'/*,'caption'*/,'graphic','alt_text','thumbnail'));
 	}
 }
 ?>

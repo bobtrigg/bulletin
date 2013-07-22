@@ -1,6 +1,6 @@
 	<tr>
-		<td style="background-color:#D5EF98;">
-			<p style="margin-top:5px;margin-bottom:5px;margin-left:5px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#543019;">
+		<td style="background-color:<?php echo CUSTOM_BAR_BGCOLOR;?>;">
+			<p style="margin-top:5px;margin-bottom:5px;margin-left:5px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:<?php echo CUSTOM_BAR_TEXT_COLOR;?>;">
 
 			<?php echo $item_title; ?>
 			
@@ -18,7 +18,7 @@
 
 							<?php echo '<a href="bulletin.php?date=' . $wb_date->format('Ymd') . '#' . str_replace(' ','',$item_title) . '" target="_blank">'; ?>
 
-								<img src="<?php echo $image_url; ?>"  style="margin-top:5px;margin-bottom:5px;padding-top:0;padding-bottom:0;" alt="<?php echo $item_title; ?>" width="<?php echo $dimensions[0]; ?>" height="<?php echo $dimensions[1]; ?>" border="0">
+								<img src="<?php echo $image_url; ?>" alt="<?php echo $alt_text; ?>" style="margin-top:5px;margin-bottom:5px;padding-top:0;padding-bottom:0;" alt="<?php echo $item_title; ?>" width="<?php echo $dimensions[0]; ?>" height="<?php echo $dimensions[1]; ?>" border="0">
 							</a>
 						</p>
 					</td>

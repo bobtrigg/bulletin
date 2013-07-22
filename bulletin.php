@@ -5,6 +5,7 @@ date_default_timezone_set('America/Los_Angeles');
 require_once('classes/item.class.php');
 require_once('_includes/db_functions.inc.php');
 require_once('_includes/functions.inc.php');
+include_once('_includes/runtime_parms.inc.php');
 
 ?>
 
@@ -17,6 +18,7 @@ require_once('_includes/functions.inc.php');
 <title>Marin County Bicycle Coalition</title>
 
 <link href="../../css/global.css" rel="stylesheet" type="text/css">
+<link href="<?php echo CUSTOM_CSS; ?>" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <link rel="stylesheet" href="../../fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 <script type="text/javascript" src="../../fancybox/jquery.fancybox.pack.js"></script>
@@ -45,14 +47,14 @@ require_once('_includes/functions.inc.php');
 
 <body>
 <div id="wrapper">
-	<?php include('../../_includes/Header.htm');?>
-	<?php include('../../_includes/LeftCol.htm');?>
-	<?php include('../../_includes/RightCol.htm');?>
+	<?php include(WEB_HEADER);?>
+	<?php include(LEFT_SIDEBAR);?>
+	<?php include(RIGHT_SIDEBAR);?>
   <div id="content">
-	<?php include('../../_includes/share.htm');?>
+	<?php include(CUSTOM_SHARE);?>
 
 	<div id="wbHeader">
-	<p><strong>MARIN COUNTY BICYCLE COALITION (MCBC)<br>WEEKLY BULLETIN</strong><br>
+	<p><strong><?php echo ORG_NAME; ?><br>WEEKLY BULLETIN</strong><br>
 	
 	<?php
 
@@ -98,10 +100,10 @@ require_once('_includes/functions.inc.php');
 			echo $item['subtitle'] . '</p>';
 			
 			//  Code image, with link to fancybox popup
-			if (!is_null($item['graphic_link'])) {
+			if (!is_null($item['graphic'])) {
 			
 				//  Set image height and width
-				$image_size_info = getimagesize($item['image_link_url']);
+				$image_size_info = getimagesize($item['graphic']);
 				$width = $image_size_info[0];
 				$height = $image_size_info[1];
 				if ($width > 300 || $height > 300) {
@@ -115,8 +117,8 @@ require_once('_includes/functions.inc.php');
 				}
 			
 				//  Write HTML to put image, with link, on page
-				echo '<a href="' . $item['image_link_url'] . '" title="'  . $item['title'] . '" class="fancybox">';
-				echo '<img src="' . $item['image_link_url'] . '" alt="' . $item['title'] . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
+				echo '<a href="' . $item['graphic'] . '" title="'  . $item['title'] . '" class="fancybox">';
+				echo '<img src="' . $item['graphic'] . '" alt="' . $item['alt_text'] . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
 				echo '</a>';
 			}
 			
@@ -128,7 +130,7 @@ require_once('_includes/functions.inc.php');
 	?>
   </div>
   <div id="footer">
-	<?php include('../../_includes/footer.htm');?>
+	<?php include(WEB_FOOTER);?>
   </div>
 </div>
 </body>

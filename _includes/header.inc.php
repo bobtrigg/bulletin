@@ -8,6 +8,7 @@
 
 <script type="text/javascript" src="_js/TinyMCE/jscripts/tiny_mce/tiny_mce.js" ></script >
 <script type="text/javascript" src="_js/tinyMCEinit.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 <!-- <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
 <script>
         tinymce.init({selector:'textarea'});
@@ -27,6 +28,8 @@
 	if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
 		echo "<p>" . $_SESSION['message'] . "</p>";
 		unset ($_SESSION['message']);
+	} else {
+		echo "<p>No session messages</p>";
 	}
 ?>
 <!-- End of header.html -->

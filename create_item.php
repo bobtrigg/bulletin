@@ -6,40 +6,53 @@ if (isset($_POST['submitted'])) {
 	$item_object = validate_all_items($dbc);
 	
 	if (empty($errors)) {
-
-		//  Insert new record
-		$result = $item_object->insert_row($dbc);
-		
-		if ($result) { 
-		
-			//  New row inserted - Return to list page
-				if (!headers_sent($filename, $linenum)) {
-					header("Location: list_items.php?date=" . preg_replace('/\-/','',$item_object->get_value('bulletin_date')));
-					exit();
-				} else {
-					die ( "Headers already sent in $filename on line $linenum<br>\n" .
-						  "Please report the above information to your <a href=\"mailto:bobtrigg94930@gmail.com\">system administrator</a>.<br>\n" .
-						  "<a href=\"list_items.php\">Click here</a> to return to items list.\n");
-				}
-						
-		} else {
+	
+		// $file_data = $_FILES['file_upload'];
+	
+		if (empty($errors)) {
+	
+			//  Insert new record
+			$result = $item_object->insert_row($dbc);
 			
-			// Insert failed; add error message
-			$errors[] = "Insert failed.";
+			if ($result) { 
+			
+				//  New row inserted - Return to list page
+					if (!headers_sent($filename, $linenum)) {
+						header("Location: list_items.php?date=" . preg_replace('/\-/','',$item_object->get_value('bulletin_date')));
+						exit();
+					} else {
+						die ( "Headers already sent in $filename on line $linenum<br>\n" .
+							  "Please report the above information to your <a href=\"mailto:bobtrigg94930@gmail.com\">system administrator</a>.<br>\n" .
+							  "<a href=\"list_items.php\">Click here</a> to return to items list.\n");
+					}
+							
+			} else {
+				
+				// Insert failed; add error message
+				$errors[] = "Insert failed.";
+			}
+		} else {
+			$_SESSION['message'] .= "\nFile upload failed; update aborted.";
+			foreach	($errors as $error) { 
+				$_SESSION['message'] .= "\n" . $error;
+			}
 		}
-	} else {
+	} else { 
 		$title = $item_object->get_value('title');
 		$subtitle = $item_object->get_value('subtitle');
 		$content = $item_object->get_value('content');
 		$excerpt = $item_object->get_value('excerpt');
 		$position = $item_object->get_value('position');
 		$bulletin_date = $item_object->get_value('bulletin_date');
+		$graphic = $item_object->get_value('graphic');
+		$alt_text = $item_object->get_value('alt_text');
+		$thumbnail = $item_object->get_value('thumbnail');
 	}
 	
-}  else {
+}  else {  // Form was not yet submitted
 
 	// initialize item name variable
-	$bulletin_date = $position = $title = $subtitle = $content = $excerpt = '';
+	$bulletin_date = $position = $title = $subtitle = $content = $excerpt = $graphic = $alt_text = $thumbnail = '';
 }
 
 //  Display header, and errors if any 
@@ -59,7 +72,7 @@ if (!empty($errors)) {
 }
 
 ?>
-<form name="form1" method="post" action="create_item.php" enctype=“mulitpart/form-data”>
+<form action="create_item.php" enctype="mulitpart/form-data" method="POST">
 
 	<!--  Copy in boilerplate form fields -->
 	<?php require('_includes/data_form.inc.php'); ?>

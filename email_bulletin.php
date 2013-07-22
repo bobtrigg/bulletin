@@ -5,6 +5,7 @@
 	require_once('classes/item.class.php');
 	require_once('_includes/db_functions.inc.php');
 	include_once('_includes/functions.inc.php');
+	include_once('_includes/runtime_parms.inc.php');
 
 	//  Check for date in $_GET superglobal; set default if not provided
 	if (isset($_GET['date'])) {
@@ -15,7 +16,7 @@
 	
 	//  Get formatted bulletin date and display on page
 	$display_date = $wb_date->format('F j, Y');
-	include('_includes/email_header.inc.php');
+	include(EMAIL_HEADER);
 	
 	//  Set up query to loop thru items
 	$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
@@ -26,12 +27,20 @@
 	
 		$item_title = $item['title'];
 		$item_excerpt = $item['excerpt'];
-		$image_url = $item['graphic'];
+		$thumbnail = $item['thumbnail'];
+		
+		// If thumbnail size graphic was specified, use it; otherwise use main graphic
+		if (isset($thumbnail) && !is_null($thumbnail)) {
+			$image_url = $thumbnail;
+		} else {
+			$image_url = $item['graphic'];
+		}
+		$alt_text = $item['alt_text'];
 
 		include('_includes/email_item.inc.php');
 	}
 	
 	echo "</ol>\n</div>\n";
 
-	include('_includes/email_footer.inc.php');
+	include(EMAIL_FOOTER);
 ?>
