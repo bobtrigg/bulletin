@@ -1,3 +1,15 @@
+<?php
+
+// A little housekeeping
+$max_file_size = 1048576;
+ 
+if (is_null($bulletin_date)) {
+	$year = date('Y');
+} else {
+	$year = explode('/',$bulletin_date)[2];
+}
+?>
+
 <p>
 	<label for="bulletin_date">Date: </label>
 	<input type="text" name="bulletin_date" id="bulletin_date" value="<?php echo $bulletin_date; ?>" size="40" maxlength="60" />
@@ -10,8 +22,6 @@
 	<label for="subtitle">Subtitle: </label>
 	<input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="60" />
 </p>
-
-<?php 	$max_file_size = 1048576; ?>
 
 <p>
 	<label for="content">Content:<br>
@@ -28,12 +38,15 @@
 
 	<blockquote>
 		<p>
-			<label for="img_file">Upload</label>
-			<br>
-			<!-- <input type="file" name="img_file" id="img_file" >  -->
+			<!--  Non-working code ported to new file
+			// <label for="img_file">Upload</label>
+			// <br>
 
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
-			<p><input type="file" name="file_upload" /></p>
+			// <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
+			// <p><input type="file" name="file_upload" /></p>
+			-->
+			
+			<a href="upload.php?year=<?php echo $year ?>" target="_blank">Upload a file</a>
 
 		</p>
 

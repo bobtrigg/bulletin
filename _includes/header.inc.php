@@ -28,8 +28,8 @@
 	if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
 		echo "<p>" . $_SESSION['message'] . "</p>";
 		unset ($_SESSION['message']);
-	} else {
-		echo "<p>No session messages</p>";
+	// } else {
+		// echo "<p>No session messages</p>";
 	}
 ?>
 <!-- End of header.html -->
