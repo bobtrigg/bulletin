@@ -6,7 +6,8 @@
 <title><?php echo $page_title; ?></title>
 <link href="_css/style.css" rel="stylesheet" type="text/css">
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="_js/script.js"></script>
 
 <script type="text/javascript" src="_js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">

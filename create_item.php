@@ -45,6 +45,7 @@ if (isset($_POST['submitted'])) {
 		$position = $item_object->get_value('position');
 		$bulletin_date = $item_object->get_value('bulletin_date');
 		$graphic = $item_object->get_value('graphic');
+		$large_graphic = $item_object->get_value('large_graphic');
 		$alt_text = $item_object->get_value('alt_text');
 		$thumbnail = $item_object->get_value('thumbnail');
 	}
@@ -52,7 +53,7 @@ if (isset($_POST['submitted'])) {
 }  else {  // Form was not yet submitted
 
 	// initialize item name variable
-	$bulletin_date = $position = $title = $subtitle = $content = $excerpt = $graphic = $alt_text = $thumbnail = '';
+	$bulletin_date = $position = $title = $subtitle = $content = $excerpt = $graphic = $large_graphic = $alt_text = $thumbnail = '';
 }
 
 //  Display header, and errors if any 

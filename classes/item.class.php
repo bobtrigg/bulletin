@@ -19,6 +19,7 @@ class Item extends Table {
 								$excerpt=NULL, 
 								// $caption=NULL, 
 								$graphic=NULL,
+								$large_graphic=NULL,
 								$alt_text=NULL,
 								$thumbnail=NULL,
 								$item_id=NULL	) 
@@ -33,13 +34,14 @@ class Item extends Table {
 								  'excerpt' => (string)$excerpt,
 								  //'caption' => (string)$caption,
 								  'graphic' => $graphic,
+								  'large_graphic' => $large_graphic,
 								  'alt_text' => $alt_text,
 								  'thumbnail' => $thumbnail
 								  );
 								  
 		parent::__construct('items', 'item_id', 
 		                     array('bulletin_date', 'position','title','subtitle','content',
-							       'excerpt'/*,'caption'*/,'graphic','alt_text','thumbnail'));
+							       'excerpt'/*,'caption'*/,'graphic','large_graphic','alt_text','thumbnail'));
 	}
 }
 ?>

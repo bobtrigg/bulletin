@@ -68,6 +68,7 @@ if (isset($_POST['submitted'])) {
 		$bulletin_date = get_bulletin_date($item_object->get_value('bulletin_date'));
 		// $bulletin_date = (new DateTime($item_object->get_value('bulletin_date')))->format('n/j/Y');
 		$graphic = $item_object->get_value('graphic');
+		$large_graphic = $item_object->get_value('large_graphic');
 		$alt_text = $item_object->get_value('alt_text');
 		$thumbnail = $item_object->get_value('thumbnail');
 	}
@@ -90,6 +91,7 @@ if (isset($_POST['submitted'])) {
 	// $image = $return_row['image'];
 	// $caption = $return_row['caption'];
 	$graphic = $return_row['graphic'];
+	$large_graphic = $return_row['large_graphic'];
 	$alt_text = $return_row['alt_text'];
 	$thumbnail = $return_row['thumbnail'];
 }
@@ -125,7 +127,6 @@ if (!empty($errors)) {
 
 ?>
 <form name="form1" method="post" action="edit_item.php?id=<?php echo $item_id; ?>" enctype=“mulitpart/form-data”>
-</form>
  	
 	<!--  Copy in boilerplate form fields -->
 	<?php require('_includes/data_form.inc.php'); ?>
@@ -141,6 +142,7 @@ if (!empty($errors)) {
 			}
 		?>
 	</p>
+</form>
 	
 </body>
 </html>

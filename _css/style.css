@@ -31,8 +31,11 @@ body {
 #wrapper {
 	height:auto;
 	margin:20px auto;
-	padding:0 10px 20px;
+/* 	padding:0 10px 20px; */	
 	width:752px;
+	-webkit-box-shadow: 10px 10px 20px #20242c;
+	-moz-box-shadow: 10px 10px 20px #20242c;
+	box-shadow: 10px 10px 20px #20242c;
 }
 /* header */
 #header {
@@ -41,6 +44,9 @@ body {
     padding: 0;
 	width:752px;
 	background-color: #ffda4a;
+	-webkit-border-radius:10px 10px 0 0;
+	-moz-border-radius:10px 10px 0 0;
+	border-radius:10px 10px 0 0;
 }
 h1,h2,h3,h4 {
 	color:#666;
@@ -85,13 +91,16 @@ p.clear {
 	background-color: #f8f8f8;
 	border: solid #ccc 1px;
 	clear:both;
+	-webkit-border-radius:0 0 10px 10px;
+	-moz-border-radius:0 0 10px 10px;
+	border-radius:0 0 10px 10px;
 }
 #page_content h1 {
 	border-bottom:1px dashed #999;
 	font-size:1.8em;
 	padding:20px 0 0;
 }
-#page_content p {
+#page_content form p {
 	padding:20px 20px 0 20px;
 }
 #page_content ul{
@@ -102,7 +111,7 @@ p.clear {
 #page_content form {
 	margin: 10px 0;
 }
-#page_content form p {
+#page_content form p, #page_content form h3 {
 	padding: 10px 0 10px 45px;
 }
 #page_content .explanation {
@@ -118,6 +127,34 @@ form input , form textarea, form select {
 form select option {
 	padding: 0 10px;
 }
+form input[type=text] {
+	height:20px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	padding:0 5px;
+}
+#graphic_entries input[type=text], #text_entries input[type=text] {
+	width: 400px;
+}
+#text_entries .mce-panel {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+#text_entries, #graphic_entries {
+	position:relative;
+}
+#text_entries input[type=text] {
+	position:absolute;
+	right:	200px;
+}
+#graphic_entries input {
+	position:absolute;
+	right:92px;
+ }
+#page_content #graphic_entries p {
+	padding-left:65px;
+}
 .label {
 	width: 120px;
 	text-align: right;
@@ -128,6 +165,19 @@ form select option {
 textarea {
 	width:625px;
 }
+input[type=submit], input[type=button] {
+	padding:5px 10px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+}
+input[type=submit] {
+	background:rgba(5,224,5,.3);
+}
+input[type=button] {
+	background:rgba(224,5,5,.3);
+}
+ 
 .required {
 	float: left;
 	font-weight: bold;
@@ -138,7 +188,7 @@ textarea {
 	padding: 5px 10px;
 }
 
-/*  data table */
+/*  data table - used in list_items.php */
 #datatable {
 	margin: 5px auto;
 }
@@ -170,4 +220,9 @@ textarea {
 .error {
 	font-weight: bold;
 	color: #C00;
+}
+@media only screen and (max-width:560px) {
+	#graphic_entries input {
+		position:static;
+	}
 }

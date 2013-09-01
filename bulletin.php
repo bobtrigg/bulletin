@@ -116,7 +116,7 @@ include_once('_includes/runtime_parms.inc.php');
 				}
 			
 				//  Write HTML to put image, with link, on page
-				echo '<a href="' . $item['graphic'] . '" title="'  . $item['title'] . '" class="fancybox">';
+				echo '<a href="' . $item['large_graphic'] . '" title="'  . $item['title'] . '" class="fancybox">';
 				echo '<img src="' . $item['graphic'] . '" alt="' . $item['alt_text'] . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
 				echo '</a>';
 			}

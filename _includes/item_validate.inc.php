@@ -49,9 +49,12 @@ function validate_all_items($dbc) {
 	$item->set_value('bulletin_date', $bulletin_date);
 	$item->set_value('position', validate_item($dbc,'position',true,true));
 	
-	//  Code note: setting $bulletin_date MUST precede setting $graphic and $thumbnail
+	//  Code note: setting $bulletin_date MUST precede setting $graphic, $large_graphic, and $thumbnail
 	$graphic = validate_item($dbc,'graphic',true);
 	$item->set_value('graphic', set_image_path($graphic, $bulletin_date));
+
+	$large_graphic = validate_item($dbc,'large_graphic',false);
+	$item->set_value('large_graphic', set_image_path($large_graphic, $bulletin_date));
 
 	$thumbnail = validate_item($dbc,'thumbnail',false);
 	$item->set_value('thumbnail', set_image_path($thumbnail, $bulletin_date));

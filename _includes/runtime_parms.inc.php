@@ -39,7 +39,7 @@ DEFINE('GLOBAL_JS', '');
 //  This package contains the fancybox code; you can delete it if you already
 //    have fancybox installed somewhere else. If you do, you'll need to
 //    change this constant.
-DEFINE('FANCY_BOX', 'fancybox/');  
+DEFINE('FANCY_BOX', '/fancybox/');  
 
 //  Constants used for email bulletin HTML
 
