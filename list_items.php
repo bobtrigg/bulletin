@@ -97,6 +97,10 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 <?php
 
 //  Read each row from events table and display data, with edit and delete links
+//  Store IDs in an array for previous/next functionality in edit program
+
+$item_ids = array();
+
 while ($item = mysqli_fetch_array($row_resource)) {
 
 	echo "  <tr>\n";
@@ -112,7 +116,11 @@ while ($item = mysqli_fetch_array($row_resource)) {
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";
 	echo "    <td><a href=\"delete_item.php?id=" . $item['item_id'] . "\">Delete</a></td>\n";
 	echo "  </tr>\n\n";
+	
+	$item_ids[] = $item['item_id'];
 }
+
+$_SESSION['item_ids'] = $item_ids;
 ?>
 
   </tr>

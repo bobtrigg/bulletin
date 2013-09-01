@@ -94,6 +94,19 @@ if (isset($_POST['submitted'])) {
 	$thumbnail = $return_row['thumbnail'];
 }
 
+// Obtain previous and next row ids from $_SESSION variable
+
+$item_ids = $_SESSION['item_ids'];
+$curr_item_key = array_search($item_id, $item_ids);
+
+if ($curr_item_key === false) {
+	$next_item_id = null;
+	$prev_item_id = null;
+} else {
+	$prev_item_id = ($curr_item_key == 0) ? null : $item_ids[$curr_item_key - 1] ;
+	$next_item_id = ($curr_item_key >= count($item_ids) - 1) ? null : $item_ids[$curr_item_key + 1] ;
+}
+
 //  Display header, and errors if any 
 $page_title = 'Edit bulletin item';
 $header_title = 'MCBC Weekly Bulletin';
@@ -112,11 +125,22 @@ if (!empty($errors)) {
 
 ?>
 <form name="form1" method="post" action="edit_item.php?id=<?php echo $item_id; ?>" enctype=“mulitpart/form-data”>
-
+</form>
  	
 	<!--  Copy in boilerplate form fields -->
 	<?php require('_includes/data_form.inc.php'); ?>
 	
-</form>
+	<!-- Set up links to edit next and previous items  -->
+	<p>
+		<?php
+			if (!is_null($prev_item_id)) {
+				echo "<a href=\"edit_item.php?id=" . $prev_item_id . "\">Previous item</a>&nbsp;&nbsp;&nbsp;";
+			}
+			if (!is_null($next_item_id)) {
+				echo "<a href=\"edit_item.php?id=" . $next_item_id . "\">Next item</a>";
+			}
+		?>
+	</p>
+	
 </body>
 </html>
