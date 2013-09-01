@@ -47,7 +47,7 @@ if (!empty($errors)) {
 ?>
 	<h2>Photo Upload</h2>
 	
-	<?php echo $message; ?>
+	<?php if (isset($message)) {echo $message;} ?>
 	
 	<form action="upload.php" enctype="multipart/form-data" method="POST">
 	

@@ -11,7 +11,7 @@ function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 
 	if (isset($_POST[$name]) && (!is_null($_POST[$name])) && ($_POST[$name] != '')) {
 	
-		$value = mysqli_real_escape_string($dbc, trim($_POST[$name]));
+		$value = nl2br(mysqli_real_escape_string($dbc, trim($_POST[$name])));
 		
 	} else {
 		if ($required) {

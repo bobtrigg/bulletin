@@ -105,6 +105,11 @@ p.clear {
 #page_content form p {
 	padding: 10px 0 10px 45px;
 }
+#page_content .explanation {
+	font-size:75%;
+	padding: 0 0 0 45px;
+	margin:0 0 0 20px;
+}
 form input , form textarea, form select {
 	border: 1px #999 solid;
 	font-family: Calibri, Verdana, Arial, sans-serif;

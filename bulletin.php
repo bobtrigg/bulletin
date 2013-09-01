@@ -9,25 +9,24 @@ include_once('_includes/runtime_parms.inc.php');
 
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8" />
 
-<title>Marin County Bicycle Coalition</title>
+<title><?php echo ORG_NAME ?></title>
 
-<link href="../../css/global.css" rel="stylesheet" type="text/css">
+<link href="<?php echo GLOBAL_CSS ?>" rel="stylesheet" type="text/css">
 <link href="<?php echo CUSTOM_CSS; ?>" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<link rel="stylesheet" href="../../fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-<script type="text/javascript" src="../../fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="<?php echo FANCY_BOX ?>jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo FANCY_BOX ?>jquery.fancybox.pack.js"></script>
 <script>
 	$(document).ready(function() {
 		$('.fancybox').fancybox();
 	});
 </script>
-<script type="text/javascript" src="/_js/global.js"></script>
+<script type="text/javascript" src="<?php echo GLOBAL_JS ?>"></script>
 
 <!-- JS code for Google Analytics  -->  
 <script type="text/javascript">

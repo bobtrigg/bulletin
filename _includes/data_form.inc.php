@@ -2,25 +2,32 @@
 
 // A little housekeeping
 $max_file_size = 1048576;
- 
-if (is_null($bulletin_date)) {
+
+if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == '')) {
 	$year = date('Y');
+	$bulletin_date = '';
 } else {
-	$year = explode('/',$bulletin_date)[2];
+	$components = explode('/',$bulletin_date);
+	// echo '<h1>Components: ' . $components.length . '</h1>';
+	if (count($components) >= 2) {
+		$year = $components[2];
+	} else {
+		$year = date('Y');
+	}
 }
 ?>
 
 <p>
 	<label for="bulletin_date">Date: </label>
-	<input type="text" name="bulletin_date" id="bulletin_date" value="<?php echo $bulletin_date; ?>" size="40" maxlength="60" />
+	<input type="text" name="bulletin_date" id="bulletin_date" value="<?php echo $bulletin_date;?>" size="40" maxlength="60" />
 </p>
 <p>
 	<label for="title">Title: </label>
-	<input type="text" name="title" id="title" value="<?php echo $title; ?>" size="40" maxlength="60" />
+	<input type="text" name="title" id="title" value="<?php echo $title; ?>" size="40" maxlength="200" />
 </p>
 <p>
 	<label for="subtitle">Subtitle: </label>
-	<input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="60" />
+	<input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="200" />
 </p>
 
 <p>
@@ -42,7 +49,7 @@ if (is_null($bulletin_date)) {
 			// <label for="img_file">Upload</label>
 			// <br>
 
-			// <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
+			// <input type="hidden" name="MAX_FILE_SIZE" value="<?php /*echo $max_file_size;*/?>" />
 			// <p><input type="file" name="file_upload" /></p>
 			-->
 			
@@ -57,14 +64,20 @@ if (is_null($bulletin_date)) {
 		</p>
 
 		<p>
-			<label for="alt_text">Alt text: </label>
-			<br>
+			<label for="alt_text">Alt text:</p>
+				<p class="explanation">
+				Provide a short description for non-displaying browsers and assisted technology.</p>
+			</label>
+		<p>
 			<input type="input" name="alt_text" id="alt_text" value="<?php echo $alt_text; ?>" size="80" maxlength="200"  />
 		</p>
 		
 		<p>
-			<label for="thumbnail">File URL: </label>
-			<br>
+			<label for="thumbnail">Thumbnail file URL:</p>
+				<p class="explanation">
+				Provide a small file for your email.<br>If you leave this blank, the larger file will be used, increasing bandwidth.</p>
+			</label>
+		<p>
 			<input type="input" name="thumbnail" id="thumbnail" value="<?php echo $thumbnail; ?>" size="80" maxlength="200"  />
 		</p>
 

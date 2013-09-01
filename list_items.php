@@ -100,7 +100,13 @@ $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bull
 while ($item = mysqli_fetch_array($row_resource)) {
 
 	echo "  <tr>\n";
-	echo "    <td>" . (new DateTime($item['bulletin_date']))->format('n/j/Y') . "</td>\n";
+	
+	//  Simplify my beautiful code for buggy web host
+	$display_date_obj = new DateTime($item['bulletin_date']);
+	$display_date = $display_date_obj->format('n/j/Y');
+	echo "    <td>" . $display_date . "</td>\n";
+
+	// echo "    <td>" . (new DateTime($item['bulletin_date']))->format('n/j/Y') . "</td>\n";
 	echo "    <td>" . $item['position'] . "</td>\n";
 	echo "    <td>" . $item['title'] . "</td>\n";
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";

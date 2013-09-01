@@ -4,3 +4,9 @@ readme
 notes.txt
 snippets.php
 Images/*
+_js/tinymce
+_js/tinymce/*
+_includes/db_info.bt.inc.php
+_includes/db_info.local.inc.php
+_includes/db_info.mcbc.inc.php
+_includes/mcbc_info.inc.php

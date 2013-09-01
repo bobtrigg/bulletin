@@ -75,7 +75,7 @@ if (!empty($errors)) {
 <form action="create_item.php" enctype="mulitpart/form-data" method="POST">
 
 	<!--  Copy in boilerplate form fields -->
-	<?php require('_includes/data_form.inc.php'); ?>
+	<?php include('_includes/data_form.inc.php'); ?>
 	
 </form>
 

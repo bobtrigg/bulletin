@@ -15,14 +15,19 @@ if (isset($_GET['id'])) {
 			  "<a href=\"login.php\">Click here</a> to re-login\n");
 	}	
 }
-				$_SESSION['message'] .= "\nInside script";
 
+function get_bulletin_date($unformatted_date) {
+
+	// Since some vsns of PHP do not allow an object reference symbol after a new object declaration,
+	// this code can't be condensed to one line. Hence, since it's reused, it's now a function. WTF!
+
+	$bulletin_date = new DateTime($unformatted_date);	
+	return $bulletin_date->format('n/j/Y');
+}
 
 if (isset($_POST['submitted'])) {
 
-				$_SESSION['message'] .= "\nInside submitted logic";
-
-				$item_object = validate_all_items($dbc);
+	$item_object = validate_all_items($dbc);
 	$item_object->set_pk_id($item_id);
 
 	if (empty($errors)) { //  Data is valid
@@ -59,7 +64,9 @@ if (isset($_POST['submitted'])) {
 		$content = $item_object->get_value('content');
 		$excerpt = $item_object->get_value('excerpt');
 		$position = $item_object->get_value('position');
-		$bulletin_date = (new DateTime($item_object->get_value('bulletin_date')))->format('n/j/Y');
+		$unformatted_date = $item_object->get_value('bulletin_date');
+		$bulletin_date = get_bulletin_date($item_object->get_value('bulletin_date'));
+		// $bulletin_date = (new DateTime($item_object->get_value('bulletin_date')))->format('n/j/Y');
 		$graphic = $item_object->get_value('graphic');
 		$alt_text = $item_object->get_value('alt_text');
 		$thumbnail = $item_object->get_value('thumbnail');
@@ -73,7 +80,8 @@ if (isset($_POST['submitted'])) {
 	}
 	
 	//  Assign event data to variables
-	$bulletin_date = (new DateTime($return_row['bulletin_date']))->format('n/j/Y');
+
+	$bulletin_date = get_bulletin_date($return_row['bulletin_date']);
 	$position = $return_row['position'];
 	$title = $return_row['title'];
 	$subtitle = $return_row['subtitle'];
