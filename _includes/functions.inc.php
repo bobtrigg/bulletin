@@ -118,4 +118,29 @@ function upload_file($file) {
 	}
 	return $errors;
 }
+
+function parse_file_name($rawfilename, $wb_date) {
+
+	// This function parse the passed parameter $rawfilename to
+	// to generate the file name for the online web page bulletin.
+	// It uses parameter $wb_date to translate format codes into
+	// date components.
+	// $rawfilename is obtained from the FILE_NAME constant
+	// defined in runtime_parms.inc.php.
+	
+	$str_array = str_split($rawfilename);
+	$formatted_string = "";
+	
+	for ($i=0;$i<=count($str_array);$i++) {
+
+		if ($str_array[$i] == "%") {
+			$i++;
+			$formatted_string .= $wb_date->format($str_array[$i]);
+		} else {
+			$formatted_string .= $str_array[$i];
+		}
+	}
+	
+	return $formatted_string;
+}
 ?>

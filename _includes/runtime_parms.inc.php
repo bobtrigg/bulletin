@@ -43,6 +43,19 @@ DEFINE('FANCY_BOX', '/fancybox/');
 
 //  Constants used for email bulletin HTML
 
+//  Use FILE_NAME to indicate the name of the website bulletin file.
+//  It changes the target URLs in links to the web file within the email.
+//  This variable can use both text and standard date format codes;
+//  combining date string formats with plain text requires a delimiter to 
+//  indicate a format character, however, so 
+//  we adopt the '%' indicator in deference to the fprintf function format.
+//  Default is to use bulletin.php, with the date as a $_GET value in the URL,
+//  e.g. "bulletin.php?date=19700101".
+//  Since emails don't reside in your domain, you will need to specify this
+//  in order for your email to successfully target your online web page.
+// DEFINE('FILE_NAME', 'bulletin.php?date=%Y%m%d');
+DEFINE('FILE_NAME', '%Y%m%d.shtml');
+
 //  Use EMAIL_HEADER for full pathname of file containing email HTML header
 DEFINE('EMAIL_HEADER', '_includes/email_header.inc.php');
 
