@@ -26,14 +26,14 @@ DEFINE('ORG_NAME', 'MARIN COUNTY BICYCLE COALITION (MCBC)');
 
 //  Use CUSTOM_CSS for full pathname of file containing CSS for this bundle's files
 //  Typically this should be for inner-facing files.
-DEFINE('CUSTOM_CSS', '');		  // Use this for 
+DEFINE('CUSTOM_CSS', 'bulletin.css');		  // Use this for 
 
 //  Use GLOBAL_CSS for full pathname of file containing site-wide CSS
 //  Typically this should be used for outward-facing pages, i.e. the bulletin itself.
 DEFINE('GLOBAL_CSS', '../../_css/global.css');  
 
 //  Use GLOBAL_JS for full pathname of file containing site-wide JavaScript
-DEFINE('GLOBAL_JS', '');  
+DEFINE('GLOBAL_JS', '../../_js/global.js');  
 
 //  Use FANCY_BOX for directory in which your fancybox code is stored
 //  This package contains the fancybox code; you can delete it if you already

@@ -14,19 +14,42 @@ include_once('_includes/runtime_parms.inc.php');
 <head>
 <meta charset="utf-8" />
 
-<title><?php echo ORG_NAME ?></title>
+<title><?php echo ORG_NAME ?> Weekly Bulletin</title>
 
-<link href="<?php echo GLOBAL_CSS ?>" rel="stylesheet" type="text/css">
-<link href="<?php echo CUSTOM_CSS; ?>" rel="stylesheet" type="text/css">
+<?php
+	if (defined('GLOBAL_CSS') && (GLOBAL_CSS != '')) {
+		echo "<link href=\"" . GLOBAL_CSS . "\" rel=\"stylesheet\" type=\"text/css\">\n";
+	}
+	if (defined('CUSTOM_CSS') && (CUSTOM_CSS != '')) {
+		echo "<link href=\"" . CUSTOM_CSS . "\" rel=\"stylesheet\" type=\"text/css\">\n";
+	}
+?>
+	
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<link rel="stylesheet" href="<?php echo FANCY_BOX ?>jquery.fancybox.css" type="text/css" media="screen" />
-<script type="text/javascript" src="<?php echo FANCY_BOX ?>jquery.fancybox.pack.js"></script>
+<?php
+	if (defined('FANCY_BOX') && (FANCY_BOX != '')) {
+		echo "<link rel=\"stylesheet\" href=\"" . FANCY_BOX .  "jquery.fancybox.css\" type=\"text/css\" media=\"screen\" />\n";
+		echo "<script type=\"text/javascript\" src=\"" . FANCY_BOX . "jquery.fancybox.pack.js\"></script>\n";
+	}
+?>
 <script>
 	$(document).ready(function() {
 		$('.fancybox').fancybox();
 	});
 </script>
-<script type="text/javascript" src="<?php echo GLOBAL_JS ?>"></script>
+<?php
+	if (defined('GLOBAL_JS') && (GLOBAL_JS != '')) {
+		echo "<script type=\"text/javascript\" src=\"" . GLOBAL_JS . "\"></script>\n";
+	}
+?>
+<script type="text/javascript" src="_js/toc.js"></script>
+<!-- Run script to generate table of contents -->
+<script>
+$("document").ready(function() {
+	gen_toc(true);
+});
+</script>
+
 
 <!-- JS code for Google Analytics  -->  
 <script type="text/javascript">
@@ -53,7 +76,7 @@ include_once('_includes/runtime_parms.inc.php');
 	<?php include(CUSTOM_SHARE);?>
 
 	<div id="wbHeader">
-	<p><strong><?php echo ORG_NAME; ?><br>WEEKLY BULLETIN</strong><br>
+	<h3><?php echo ORG_NAME; ?><br>WEEKLY BULLETIN</h3>
 	
 	<?php
 
@@ -65,23 +88,32 @@ include_once('_includes/runtime_parms.inc.php');
 		}
 		
 		//  Get formatted bulletin date and display on page
-		echo $wb_date->format('F j, Y') . '</p>';
+		echo '<p class="LargeType">' .$wb_date->format('F j, Y') . '</p>';
 		
 		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
+	?>
 		
-		//  1st query: linked TOC
-		$item_list = mysqli_query($dbc, $query_string);
-		$item_num = 1;
+		<ol id="toc">
+			<!-- Table of contents will be inserted here by toc.js -->
+		</ol>
+	</div>
 		
-		echo "<ol>\n";
+	<?php
+		// Following code is superceded by the toc JavaScript
 		
-		//  Loop through items -- **** This logic woill be replaced with JavaScript in a later release!!!
-		while ($item = mysqli_fetch_array($item_list)) {
-			echo '<li><a href="#' . str_replace(' ','',$item['title']) . '">' . $item['title'] . '</a></li>';
-		}
+		// //  1st query: linked TOC
+		// $item_list = mysqli_query($dbc, $query_string);
+		// $item_num = 1;
 		
-		echo "</ol>\n</div>\n";
-			
+		// echo "<ol>\n";
+		
+		// //  Loop through items -- **** This logic woill be replaced with JavaScript in a later release!!!
+		// while ($item = mysqli_fetch_array($item_list)) {
+			// echo '<li><a href="#' . str_replace(' ','',$item['title']) . '">' . $item['title'] . '</a></li>';
+		// }
+		
+		// echo "</ol>\n</div>\n";
+
 		//  2nd query: content
 		$item_list = mysqli_query($dbc, $query_string);
 		$item_num = 1;
@@ -93,10 +125,10 @@ include_once('_includes/runtime_parms.inc.php');
 			echo '<div class="topRuledBlock">'; 	
 			
 			//  Title (with sequence number)
-			echo '<p><a name="' . str_replace(' ','',$item['title']) . '"></a><strong>' . $item_num++ . '. ' . $item['title'] . '</strong><br>';
+			echo '<h4><a name="' . str_replace(' ','',$item['title']) . '"></a><strong>' . $item['title'] . '</strong></h4>';
 			
 			//  Subtitle
-			echo $item['subtitle'] . '</p>';
+			echo '<p>' . $item['subtitle'] . '</p>';
 			
 			//  Code image, with link to fancybox popup
 			if (!is_null($item['graphic'])) {
