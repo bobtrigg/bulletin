@@ -27,8 +27,8 @@
 	//  Loop through items 
 	while ($item = mysqli_fetch_array($item_list)) {
 	
-		$item_title = $item['title'];
-		$item_excerpt = $item['excerpt'];
+		$item_title = fix_quoted_quotes($item['title']);
+		$item_excerpt = fix_quoted_quotes($item['excerpt']);
 		$thumbnail = $item['thumbnail'];
 		
 		// If thumbnail size graphic was specified, use it; otherwise use main graphic

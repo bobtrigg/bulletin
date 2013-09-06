@@ -158,4 +158,53 @@ function parse_file_name($rawfilename, $wb_date) {
 	
 	return $formatted_string;
 }
+function make_full_url($filepathname) {
+
+	//  Converts a URL relative to current file or root
+	//  to a cyberspace friendly, http prefixed URL
+	
+	$full_pathname = $_SERVER['REQUEST_URI'];
+	$file_pos = strpos($full_pathname,'email_bulletin');
+	$dir_name = substr($full_pathname, 0, $file_pos-1);
+	$converted_name = "http://" . $_SERVER['SERVER_NAME'];
+	
+	if (substr($filepathname,0,1) == '.') {
+	
+		$converted_name .= $dir_name;
+		
+		while (substr($filepathname,0,3) == '../') {
+			$filepathname = substr($filepathname,3);
+			$converted_name = substr($converted_name, 0, strrpos($converted_name, '/'));
+		}
+		
+		if (substr($filepathname,0,2) == './') {
+			$filepathname = substr($filepathname,2);
+		}
+		
+		$converted_name .= $filepathname;
+		
+	} else if (substr($filepathname,0,1) == '/') {
+		$converted_name .= $filepathname;
+	} else if (substr($filepathname,0,4) == 'http') {
+		$converted_name = $filepathname;
+	} else {
+		$converted_name .= $dir_name . $filepathname;
+	}
+
+	return $converted_name;
+}
+function generate_bookmark($title) {
+	
+	$stripped_title = str_replace(' ','',$title);
+	
+	if ($first_quote_pos = strpos($stripped_title,'"')) {
+		$stripped_title = substr($stripped_title,0,$first_quote_pos);
+	}
+	
+	if ($first_amp_quote_pos = strpos($stripped_title,'&quot;')) {
+		$stripped_title = substr($stripped_title,0,$first_amp_quote_pos);
+	}
+	
+	return substr($stripped_title,0,20);
+}
 ?>
