@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-$_SESSION['message'] = "";
 
 //  Set time zone for Bob's house...NOT in L.A.
 date_default_timezone_set('America/Los_Angeles');

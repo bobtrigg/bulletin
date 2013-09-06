@@ -75,6 +75,21 @@ function resize_picture($graphic, $max_side_len) {
 	}
 	return array($width,$height);
 }
+function fix_quoted_quotes($string_with_quotes, $textarea=false) {
+	
+	#  This function accepts a string and fixes quoting for redisplay
+	#  In textareas and text boxes, backslashes must be removed
+	#  In a text box, double quotes must be converted to ampersand character notation
+	#  Function assumes text box unless textarea is indicated
+	
+	$fixed_string = preg_replace('/\\\\/','',$string_with_quotes);
+	
+	if (!$textarea) {
+		$fixed_string = preg_replace('/\"/','&quot;',$fixed_string);
+	}
+	
+	return $fixed_string;
+}
 function upload_file($file) {
 
 	// Pass in $_FILES['file_upload'] as an argument

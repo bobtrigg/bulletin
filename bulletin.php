@@ -69,52 +69,60 @@ $("document").ready(function() {
 
 <body>
 <div id="wrapper">
-	<?php include(WEB_HEADER);?>
-	<?php include(LEFT_SIDEBAR);?>
-	<?php include(RIGHT_SIDEBAR);?>
-  <div id="content">
+
+	<?php 
+		include(WEB_HEADER);
+		include(LEFT_SIDEBAR);
+		include(RIGHT_SIDEBAR);
+	?>
+	
+	<div id="content">
+	
 	<?php include(CUSTOM_SHARE);?>
 
 	<div id="wbHeader">
-	<h3><?php echo ORG_NAME; ?><br>WEEKLY BULLETIN</h3>
 	
-	<?php
+		<h3><?php echo ORG_NAME; ?><br>WEEKLY BULLETIN</h3>
+		
+		<?php
 
-		//  Check for date in $_GET superglobal; set default if not provided
-		if (isset($_GET['date'])) {
-			$wb_date = new DateTime($_GET['date']);
-		} else {
-			$wb_date = new DateTime();  // Default to today
-		}
-		
-		//  Get formatted bulletin date and display on page
-		echo '<p class="LargeType">' .$wb_date->format('F j, Y') . '</p>';
-		
-		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
-	?>
-		
-		<ol id="toc">
-			<!-- Table of contents will be inserted here by toc.js -->
-		</ol>
-	</div>
+			//  Check for date in $_GET superglobal; set default if not provided
+			if (isset($_GET['date'])) {
+				$wb_date = new DateTime($_GET['date']);
+			} else {
+				$wb_date = new DateTime();  // Default to today
+			}
+			
+			//  Get formatted bulletin date and display on page
+			echo '<p class="LargeType">' .$wb_date->format('F j, Y') . '</p>';
+			
+		?>
+			
+			<ol id="toc">
+				<!-- Table of contents will be inserted here by toc.js -->
+			</ol>
+			
+		</div>
 		
 	<?php
 		// Following code is superceded by the toc JavaScript
 		
-		// //  1st query: linked TOC
-		// $item_list = mysqli_query($dbc, $query_string);
-		// $item_num = 1;
-		
-		// echo "<ol>\n";
-		
-		// //  Loop through items -- **** This logic woill be replaced with JavaScript in a later release!!!
-		// while ($item = mysqli_fetch_array($item_list)) {
-			// echo '<li><a href="#' . str_replace(' ','',$item['title']) . '">' . $item['title'] . '</a></li>';
-		// }
-		
-		// echo "</ol>\n</div>\n";
+			// //  1st query: linked TOC
+			// $item_list = mysqli_query($dbc, $query_string);
+			// $item_num = 1;
+			
+			// echo "<ol>\n";
+			
+			// //  Loop through items -- **** This logic woill be replaced with JavaScript in a later release!!!
+			// while ($item = mysqli_fetch_array($item_list)) {
+				// echo '<li><a href="#' . str_replace(' ','',$item['title']) . '">' . $item['title'] . '</a></li>';
+			// }
+			
+			// echo "</ol>\n</div>\n";
 
-		//  2nd query: content
+		//  Query for content
+		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
+		
 		$item_list = mysqli_query($dbc, $query_string);
 		$item_num = 1;
 		

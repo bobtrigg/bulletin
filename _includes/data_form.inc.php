@@ -34,7 +34,7 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 	<p>
 		<label for="content">Content:<br>
 		</label>
-		<textarea name="content" id="content" cols="70" rows="10"><?php echo $content; ?></textarea>
+		<textarea name="content" id="content" cols="70" rows="25"><?php echo $content; ?></textarea>
 	</p>
 	<p>
 		<label for="excerpt">Excerpt: </label>

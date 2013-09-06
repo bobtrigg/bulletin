@@ -38,12 +38,12 @@ if (isset($_POST['submitted'])) {
 	
 			//  Update record
 			if ($result = $item_object->update_row($dbc)) {
-				$_SESSION['message'] .= "\nUpdate succeeded";
+				$_SESSION['message'] = "\nUpdate succeeded";
 			} else {
-				$_SESSION['message'] .= "\nUpdate failed: " . mysqli_error($dbc);
+				$_SESSION['message'] = "\nUpdate failed: " . mysqli_error($dbc);
 			}
 		} else {
-			$_SESSION['message'] .= "\nFile upload failed; update aborted.";		
+			$_SESSION['message'] = "\nFile upload failed; update aborted.";		
 		}
 
 		// Return to list page
@@ -66,7 +66,6 @@ if (isset($_POST['submitted'])) {
 		$position = $item_object->get_value('position');
 		$unformatted_date = $item_object->get_value('bulletin_date');
 		$bulletin_date = get_bulletin_date($item_object->get_value('bulletin_date'));
-		// $bulletin_date = (new DateTime($item_object->get_value('bulletin_date')))->format('n/j/Y');
 		$graphic = $item_object->get_value('graphic');
 		$large_graphic = $item_object->get_value('large_graphic');
 		$alt_text = $item_object->get_value('alt_text');
@@ -84,15 +83,13 @@ if (isset($_POST['submitted'])) {
 
 	$bulletin_date = get_bulletin_date($return_row['bulletin_date']);
 	$position = $return_row['position'];
-	$title = $return_row['title'];
-	$subtitle = $return_row['subtitle'];
-	$content = $return_row['content'];
-	$excerpt = $return_row['excerpt'];
-	// $image = $return_row['image'];
-	// $caption = $return_row['caption'];
+	$title = fix_quoted_quotes($return_row['title']);
+	$subtitle = fix_quoted_quotes($return_row['subtitle']);
+	$content = fix_quoted_quotes($return_row['content'],true);
+	$excerpt = fix_quoted_quotes($return_row['excerpt']);
 	$graphic = $return_row['graphic'];
 	$large_graphic = $return_row['large_graphic'];
-	$alt_text = $return_row['alt_text'];
+	$alt_text = fix_quoted_quotes($return_row['alt_text']);
 	$thumbnail = $return_row['thumbnail'];
 }
 

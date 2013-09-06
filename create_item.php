@@ -32,7 +32,7 @@ if (isset($_POST['submitted'])) {
 				$errors[] = "Insert failed.";
 			}
 		} else {
-			$_SESSION['message'] .= "\nFile upload failed; update aborted.";
+			$_SESSION['message'] = "\nFile upload failed; update aborted.";
 			foreach	($errors as $error) { 
 				$_SESSION['message'] .= "\n" . $error;
 			}

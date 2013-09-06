@@ -69,6 +69,7 @@ require_once('_includes/set_page_vars.inc.php');
 //  Call get_list to parse select query
 $row_resource = Table::get_list($dbc, 'items', $start_rec, $num_page_rows, 'bulletin_date DESC, position ASC', '', $where_clause);
 
+echo $_SESSION['message'];
 ?>
 
 <h3>Choose categories and date range you wish to display</h3>
@@ -112,7 +113,7 @@ while ($item = mysqli_fetch_array($row_resource)) {
 
 	// echo "    <td>" . (new DateTime($item['bulletin_date']))->format('n/j/Y') . "</td>\n";
 	echo "    <td>" . $item['position'] . "</td>\n";
-	echo "    <td>" . $item['title'] . "</td>\n";
+	echo "    <td>" . fix_quoted_quotes($item['title']) . "</td>\n";
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";
 	echo "    <td><a href=\"delete_item.php?id=" . $item['item_id'] . "\">Delete</a></td>\n";
 	echo "  </tr>\n\n";
