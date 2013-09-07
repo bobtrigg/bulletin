@@ -105,20 +105,6 @@ $("document").ready(function() {
 		</div>
 		
 	<?php
-		// Following code is superceded by the toc JavaScript
-		
-			// //  1st query: linked TOC
-			// $item_list = mysqli_query($dbc, $query_string);
-			// $item_num = 1;
-			
-			// echo "<ol>\n";
-			
-			// //  Loop through items -- **** This logic woill be replaced with JavaScript in a later release!!!
-			// while ($item = mysqli_fetch_array($item_list)) {
-				// echo '<li><a href="#' . str_replace(' ','',$item['title']) . '">' . $item['title'] . '</a></li>';
-			// }
-			
-			// echo "</ol>\n</div>\n";
 
 		//  Query for content
 		$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
@@ -154,9 +140,15 @@ $("document").ready(function() {
 						$height = 300;
 					}
 				}
-			
+				
+				//  Make image target open with fancybox only if it's an image file
+				if (in_array(substr($item['large_graphic'],-3),array("png","jpg","gif"))) {
+					$class_name = 'class="fancybox"';
+				}
+
 				//  Write HTML to put image, with link, on page
-				echo '<a href="' . $item['large_graphic'] . '" title="'  . $item['title'] . '" class="fancybox">';
+				echo '<a href="' . $item['large_graphic'] . '" title="'  . $item['title'] . '" ' . $class_name . ' target="_blank">\n';				
+				
 				echo '<img src="' . $item['graphic'] . '" alt="' . $item['alt_text'] . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
 				echo '</a>';
 			}
