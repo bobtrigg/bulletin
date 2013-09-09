@@ -26,17 +26,9 @@ include_once('_includes/runtime_parms.inc.php');
 ?>
 	
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<?php
-	if (defined('FANCY_BOX') && (FANCY_BOX != '')) {
-		echo "<link rel=\"stylesheet\" href=\"" . FANCY_BOX .  "jquery.fancybox.css\" type=\"text/css\" media=\"screen\" />\n";
-		echo "<script type=\"text/javascript\" src=\"" . FANCY_BOX . "jquery.fancybox.pack.js\"></script>\n";
-	}
-?>
-<script>
-	$(document).ready(function() {
-		$('.fancybox').fancybox();
-	});
-</script>
+
+<?php include('_includes/fancybox.inc.php'); ?>
+
 <?php
 	if (defined('GLOBAL_JS') && (GLOBAL_JS != '')) {
 		echo "<script type=\"text/javascript\" src=\"" . GLOBAL_JS . "\"></script>\n";
@@ -116,13 +108,13 @@ $("document").ready(function() {
 		while ($item = mysqli_fetch_array($item_list)) {
 			
 			//  This class puts a border at the top
-			echo '<div class="topRuledBlock">'; 	
+			echo '<div class="topRuledBlock">' . "\n"; 	
 			
 			//  Title (with sequence number)
-			echo '<h4><a name="' . str_replace(' ','',$item['title']) . '"></a><strong>' . $item['title'] . '</strong></h4>';
+			echo '<h4><a name="' . generate_bookmark($item['title']) . '"></a><strong>' . fix_quoted_quotes($item['title']) . '</strong></h4>' . "\n";
 			
 			//  Subtitle
-			echo '<p>' . $item['subtitle'] . '</p>';
+			echo '<p>' . fix_quoted_quotes($item['subtitle']) . '</p>' . "\n";
 			
 			//  Code image, with link to fancybox popup
 			if (!is_null($item['graphic'])) {
@@ -147,15 +139,15 @@ $("document").ready(function() {
 				}
 
 				//  Write HTML to put image, with link, on page
-				echo '<a href="' . $item['large_graphic'] . '" title="'  . $item['title'] . '" ' . $class_name . ' target="_blank">\n';				
+				echo '<a href="' . $item['large_graphic'] . '" title="'  . fix_quoted_quotes($item['title']) . '" ' . $class_name . ' target="_blank">' . "\n";				
 				
-				echo '<img src="' . $item['graphic'] . '" alt="' . $item['alt_text'] . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
+				echo '<img src="' . $item['graphic'] . '" alt="' . fix_quoted_quotes($item['alt_text']) . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
 				echo '</a>';
 			}
 			
 			//  Print content and close div
-			echo $item['content'];
-			echo '</div>';
+			echo fix_quoted_quotes($item['content'],true) . "\n";
+			echo '</div>' . "\n";
 		}
 	
 	?>

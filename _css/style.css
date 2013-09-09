@@ -24,7 +24,7 @@ a:hover {
 /* body */
 body {
 	color:#666;
-	background: #F5F0BC url(../_images/BlueSwirls.gif);
+	background: #F5F0BC;
 	font-family: Calibri, Verdana, Arial, sans-serif;
 	font-size: 100%;
 }
@@ -134,9 +134,9 @@ form input[type=text] {
 	border-radius:5px;
 	padding:0 5px;
 }
-#graphic_entries input[type=text], #text_entries input[type=text] {
-	width: 400px;
-}
+
+/*  Text entry styles */
+
 #text_entries .mce-panel {
 	margin-top:20px;
 	margin-bottom:20px;
@@ -148,12 +148,22 @@ form input[type=text] {
 	position:absolute;
 	right:	200px;
 }
+
+/*  Graphic entry styles */
+
+#graphic_entries input[type=text], #text_entries input[type=text] {
+	width: 400px;
+}
 #graphic_entries input {
 	position:absolute;
 	right:92px;
  }
 #page_content #graphic_entries p {
 	padding-left:65px;
+}
+.view_link {
+	margin-top: 5px;
+	margin-left: 10px;
 }
 .label {
 	width: 120px;

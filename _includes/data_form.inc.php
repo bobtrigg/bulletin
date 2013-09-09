@@ -66,7 +66,8 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 			If you leave this blank, a larger file will be used, increasing bandwidth.</p> 
 -->
 		</label>
-		<input type="text" name="graphic" id="graphic" class="graphic" value="<?php echo $graphic; ?>" size="large_graphic" maxlength="200"  />
+		<input type="text" name="graphic" id="graphic" class="graphic" value="<?php echo $graphic; ?>" maxlength="200"  />
+		<br><a href="#" id="graphic_view" class="fancybox view_link" target="_blank"></a>
 	</p>
 
 	<p>
@@ -75,7 +76,7 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 			Provide a short description for non-displaying browsers and assisted technology.</p>
 -->
 		</label>
-		<input type="text" name="alt_text" id="alt_text" value="<?php echo $alt_text; ?>" size="large_graphic" maxlength="200"  />
+		<input type="text" name="alt_text" id="alt_text" value="<?php echo $alt_text; ?>" maxlength="200"  />
 	</p>
 	
 	<p>
@@ -84,7 +85,8 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 			This is the largest graphic. Ideal max dimension 1200 pixels.</p>
 -->
 		</label>
-		<input type="text" name="large_graphic" id="large_graphic" class="graphic" value="<?php echo $large_graphic; ?>" size="large_graphic" maxlength="200" />
+		<input type="text" name="large_graphic" id="large_graphic" class="graphic" value="<?php echo $large_graphic; ?>" maxlength="200" />
+		<br><a href="#" id="large_graphic_view" class="fancybox view_link" target="_blank"></a>
 	</p>
 
 	<p>
@@ -94,7 +96,8 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 			If you leave this blank, a larger file will be used, increasing bandwidth.</p>
 -->
 		</label>
-		<input type="text" name="thumbnail" id="thumbnail" class="graphic" value="<?php echo $thumbnail; ?>" size="large_graphic" maxlength="200"  />
+		<input type="text" name="thumbnail" id="thumbnail" class="graphic" value="<?php echo $thumbnail; ?>" maxlength="200"  />
+		<br><a href="#" id="thumbnail_view" class="fancybox view_link" target="_blank"></a>
 	</p>
 
 </div>

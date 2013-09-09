@@ -128,6 +128,6 @@ $_SESSION['item_ids'] = $item_ids;
 </table>
 
 <p><a href="email_bulletin.php?date=<?php echo $date->format('Ymd'); ?>" target="_blank">Generate email bulletin</a>
-<p><a href="create_item.php">Create a new bulletin item</a>
+<p><a href="create_item.php?date=<?php echo $date->format('Ymd'); ?>">Create a new bulletin item</a>
 </body>
 </html>

@@ -1,3 +1,4 @@
+<?php include_once('_includes/runtime_parms.inc.php'); ?>
 <!DOCTYPE HTML>
 <html>
 <!-- header.html - include file containing contents for <head> section and page header -->
@@ -7,7 +8,8 @@
 
 <link href="_css/style.css" rel="stylesheet" type="text/css">
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<?php include('_includes/fancybox.inc.php'); ?>
 <script type="text/javascript" src="_js/script.js"></script>
 
 <script type="text/javascript" src="_js/tinymce/tinymce.min.js"></script>

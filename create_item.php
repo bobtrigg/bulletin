@@ -48,12 +48,20 @@ if (isset($_POST['submitted'])) {
 		$large_graphic = $item_object->get_value('large_graphic');
 		$alt_text = $item_object->get_value('alt_text');
 		$thumbnail = $item_object->get_value('thumbnail');
-	}
+		}
 	
 }  else {  // Form was not yet submitted
 
 	// initialize item name variable
-	$bulletin_date = $position = $title = $subtitle = $content = $excerpt = $graphic = $large_graphic = $alt_text = $thumbnail = '';
+
+	if (isset($_GET['date']) and is_numeric($_GET['date'])) {
+		$date = new DateTime($_GET['date']);
+	} else {
+		$date = new DateTime();
+	}
+	$bulletin_date = $date->format('n/j/Y');
+	
+	$position = $title = $subtitle = $content = $excerpt = $graphic = $large_graphic = $alt_text = $thumbnail = '';
 }
 
 //  Display header, and errors if any 
