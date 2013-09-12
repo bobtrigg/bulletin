@@ -40,29 +40,38 @@ function validate_all_items($dbc) {
 
 	$item = new Item();
 	
-	$item->set_value('title', validate_item($dbc,'title',true,false));
-	$item->set_value('subtitle', validate_item($dbc,'subtitle',false,false));
-	$item->set_value('content', validate_item($dbc,'content',true,false));
-	$item->set_value('excerpt', validate_item($dbc,'excerpt',true,false));
+	$item->set_value('title', validate_item($dbc,'title',true));
+	$item->set_value('subtitle', validate_item($dbc,'subtitle',false));
+	$item->set_value('content', validate_item($dbc,'content',true));
+	$item->set_value('excerpt', validate_item($dbc,'excerpt',true));
 	
 	$bulletin_date = ($value = validate_item($dbc,'bulletin_date',true,false,true)) ? $value->format('Y-m-d') : NULL;
 	$item->set_value('bulletin_date', $bulletin_date);
 	$item->set_value('position', validate_item($dbc,'position',true,true));
 	
 	//  Code note: setting $bulletin_date MUST precede setting $graphic, $large_graphic, and $thumbnail
-	$graphic = validate_item($dbc,'graphic',true);
-	$item->set_value('graphic', set_image_path($graphic, $bulletin_date));
+	$graphic = validate_item($dbc,'graphic',false);
+	$item->set_value('graphic', $graphic);
 
 	$large_graphic = validate_item($dbc,'large_graphic',false);
-	$item->set_value('large_graphic', set_image_path($large_graphic, $bulletin_date));
+	$item->set_value('large_graphic', $large_graphic);
 
 	$thumbnail = validate_item($dbc,'thumbnail',false);
-	$item->set_value('thumbnail', set_image_path($thumbnail, $bulletin_date));
+	$item->set_value('thumbnail', $thumbnail);
 
-	$item->set_value('alt_text', validate_item($dbc,'alt_text',true));
+	//  graphic validation must precede alt_text validation 
+	if ($item->get_value('graphic') != NULL && $item->get_value('graphic') != '' && $item->get_value('graphic') != ' ') {
+		$item->set_value('alt_text', validate_item($dbc,'alt_text',true));
+	} else {
+		$item->set_value('alt_text', validate_item($dbc,'alt_text',false));
+	}
 	
 	return $item;
 }
+# The following function's use has been replaced by a parameter
+# which can be set in the runtime_parms.inc.php file.
+# It's saved here in case a need arises for it in the future.
+
 function set_image_path($filename, $bulletin_date) {
 
 	// Derive full path to image file

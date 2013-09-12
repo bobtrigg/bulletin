@@ -1,5 +1,6 @@
 <?php
 require_once('_includes/opening_housekeeping.inc.php');
+include_once('_includes/runtime_parms.inc.php');
 
 if (isset($_POST['submitted'])) {
 
@@ -31,22 +32,22 @@ if (isset($_POST['submitted'])) {
 				// Insert failed; add error message
 				$errors[] = "Insert failed.";
 			}
-		} else {
+		} else {  // This code will not be run unless file upload above is reinstated.
 			$_SESSION['message'] = "\nFile upload failed; update aborted.";
 			foreach	($errors as $error) { 
 				$_SESSION['message'] .= "\n" . $error;
 			}
 		}
 	} else { 
-		$title = $item_object->get_value('title');
-		$subtitle = $item_object->get_value('subtitle');
-		$content = $item_object->get_value('content');
-		$excerpt = $item_object->get_value('excerpt');
+		$title = fix_quoted_quotes($item_object->get_value('title'));
+		$subtitle = fix_quoted_quotes($item_object->get_value('subtitle'));
+		$content = fix_quoted_quotes($item_object->get_value('content'));
+		$excerpt = fix_quoted_quotes($item_object->get_value('excerpt'));
 		$position = $item_object->get_value('position');
 		$bulletin_date = $item_object->get_value('bulletin_date');
 		$graphic = $item_object->get_value('graphic');
 		$large_graphic = $item_object->get_value('large_graphic');
-		$alt_text = $item_object->get_value('alt_text');
+		$alt_text = fix_quoted_quotes($item_object->get_value('alt_text'));
 		$thumbnail = $item_object->get_value('thumbnail');
 		}
 	
@@ -61,7 +62,8 @@ if (isset($_POST['submitted'])) {
 	}
 	$bulletin_date = $date->format('n/j/Y');
 	
-	$position = $title = $subtitle = $content = $excerpt = $graphic = $large_graphic = $alt_text = $thumbnail = '';
+	$position = $title = $subtitle = $content = $excerpt = $alt_text = '';
+	$graphic = $large_graphic = $thumbnail = parse_date_string(IMAGE_FOLDER,$date);
 }
 
 //  Display header, and errors if any 

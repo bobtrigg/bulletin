@@ -56,6 +56,11 @@ DEFINE('FANCY_BOX', '/fancybox/');
 // DEFINE('FILE_NAME', 'bulletin.php?date=%Y%m%d');
 DEFINE('FILE_NAME', '%Y%m%d.shtml');
 
+//  Use IMAGE_FOLDER to indicate a default image file.
+//  If not assigned, default is the current working directory.
+//  Like FILE_NAME, the name is parsed according to standard date format codes.
+DEFINE('IMAGE_FOLDER', 'Images/%Y');
+
 //  Use EMAIL_HEADER for full pathname of file containing email HTML header
 DEFINE('EMAIL_HEADER', '_includes/email_header.inc.php');
 

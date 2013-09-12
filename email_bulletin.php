@@ -22,7 +22,7 @@
 	$query_string = 'SELECT * FROM items WHERE bulletin_date = "' . $wb_date->format('Y-m-d') . '" ORDER BY position';
 	$item_list = mysqli_query($dbc, $query_string);
 	
-	$webfile_url = parse_file_name(FILE_NAME,$wb_date);
+	$webfile_url = parse_date_string(FILE_NAME,$wb_date);
 
 	//  Loop through items 
 	while ($item = mysqli_fetch_array($item_list)) {

@@ -31,7 +31,7 @@ body,td,th {
             </td>
           </tr>
           <tr style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
-            <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="57"valign="bottom" bgcolor="#543019">&nbsp;</td>
+            <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="57" valign="bottom" bgcolor="#543019">&nbsp;</td>
             <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" valign="bottom" bgcolor="#543019">
               <p style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
                 <a href="http://www.marinbike.org/Index.shtml" target="_blank"><img src="http://www.marinbike.org/News/Bulletin/Nav/HomeBrnSq.gif" alt="MCBC Home" style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;"  width="96" height="25" border="0"></a>
@@ -43,17 +43,17 @@ body,td,th {
             </td>
             <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" valign="bottom" bgcolor="#543019">
               <p style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
-                <a href="http://www.marinbike.org/Campaigns/Index.shtml" target="_blank"><img src="http://www.marinbike.org/News/Bulletin/Nav/CampaignsBrnSq.gif" alt="Campaigns"  style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="96" height="25" border="0"></a>
+                <a href="http://www.marinbike.org/Campaigns/Index.shtml" target="_blank"><img src="http://www.marinbike.org/News/Bulletin/Nav/OnRoadBrnSq.gif" alt="On-Road Advocacy"  style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="96" height="25" border="0"></a>
+              </p>
+            </td>
+            <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" valign="bottom" bgcolor="#543019">
+              <p style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
+                <a href="http://www.marinbike.org/Campaigns/MTB/Launch.shtml" target="_blank"><img src="http://www.marinbike.org/News/Bulletin/Nav/OffRoadBrnSq.gif" alt="Off-Road Program"  style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="96" height="25" border="0"></a>
               </p>
             </td>
             <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" valign="bottom" bgcolor="#543019">
               <p style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
                 <a href="http://www.marinbike.org/Volunteer/Index.shtml" target="_blank"><img src="http://www.marinbike.org/News/Bulletin/Nav/VolBrnSq.gif" alt="Volunteer"  style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="96" height="25" border="0"></a>
-              </p>
-            </td>
-            <td style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" valign="bottom" bgcolor="#543019">
-              <p style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" >
-                <a href="http://www.marinbike.org/Resources/Index.shtml" target="_blank"><img src="http://www.marinbike.org/News/Bulletin/Nav/ResourcesBrnSq.gif" alt="Resources"  style="margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;" width="96" height="25" border="0"></a>
               </p>
             </td>
           </tr>

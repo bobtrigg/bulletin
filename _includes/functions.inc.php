@@ -134,10 +134,10 @@ function upload_file($file) {
 	return $errors;
 }
 
-function parse_file_name($rawfilename, $wb_date) {
+function parse_date_string($rawfilename, $wb_date) {
 
-	// This function parse the passed parameter $rawfilename to
-	// to generate the file name for the online web page bulletin.
+	// This function parses the passed parameter $rawfilename to
+	// generate the file name for the online web page bulletin.
 	// It uses parameter $wb_date to translate format codes into
 	// date components.
 	// $rawfilename is obtained from the FILE_NAME constant
@@ -181,21 +181,30 @@ function make_full_url($filepathname) {
 			$filepathname = substr($filepathname,2);
 		}
 		
-		$converted_name .= $filepathname;
+		$converted_name .= '/' . $filepathname;
 		
 	} else if (substr($filepathname,0,1) == '/') {
 		$converted_name .= $filepathname;
 	} else if (substr($filepathname,0,4) == 'http') {
 		$converted_name = $filepathname;
 	} else {
-		$converted_name .= $dir_name . $filepathname;
+		$converted_name .= $dir_name . '/' . $filepathname;
 	}
 
 	return $converted_name;
 }
+function fix_control_chars($in_string) {
+
+	//  Replaces pesky control characters which have replaced
+	//  some punctuation characters somewhere in the process.
+
+	$out_string = preg_replace('/’/','\'',$in_string);
+	
+	return $out_string;
+}
 function generate_bookmark($title) {
 	
-	$stripped_title = str_replace(' ','',$title);
+	$stripped_title = str_replace(array(' ','\'','’'),'',$title);
 	
 	if ($first_quote_pos = strpos($stripped_title,'"')) {
 		$stripped_title = substr($stripped_title,0,$first_quote_pos);
