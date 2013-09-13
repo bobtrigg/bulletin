@@ -36,7 +36,7 @@ include_once('_includes/runtime_parms.inc.php');
 ?>
 <script type="text/javascript" src="_js/toc.js"></script>
 <!-- Run script to generate table of contents -->
-<script>
+<script type="text/javascript">
 $("document").ready(function() {
 	gen_toc(true);
 });
@@ -108,16 +108,21 @@ $("document").ready(function() {
 		while ($item = mysqli_fetch_array($item_list)) {
 			
 			//  This class puts a border at the top
+			//  This class puts a border at the top
 			echo '<div class="topRuledBlock">' . "\n"; 	
 			
 			//  Title (with sequence number)
 			echo '<h4><a name="' . generate_bookmark($item['title']) . '"></a><strong>' . fix_quoted_quotes($item['title']) . '</strong></h4>' . "\n";
 			
 			//  Subtitle
-			echo '<p>' . fix_quoted_quotes($item['subtitle']) . '</p>' . "\n";
+			if ($item['subtitle'] == '' || $item['subtitle'] == ' ') {
+				echo '<br>';
+			} else {
+				echo '<p>' . fix_quoted_quotes($item['subtitle']) . '</p>' . "\n";
+			}
 			
 			//  Code image, with link to fancybox popup
-			if (!is_null($item['graphic'])) {
+			if (!is_null($item['graphic']) && $item['graphic'] != '' && $item['graphic'] != ' ') {
 			
 				//  Set image height and width
 				$image_size_info = getimagesize($item['graphic']);

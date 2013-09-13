@@ -6,7 +6,7 @@ function populatePics(text) {
 	});
 }
 
-function redisplay(id) {
+function redisplay_view_link(id) {	
 
 	var input_obj = document.getElementById(id);
 	var input_val = input_obj.value;
@@ -37,26 +37,38 @@ function redisplay(id) {
 
 function prepEventHandlers() {
 
+	// Event handler for when subtitle is changed:
+	// If excerpt is blank, default it to new subtitle
+	$("#subtitle").change(function() {
+		var excerpt = document.getElementById('excerpt');
+		if (excerpt.value == '' || excerpt.value == ' ') {
+			excerpt.value = this.value;
+		}
+	});
+
+	// If any of the graphics change, default all with no value to the value in the changed field
 	$( ".graphic" ).change(function() {
 		var thisText = this.value;
 		populatePics(thisText);
 	});
 	
+	// Next three handlers display a link to view a graphic when its value changes
 	$( "#graphic" ).change(function() {
-		redisplay("graphic");
+		redisplay_view_link("graphic");
 	});
 	
 	$( "#large_graphic" ).change(function() {
-		redisplay("large_graphic");
+		redisplay_view_link("large_graphic");
 	});
 	
 	$( "#thumbnail" ).change(function() {
-		redisplay("thumbnail");
+		redisplay_view_link("thumbnail");
 	});
 	
-	redisplay("graphic");
-	redisplay("large_graphic");
-	redisplay("thumbnail");
+	// Display view links at the start of the program
+	redisplay_view_link("graphic");
+	redisplay_view_link("large_graphic");
+	redisplay_view_link("thumbnail");
 
 };
 
