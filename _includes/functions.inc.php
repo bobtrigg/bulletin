@@ -90,6 +90,18 @@ function fix_quoted_quotes($string_with_quotes, $textarea=false) {
 	
 	return $fixed_string;
 }
+function get_entered_value($field_name,$item_object) {
+
+	//  Returns the user-entered value of $field_name, stripped of quoted quotes
+	//  Cleans up oft-repeated code
+	
+	$raw_value = $item_object->get_value($field_name);
+
+	$line_feeds_removed = str_replace(array('\n','\r'),'',$raw_value);
+	
+	return fix_quoted_quotes($line_feeds_removed);
+}
+
 function upload_file($file) {
 
 	// Pass in $_FILES['file_upload'] as an argument

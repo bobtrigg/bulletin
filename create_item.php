@@ -39,16 +39,16 @@ if (isset($_POST['submitted'])) {
 			}
 		}
 	} else { 
-		$title = fix_quoted_quotes($item_object->get_value('title'));
-		$subtitle = fix_quoted_quotes($item_object->get_value('subtitle'));
-		$content = fix_quoted_quotes($item_object->get_value('content'));
-		$excerpt = fix_quoted_quotes($item_object->get_value('excerpt'));
-		$position = $item_object->get_value('position');
-		$bulletin_date = $item_object->get_value('bulletin_date');
-		$graphic = $item_object->get_value('graphic');
-		$large_graphic = $item_object->get_value('large_graphic');
-		$alt_text = fix_quoted_quotes($item_object->get_value('alt_text'));
-		$thumbnail = $item_object->get_value('thumbnail');
+		$title = get_entered_value('title',$item_object);
+		$subtitle = get_entered_value('subtitle',$item_object);
+		$content = get_entered_value('content',$item_object);
+		$excerpt = get_entered_value('excerpt',$item_object);
+		$position = get_entered_value('position',$item_object);
+		$bulletin_date = get_entered_value('bulletin_date',$item_object);
+		$graphic = get_entered_value('graphic',$item_object);
+		$large_graphic = get_entered_value('large_graphic',$item_object);
+		$alt_text = get_entered_value('alt_text',$item_object);
+		$thumbnail = get_entered_value('thumbnail',$item_object);
 		}
 	
 }  else {  // Form was not yet submitted

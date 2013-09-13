@@ -24,7 +24,6 @@ function get_bulletin_date($unformatted_date) {
 	$bulletin_date = new DateTime($unformatted_date);	
 	return $bulletin_date->format('n/j/Y');
 }
-
 if (isset($_POST['submitted'])) {
 
 	$item_object = validate_all_items($dbc);
@@ -59,17 +58,17 @@ if (isset($_POST['submitted'])) {
 
 	} else {
 	
-		$title = $item_object->get_value('title');
-		$subtitle = $item_object->get_value('subtitle');
-		$content = $item_object->get_value('content');
-		$excerpt = $item_object->get_value('excerpt');
-		$position = $item_object->get_value('position');
-		$unformatted_date = $item_object->get_value('bulletin_date');
-		$bulletin_date = get_bulletin_date($item_object->get_value('bulletin_date'));
-		$graphic = $item_object->get_value('graphic');
-		$large_graphic = $item_object->get_value('large_graphic');
-		$alt_text = $item_object->get_value('alt_text');
-		$thumbnail = $item_object->get_value('thumbnail');
+		$title = get_entered_value('title',$item_object);
+		$subtitle = get_entered_value('subtitle',$item_object);
+		$content = get_entered_value('content',$item_object);
+		$excerpt = get_entered_value('excerpt',$item_object);
+		$position = get_entered_value('position',$item_object);
+		$unformatted_date = get_entered_value('bulletin_date',$item_object);
+		$bulletin_date = get_bulletin_date(get_entered_value('bulletin_date',$item_object));
+		$graphic = get_entered_value('graphic',$item_object);
+		$large_graphic = get_entered_value('large_graphic',$item_object);
+		$alt_text = get_entered_value('alt_text',$item_object);
+		$thumbnail = get_entered_value('thumbnail',$item_object);
 	}
 	
 }  else {
