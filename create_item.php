@@ -65,6 +65,10 @@ if (isset($_POST['submitted'])) {
 	$graphic = $large_graphic = $thumbnail = parse_date_string(IMAGE_FOLDER,$date);
 }
 
+$next_item_id = null;
+$prev_item_id = null;
+
+
 //  Display header, and errors if any 
 $page_title = 'Create bulletin item';
 $header_title = 'MCBC Weekly Bulletin';

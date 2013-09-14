@@ -35,6 +35,19 @@ function replace_blank_image_url($url,$date) {
 		return $url;
 	}
 }
+// Obtain previous and next row ids from $_SESSION variable
+
+$item_ids = $_SESSION['item_ids'];
+$curr_item_key = array_search($item_id, $item_ids);
+
+if ($curr_item_key === false) {
+	$next_item_id = null;
+	$prev_item_id = null;
+} else {
+	$prev_item_id = ($curr_item_key == 0) ? null : $item_ids[$curr_item_key - 1] ;
+	$next_item_id = ($curr_item_key >= count($item_ids) - 1) ? null : $item_ids[$curr_item_key + 1] ;
+}
+
 if (isset($_POST['submitted'])) {
 
 	$item_object = validate_all_items($dbc);
@@ -58,8 +71,21 @@ if (isset($_POST['submitted'])) {
 
 		// Return to list page
 		if (!headers_sent($filename, $linenum)) {
-			header("Location: list_items.php?date=" . preg_replace('/\-/','',$item_object->get_value('bulletin_date')));
+		
+			// echo 'Submit value = ' . $_POST['submit'];
+			// die('die');
+		
+			if ($_POST['submit'] == 'Previous') {
+				$location = "edit_item.php?id=" . $prev_item_id;
+			} elseif ($_POST['submit'] == 'Next') {
+				$location = "edit_item.php?id=" . $next_item_id;
+			} else {
+				$location = "list_items.php?date=" . preg_replace('/\-/','',$item_object->get_value('bulletin_date'));
+			}
+			
+			header("Location:" . $location);
 			exit();
+			
 		} else {
 			die ( "Headers already sent in $filename on line $linenum<br>\n" .
 				  "Please report the above information to your <a href=\"mailto:bob@marinbike.org\">system administrator</a>.<br>\n" .
@@ -105,19 +131,6 @@ if (isset($_POST['submitted'])) {
 	$graphic = replace_blank_image_url($graphic,$bulletin_date);
 	$large_graphic = replace_blank_image_url($large_graphic,$bulletin_date);
 	$thumbnail = replace_blank_image_url($thumbnail,$bulletin_date);
-}
-
-// Obtain previous and next row ids from $_SESSION variable
-
-$item_ids = $_SESSION['item_ids'];
-$curr_item_key = array_search($item_id, $item_ids);
-
-if ($curr_item_key === false) {
-	$next_item_id = null;
-	$prev_item_id = null;
-} else {
-	$prev_item_id = ($curr_item_key == 0) ? null : $item_ids[$curr_item_key - 1] ;
-	$next_item_id = ($curr_item_key >= count($item_ids) - 1) ? null : $item_ids[$curr_item_key + 1] ;
 }
 
 //  Display header, and errors if any 

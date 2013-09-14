@@ -116,7 +116,21 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 ?>
 
 <p>&nbsp;&nbsp;&nbsp;
-	<input type="submit" name="submit" id="submit" value="Submit" />&nbsp;&nbsp;
+
+	<?php   // Add 'Previouw' button if editing and previous item exists
+		if (!is_null($prev_item_id)) {
+			echo "<input type=\"submit\" name=\"submit\" id=\"previous\" value=\"Previous\" />&nbsp;&nbsp;\n";
+		}
+	?>
+	
+	<input type="submit" name="submit" id="submit" value="Save and Return" />&nbsp;&nbsp;
+	
+	<?php   // Add 'Next' button if editing and next item exists
+		if (!is_null($next_item_id)) {
+		echo "<input type=\"submit\" name=\"submit\" id=\"next\" value=\"Next\" />&nbsp;&nbsp;\n";
+		}
+	?>
+	
 	<a href="list_items.php<?php echo $return_str; ?>"><input type="button" name="cancel" id="cancel" value="Cancel"></a>
 	<input id="image_folder" type="hidden" value="<?php echo parse_date_string(IMAGE_FOLDER,new DateTime($bulletin_date)) ?>" />
 	<input name="submitted" type="hidden" id="submitted" value="true" />
