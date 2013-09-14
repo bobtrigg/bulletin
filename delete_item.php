@@ -37,7 +37,8 @@ if (isset($_POST['submitted'])) {
 	}
 	
 	if (!headers_sent($filename, $linenum)) {
-		header ("Location:list_items.php?date=" . (new DateTime($item_data['bulletin_date']))->format('Ymd'));
+		$wb_date = new DateTime($item_data['bulletin_date']);
+		header ("Location:list_items.php?date=" . $wb_date->format('Ymd'));
 		exit();
 	} else {
 		die ( "Headers already sent in $filename on line $linenum<br>\n" .

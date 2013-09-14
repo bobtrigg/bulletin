@@ -14,8 +14,9 @@ function redisplay_view_link(id) {
 	var input_link_id = id + "_view";
 	var input_link = document.getElementById(input_link_id);
 	var input_val_sfx = input_val.substring(input_len-3);
+	var image_folder = document.getElementById('image_folder').value;
 	
-	if (input_val != "") {
+	if (input_val != "" && input_val != image_folder) {
 
 		if (input_val_sfx == "jpg" ||
 			input_val_sfx == "gif" ||
@@ -33,7 +34,30 @@ function redisplay_view_link(id) {
 		}
 	}
 }
-// create those event handlers.
+
+function update_image_url(id, url, default_folder) {
+
+	var this_url = document.getElementById(id);
+	
+	if (this_url.value == '' || this_url.value == ' ' || this_url.value == default_folder) {
+		this_url.value = url;
+	}
+}
+
+function propogate_image_url(id) {
+
+	var default_folder = document.getElementById('image_folder').value;
+	var input_obj = document.getElementById(id);
+	var curr_url = input_obj.value;
+	
+	if (curr_url != '' && curr_url != ' ' && curr_url != default_folder) {
+	
+		update_image_url('graphic',curr_url,default_folder);
+		update_image_url('large_graphic',curr_url,default_folder);
+		update_image_url('thumbnail',curr_url,default_folder);
+		
+	}
+}
 
 function prepEventHandlers() {
 
@@ -55,14 +79,17 @@ function prepEventHandlers() {
 	// Next three handlers display a link to view a graphic when its value changes
 	$( "#graphic" ).change(function() {
 		redisplay_view_link("graphic");
+		propogate_image_url("graphic");
 	});
 	
 	$( "#large_graphic" ).change(function() {
 		redisplay_view_link("large_graphic");
+		propogate_image_url("large_graphic");
 	});
 	
 	$( "#thumbnail" ).change(function() {
 		redisplay_view_link("thumbnail");
+		propogate_image_url("thumbnail");
 	});
 	
 	// Display view links at the start of the program

@@ -118,5 +118,6 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 <p>&nbsp;&nbsp;&nbsp;
 	<input type="submit" name="submit" id="submit" value="Submit" />&nbsp;&nbsp;
 	<a href="list_items.php<?php echo $return_str; ?>"><input type="button" name="cancel" id="cancel" value="Cancel"></a>
+	<input id="image_folder" type="hidden" value="<?php echo parse_date_string(IMAGE_FOLDER,new DateTime($bulletin_date)) ?>" />
 	<input name="submitted" type="hidden" id="submitted" value="true" />
 </p>

@@ -1,6 +1,5 @@
 <?php
 require_once('_includes/opening_housekeeping.inc.php');
-include_once('_includes/runtime_parms.inc.php');
 
 if (isset($_POST['submitted'])) {
 

@@ -150,10 +150,12 @@ function parse_date_string($rawfilename, $wb_date) {
 
 	// This function parses the passed parameter $rawfilename to
 	// generate the file name for the online web page bulletin.
-	// It uses parameter $wb_date to translate format codes into
-	// date components.
-	// $rawfilename is obtained from the FILE_NAME constant
-	// defined in runtime_parms.inc.php.
+	// It uses parameter $wb_date to translate format codes into  date components.
+	// $rawfilename is obtained from the FILE_NAME constant defined in runtime_parms.inc.php.
+	
+	//  Parameters:
+	//    String $rawfilename
+	//    DateTime $wb_date
 	
 	$str_array = str_split($rawfilename);
 	$formatted_string = "";

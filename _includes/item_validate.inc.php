@@ -4,10 +4,12 @@
 #  It checks to see that all required data was entered and that all entered data is valid.
 
 require_once('_includes/functions.inc.php'); 
+$image_folder;
 
-function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
+function validate_item($dbc,$name,$required=false,$type='text') {
 
 	global $errors;
+	global $image_folder;
 
 	if (isset($_POST[$name]) && (!is_null($_POST[$name])) && ($_POST[$name] != '')) {
 	
@@ -20,11 +22,11 @@ function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 		$value = "";
 	}
 	
-	if ($numeric && (!is_numeric($value) || $value < 0)) {
+	if ($type == 'numeric' && (!is_numeric($value) || $value < 0)) {
 		$errors[] = $name . " must be numeric and > 0";
 	}
 	
-	if ($date) {
+	if ($type == 'date') {
 		$value = valid_date($value);
 		
 		if (!$value) {
@@ -33,10 +35,29 @@ function validate_item($dbc,$name,$required=false,$numeric=false,$date=false) {
 		}
 	}
 	
+	if ($type == 'graphic') {
+	
+		if ($value != $image_folder) {
+			if ($value && $value != "jpg" && $value != "gif" && $value != "png") {
+				$errors[] = "Graphic (inline or thumbnail) must be a .gif, .jpg, or .png";
+			}
+		}
+	}
+	
 	return $value;
 }
 
+function clear_default_folder_from_graphic($field_value, $image_folder_name) {
+		
+	if ($field_value == $image_folder_name) {
+		$field_value = '';
+	}
+	return $field_value;
+}
+
 function validate_all_items($dbc) {
+
+	global $image_folder;
 
 	$item = new Item();
 	
@@ -45,19 +66,24 @@ function validate_all_items($dbc) {
 	$item->set_value('content', validate_item($dbc,'content',true));
 	$item->set_value('excerpt', validate_item($dbc,'excerpt',true));
 	
-	$bulletin_date = ($value = validate_item($dbc,'bulletin_date',true,false,true)) ? $value->format('Y-m-d') : NULL;
+	$bulletin_date = ($wb_date = validate_item($dbc,'bulletin_date',true,'date')) ? $wb_date->format('Y-m-d') : NULL;
 	$item->set_value('bulletin_date', $bulletin_date);
-	$item->set_value('position', validate_item($dbc,'position',true,true));
+	$item->set_value('position', validate_item($dbc,'position',true,'numeric'));
 	
 	//  Code note: setting $bulletin_date MUST precede setting $graphic, $large_graphic, and $thumbnail
-	$graphic = validate_item($dbc,'graphic',false);
-	$item->set_value('graphic', $graphic);
+	
+	//  $image_folder is default image folder
+	//  An equal graphic value indicates no entry and should be blanked with clear_default_folder_from_graphic
+	$image_folder = parse_date_string(IMAGE_FOLDER,$wb_date);
+	
+	$item->set_value('graphic', validate_item($dbc,'graphic',false,'graphic'));
+	$item->set_value('graphic', clear_default_folder_from_graphic($item->get_value('graphic'), $image_folder));
 
-	$large_graphic = validate_item($dbc,'large_graphic',false);
-	$item->set_value('large_graphic', $large_graphic);
+	$item->set_value('large_graphic', validate_item($dbc,'large_graphic',false));
+	$item->set_value('large_graphic', clear_default_folder_from_graphic($item->get_value('large_graphic'), $image_folder));
 
-	$thumbnail = validate_item($dbc,'thumbnail',false);
-	$item->set_value('thumbnail', $thumbnail);
+	$item->set_value('thumbnail', validate_item($dbc,'thumbnail',false,'graphic'));
+	$item->set_value('thumbnail', clear_default_folder_from_graphic($item->get_value('thumbnail'), $image_folder));
 
 	//  graphic validation must precede alt_text validation 
 	if ($item->get_value('graphic') != NULL && $item->get_value('graphic') != '' && $item->get_value('graphic') != ' ') {

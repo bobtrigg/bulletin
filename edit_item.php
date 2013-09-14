@@ -24,6 +24,17 @@ function get_bulletin_date($unformatted_date) {
 	$bulletin_date = new DateTime($unformatted_date);	
 	return $bulletin_date->format('n/j/Y');
 }
+
+function replace_blank_image_url($url,$date) {
+
+	$date_object = new DateTime($date);
+	
+	if ($url == '' || $url == ' ') {
+		return parse_date_string(IMAGE_FOLDER,$date_object);
+	} else {
+		return $url;
+	}
+}
 if (isset($_POST['submitted'])) {
 
 	$item_object = validate_all_items($dbc);
@@ -90,6 +101,10 @@ if (isset($_POST['submitted'])) {
 	$large_graphic = $return_row['large_graphic'];
 	$alt_text = fix_quoted_quotes($return_row['alt_text']);
 	$thumbnail = $return_row['thumbnail'];
+	
+	$graphic = replace_blank_image_url($graphic,$bulletin_date);
+	$large_graphic = replace_blank_image_url($large_graphic,$bulletin_date);
+	$thumbnail = replace_blank_image_url($thumbnail,$bulletin_date);
 }
 
 // Obtain previous and next row ids from $_SESSION variable
