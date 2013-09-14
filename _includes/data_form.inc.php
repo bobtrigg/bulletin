@@ -37,8 +37,8 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 		<textarea name="content" id="content" cols="70" rows="25"><?php echo $content; ?></textarea>
 	</p>
 	<p>
-		<label for="excerpt">Excerpt: </label>
-		<input type="text" name="excerpt" id="excerpt" value="<?php echo $excerpt; ?>" size="80" maxlength="200" />
+		<label for="excerpt">Excerpt:<br></label>
+		<textarea name="excerpt" id="excerpt" cols="70" rows="10"><?php echo $excerpt; ?></textarea>
 	</p>
 </div>
 

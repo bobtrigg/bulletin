@@ -211,8 +211,12 @@ function fix_control_chars($in_string) {
 
 	//  Replaces pesky control characters which have replaced
 	//  some punctuation characters somewhere in the process.
+	//  Also remove paragraph tags added to excerpt by tinyMCE
 
 	$out_string = preg_replace('/’/','\'',$in_string);
+	$out_string = preg_replace('/<p>/','',$out_string);
+	$out_string = preg_replace('/<\/p>/','',$out_string);
+	$out_string = preg_replace('/\&quot;/','"',$out_string);
 	
 	return $out_string;
 }
