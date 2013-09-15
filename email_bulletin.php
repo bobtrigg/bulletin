@@ -31,6 +31,12 @@
 		$item_excerpt = fix_quoted_quotes($item['excerpt']);
 		$thumbnail = $item['thumbnail'];
 		
+		if ($item['bookmark'] == '' || $item['bookmark'] == ' ') {
+			$bookmark =  generate_bookmark($item_title);
+		} else {
+			$bookmark = $item['bookmark'];
+		}
+		
 		// If thumbnail size graphic was specified, use it; otherwise use main graphic
 		if (isset($thumbnail) && !is_null($thumbnail)) {
 			$image_url = $thumbnail;

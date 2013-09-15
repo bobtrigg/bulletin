@@ -23,12 +23,21 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 		<input type="text" name="bulletin_date" id="bulletin_date" value="<?php echo $bulletin_date;?>" size="40" maxlength="60" />
 	</p>
 	<p>
+		<label for="position">Position:&nbsp;&nbsp;&nbsp;</label>
+		<input type="text" name="position" id="position" value="<?php echo $position; ?>" size="2" maxlength="2" />
+	</p>
+
+	<p>
 		<label for="title">Title: </label>
 		<input type="text" name="title" id="title" value="<?php echo $title; ?>" size="40" maxlength="200" />
 	</p>
 	<p>
 		<label for="subtitle">Subtitle: </label>
 		<input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="200" />
+	</p>
+	<p>
+		<label for="bookmark">Bookmark: </label>
+		<input type="text" name="bookmark" id="bookmark" value="<?php echo $bookmark; ?>" size="40" maxlength="200" />
 	</p>
 
 	<p>
@@ -102,11 +111,6 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 
 </div>
 	
-<p>
-	<label for="position">Position:&nbsp;&nbsp;&nbsp;</label>
-	<input type="text" name="position" id="position" value="<?php echo $position; ?>" size="2" maxlength="2" />
-</p>
-
 <?php 
 	if (isset($_SESSION['date']) && $_SESSION['date'] != '') {
 		$return_str = "?date=" . $_SESSION['date'];

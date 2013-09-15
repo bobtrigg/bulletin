@@ -152,7 +152,11 @@ form input[type=text] {
 /*  Graphic entry styles */
 
 #graphic_entries input[type=text], #text_entries input[type=text] {
-	width: 400px;
+	width: 380px;
+}
+#text_entries #position {
+	width:30px;
+	right:550px;
 }
 #graphic_entries input {
 	position:absolute;

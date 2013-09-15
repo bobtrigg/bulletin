@@ -2,9 +2,9 @@
 //  Set time zone for Bob's house...NOT in L.A.
 date_default_timezone_set('America/Los_Angeles');
 
-// require_once('classes/item.class.php');
-// require_once('_includes/db_functions.inc.php');
-// require_once('_includes/functions.inc.php');
+require_once('classes/item.class.php');
+require_once('_includes/db_functions.inc.php');
+require_once('_includes/functions.inc.php');
 include_once('_includes/runtime_parms.inc.php');
 
 ?>
@@ -22,9 +22,13 @@ include_once('_includes/runtime_parms.inc.php');
 
 <?php
 	if (defined('GLOBAL_JS') && (GLOBAL_JS != '')) {
-		echo "<script type=\"text/javascript\" src=\"" . GLOBAL_JS . "\"></script>\n";
+		echo "<script type=\"text/javascript\" href=\"" . GLOBAL_JS . "\"></script>\n";
+	}
+	if (defined('GLOBAL_CSS') && (GLOBAL_CSS != '')) {
+		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . GLOBAL_CSS . "\" />\n";
 	}
 ?>
+<link rel="stylesheet" type="text/css" href="_css/bulletin.css" />
 <script type="text/javascript" src="_js/toc.js"></script>
 <!-- Run script to generate table of contents -->
 <script type="text/javascript">
@@ -81,7 +85,7 @@ $("document").ready(function() {
 			
 		?>
 			
-			<ol id="toc">
+			<ol id="toc" style="list-style:none;">
 				<!-- Table of contents will be inserted here by toc.js -->
 			</ol>
 			
@@ -103,7 +107,12 @@ $("document").ready(function() {
 			echo '<div class="topRuledBlock">' . "\n"; 	
 			
 			//  Title (with sequence number)
-			echo '<h4><a name="' . generate_bookmark($item['title']) . '"></a><strong>' . fix_quoted_quotes($item['title']) . '</strong></h4>' . "\n";
+			if ($item['bookmark'] == '' || $item['bookmark'] == ' ') {
+				$bookmark =  generate_bookmark($item['title']);
+			} else {
+				$bookmark = $item['bookmark'];
+			}
+			echo '<h4><a name="' . $bookmark . '"></a><strong>' . fix_quoted_quotes($item['title']) . '</strong></h4>' . "\n";
 			
 			//  Subtitle
 			if ($item['subtitle'] == '' || $item['subtitle'] == ' ') {

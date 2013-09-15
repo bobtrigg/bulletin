@@ -222,12 +222,15 @@ function fix_control_chars($in_string) {
 }
 function generate_bookmark($title) {
 	
+	// Replace quoted single quotes
 	$stripped_title = str_replace(array(' ','\'','’'),'',$title);
 	
+	// Truncate at first double quote
 	if ($first_quote_pos = strpos($stripped_title,'"')) {
 		$stripped_title = substr($stripped_title,0,$first_quote_pos);
 	}
 	
+	// Truncate at first ampersand character quote ($quot;)
 	if ($first_amp_quote_pos = strpos($stripped_title,'&quot;')) {
 		$stripped_title = substr($stripped_title,0,$first_amp_quote_pos);
 	}

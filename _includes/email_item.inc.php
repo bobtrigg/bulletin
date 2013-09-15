@@ -19,7 +19,7 @@
 								
 							$dimensions = isset($image_url) ? resize_picture($image_url, 100) : array(0.0);
 							
-							echo '<a href="' . make_full_url($webfile_url) . '#' . generate_bookmark($item_title) . '" target="_blank">';
+							echo '<a href="' . make_full_url($webfile_url) . '#' . $bookmark . '" target="_blank">';
 
 							echo "<img src=\"" . make_full_url($image_url) . "\" alt=\"" . $alt_text;
 							echo "\"  style=\"margin-top:5px;margin-bottom:5px;padding-top:0;padding-bottom:0;\" width=\"";
@@ -38,7 +38,7 @@
 						<p style="font-size:12px;font-family:Arial,Helvetica,sans-serif;margin-top:10px;margin-left:10px;margin-bottom:0;padding-top:0;padding-bottom:0;">
 					  
 						<?php 
-							echo '<a href="' . make_full_url($webfile_url) . '#' . generate_bookmark($item_title) . '">';
+							echo '<a href="' . make_full_url($webfile_url) . '#' . $bookmark . '">';
 							echo '<b>Read more &gt;&gt;</b></a>';
 						?>
 						

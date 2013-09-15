@@ -37,8 +37,9 @@ function replace_blank_image_url($url,$date) {
 }
 // Obtain previous and next row ids from $_SESSION variable
 
-$item_ids = $_SESSION['item_ids'];
-$curr_item_key = array_search($item_id, $item_ids);
+if ($item_ids = $_SESSION['item_ids']) {
+	$curr_item_key = array_search($item_id, $item_ids);
+}
 
 if ($curr_item_key === false) {
 	$next_item_id = null;
@@ -97,6 +98,7 @@ if (isset($_POST['submitted'])) {
 	
 		$title = get_entered_value('title',$item_object);
 		$subtitle = get_entered_value('subtitle',$item_object);
+		$bookmark = get_entered_value('bookmark',$item_object);
 		$content = get_entered_value('content',$item_object);
 		$excerpt = get_entered_value('excerpt',$item_object);
 		$position = get_entered_value('position',$item_object);
@@ -121,6 +123,7 @@ if (isset($_POST['submitted'])) {
 	$position = $return_row['position'];
 	$title = fix_quoted_quotes($return_row['title']);
 	$subtitle = fix_quoted_quotes($return_row['subtitle']);
+	$bookmark = fix_quoted_quotes($return_row['bookmark']);
 	$content = fix_quoted_quotes($return_row['content'],true);
 	$excerpt = fix_quoted_quotes($return_row['excerpt']);
 	$graphic = $return_row['graphic'];

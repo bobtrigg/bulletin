@@ -15,6 +15,7 @@ class Item extends Table {
 								$position=NULL, 
 								$title=NULL, 
 								$subtitle=NULL, 
+								$bookmark=NULL, 
 								$content=NULL, 
 								$excerpt=NULL, 
 								// $caption=NULL, 
@@ -30,6 +31,7 @@ class Item extends Table {
 								  'position' => (int)$position,
 								  'title' => (string)$title,
 								  'subtitle' => $subtitle,
+								  'bookmark' => $bookmark,
 								  'content' => (string)$content,
 								  'excerpt' => (string)$excerpt,
 								  //'caption' => (string)$caption,
@@ -40,7 +42,7 @@ class Item extends Table {
 								  );
 								  
 		parent::__construct('items', 'item_id', 
-		                     array('bulletin_date', 'position','title','subtitle','content',
+		                     array('bulletin_date', 'position','title','subtitle','bookmark','content',
 							       'excerpt'/*,'caption'*/,'graphic','large_graphic','alt_text','thumbnail'));
 	}
 }

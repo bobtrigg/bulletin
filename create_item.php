@@ -40,6 +40,7 @@ if (isset($_POST['submitted'])) {
 	} else { 
 		$title = get_entered_value('title',$item_object);
 		$subtitle = get_entered_value('subtitle',$item_object);
+		$bookmark = get_entered_value('bookmark',$item_object);
 		$content = get_entered_value('content',$item_object);
 		$excerpt = get_entered_value('excerpt',$item_object);
 		$position = get_entered_value('position',$item_object);
@@ -61,7 +62,7 @@ if (isset($_POST['submitted'])) {
 	}
 	$bulletin_date = $date->format('n/j/Y');
 	
-	$position = $title = $subtitle = $content = $excerpt = $alt_text = '';
+	$position = $title = $subtitle = $bookmark = $content = $excerpt = $alt_text = '';
 	$graphic = $large_graphic = $thumbnail = parse_date_string(IMAGE_FOLDER,$date);
 }
 

@@ -38,8 +38,10 @@ function validate_item($dbc,$name,$required=false,$type='text') {
 	if ($type == 'graphic') {
 	
 		if ($value != $image_folder) {
-			if ($value && $value != "jpg" && $value != "gif" && $value != "png") {
-				$errors[] = "Graphic (inline or thumbnail) must be a .gif, .jpg, or .png";
+		
+			$suffix = substr($value,-3);
+			if ($suffix && $suffix != "jpg" && $suffix != "gif" && $suffix != "png") {
+				$errors[] = "Graphic (inline or thumbnail) must be a .gif, .jpg, or .png: (" . $name . ", suffix " . $suffix . ")";
 			}
 		}
 	}
@@ -63,6 +65,7 @@ function validate_all_items($dbc) {
 	
 	$item->set_value('title', validate_item($dbc,'title',true));
 	$item->set_value('subtitle', validate_item($dbc,'subtitle',false));
+	$item->set_value('bookmark', validate_item($dbc,'bookmark',false));
 	$item->set_value('content', validate_item($dbc,'content',true));
 	$item->set_value('excerpt', validate_item($dbc,'excerpt',true));
 	
