@@ -29,8 +29,12 @@ include_once('_includes/runtime_parms.inc.php');
 	}
 ?>
 <link rel="stylesheet" type="text/css" href="_css/bulletin.css" />
-<script type="text/javascript" src="_js/toc.js"></script>
+
+<!-- Include script to render email adresses -->
+<script type="text/javascript" src="_js/mailguard.js"></script>
+
 <!-- Run script to generate table of contents -->
+<script type="text/javascript" src="_js/toc.js"></script>
 <script type="text/javascript">
 $("document").ready(function() {
 	gen_toc(true);
@@ -156,9 +160,18 @@ $("document").ready(function() {
 		}
 	
 	?>
+    <?php
+		if (defined('BULLETIN_FOOTER') && (BULLETIN_FOOTER != '')) {
+			include (BULLETIN_FOOTER);
+		}
+	?>
   </div>
   <div id="footer">
-	<?php include(WEB_FOOTER);?>
+	<?php 
+		if (defined('WEB_FOOTER') && (WEB_FOOTER != '')) {
+			include (WEB_FOOTER);
+		}
+	?>
   </div>
 </div>
 </body>

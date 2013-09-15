@@ -24,7 +24,10 @@ include_once('_includes/runtime_parms.inc.php');
 	<!-- Run script to generate table of contents -->
 	<script type="text/javascript" src="_js/toc.js"></script>
 	
-</head>
+	<!-- Include script to render email addresses -->
+	<script type="text/javascript" src="_js/mailguard.js"></script>
+	
+	</head>
 
 <body>
 	<div id="wbHeader">

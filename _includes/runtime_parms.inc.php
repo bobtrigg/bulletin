@@ -64,6 +64,9 @@ DEFINE('IMAGE_FOLDER', 'Images/%Y');
 //  Use EMAIL_HEADER for full pathname of file containing email HTML header
 DEFINE('EMAIL_HEADER', '_includes/email_header.inc.php');
 
+//  Use BULLETIN_FOOTER for pathname of file containing HTML bulletin footer
+DEFINE('BULLETIN_FOOTER', '../../_includes/WBfooter.html');
+
 //  Use EMAIL_FOOTER for full pathname of file containing email HTML footer
 DEFINE('EMAIL_FOOTER', '_includes/email_footer.inc.php');
 
