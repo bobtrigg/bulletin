@@ -127,7 +127,10 @@ $_SESSION['item_ids'] = $item_ids;
   </tr>
 </table>
 
-<p><a href="email_bulletin.php?date=<?php echo $date->format('Ymd'); ?>" target="_blank">Generate email bulletin</a>
-<p><a href="create_item.php?date=<?php echo $date->format('Ymd'); ?>">Create a new bulletin item</a>
+<p><a href="create_item.php?date=<?php echo $date->format('Ymd'); ?>">Create a new bulletin item</a><br></p>
+<p><a href="bulletin.php?date=<?php echo $date->format('Ymd'); ?>" target="_blank">Generate HTML bulletin</a><br>
+	<a href="email_bulletin.php?date=<?php echo $date->format('Ymd'); ?>" target="_blank">Generate email bulletin</a><br>
+	<a href="text_bulletin.php?date=<?php echo $date->format('Ymd'); ?>" target="_blank">Generate text bulletin</a>
+</p>
 </body>
 </html>

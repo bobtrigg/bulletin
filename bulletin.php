@@ -2,9 +2,9 @@
 //  Set time zone for Bob's house...NOT in L.A.
 date_default_timezone_set('America/Los_Angeles');
 
-require_once('classes/item.class.php');
-require_once('_includes/db_functions.inc.php');
-require_once('_includes/functions.inc.php');
+// require_once('classes/item.class.php');
+// require_once('_includes/db_functions.inc.php');
+// require_once('_includes/functions.inc.php');
 include_once('_includes/runtime_parms.inc.php');
 
 ?>
@@ -16,15 +16,6 @@ include_once('_includes/runtime_parms.inc.php');
 
 <title><?php echo ORG_NAME ?> Weekly Bulletin</title>
 
-<?php
-	if (defined('GLOBAL_CSS') && (GLOBAL_CSS != '')) {
-		echo "<link href=\"" . GLOBAL_CSS . "\" rel=\"stylesheet\" type=\"text/css\">\n";
-	}
-	if (defined('CUSTOM_CSS') && (CUSTOM_CSS != '')) {
-		echo "<link href=\"" . CUSTOM_CSS . "\" rel=\"stylesheet\" type=\"text/css\">\n";
-	}
-?>
-	
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <?php include('_includes/fancybox.inc.php'); ?>
