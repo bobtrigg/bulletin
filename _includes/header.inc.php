@@ -11,6 +11,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <?php include('_includes/fancybox.inc.php'); ?>
 <script type="text/javascript" src="_js/script.js"></script>
+<script type="text/javascript" src="_js/tooltip.js"></script>
 
 <script type="text/javascript" src="_js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
@@ -21,6 +22,12 @@ tinymce.init({
     toolbar: "preview,fullscreen,searchreplace,anchor,link"
  });
 </script>
+
+<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<link rel="stylesheet" type="text/css" href="_css/tooltip_ie.css" />
+<![endif]-->
+
 </head>
 
 <body>

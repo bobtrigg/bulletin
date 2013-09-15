@@ -96,5 +96,7 @@ if (!empty($errors)) {
 
 <p><a href="create_bulletin.php?date=<?php echo $bulletin_date; ?>" target="_blank">Generate email bulletin</a>
 
+<?php include('_includes/footer.inc.php');?>	
+
 </body>
 </html>

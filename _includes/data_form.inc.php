@@ -23,6 +23,9 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 		<input type="text" name="bulletin_date" id="bulletin_date" value="<?php echo $bulletin_date;?>" size="40" maxlength="60" />
 	</p>
 	<p>
+		<!-- Tooltip -->
+		<a href="#" data-tip-type="text" data-tip-source="Suggestion: use multiples of 5 or 10 to more easily rearrange items." class="tooltip"><img src="Images/InfoIconTrnsprnt30.png" class="info_button" /></a>
+		
 		<label for="position">Position:&nbsp;&nbsp;&nbsp;</label>
 		<input type="text" name="position" id="position" value="<?php echo $position; ?>" size="2" maxlength="2" />
 	</p>
@@ -36,6 +39,9 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 		<input type="text" name="subtitle" id="subtitle" value="<?php echo $subtitle; ?>" size="40" maxlength="200" />
 	</p>
 	<p>
+		<!-- Tooltip -->
+		<a href="#" data-tip-type="text" data-tip-source="This bookmarks this item so it can be easily found by a browser. if not specified, a less user-friendly default value will be used." class="tooltip"><img src="Images/InfoIconTrnsprnt30.png" class="info_button" /></a>
+		
 		<label for="bookmark">Bookmark: </label>
 		<input type="text" name="bookmark" id="bookmark" value="<?php echo $bookmark; ?>" size="40" maxlength="200" />
 	</p>
@@ -69,42 +75,37 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 	</p>
 
 	<p>
-		<label for="graphic">Inline file URL:
-<!--			<p class="explanation">
-			This file will go into the web page bulletin, in line with text.<br />
-			If you leave this blank, a larger file will be used, increasing bandwidth.</p> 
--->
-		</label>
+		<!-- Tooltip -->
+		<a href="#" data-tip-type="text" data-tip-source="This file will go into the web page bulletin, in line with text." class="tooltip"><img src="Images/InfoIconTrnsprnt30.png" class="info_button" /></a>
+		
+		<label for="graphic">Inline file URL:</label>
 		<input type="text" name="graphic" id="graphic" class="graphic" value="<?php echo $graphic; ?>" maxlength="200"  />
 		<br><a href="#" id="graphic_view" class="fancybox view_link" target="_blank"></a>
-	</p>
+
+		</p>
 
 	<p>
-		<label for="alt_text">Alt text:
-<!--			<p class="explanation">
-			Provide a short description for non-displaying browsers and assisted technology.</p>
--->
-		</label>
+		<!-- Tooltip -->
+		<a href="#" data-tip-type="text" data-tip-source="Provide a short description for non-displaying browsers and assistive technology." class="tooltip"><img src="Images/InfoIconTrnsprnt30.png" class="info_button" /></a>
+		
+		<label for="alt_text">Alt text:</label>
 		<input type="text" name="alt_text" id="alt_text" value="<?php echo $alt_text; ?>" maxlength="200"  />
 	</p>
 	
 	<p>
-		<label for="large_graphic">Large graphic file URL:
-<!--			<p class="explanation">
-			This is the largest graphic. Ideal max dimension 1200 pixels.</p>
--->
-		</label>
+		<!-- Tooltip -->
+		<a href="#" data-tip-type="text" data-tip-source="This is the largest graphic. Ideal max dimension 1200 pixels." class="tooltip"><img src="Images/InfoIconTrnsprnt30.png" class="info_button" /></a>
+		
+		<label for="large_graphic">Large graphic file URL:</label>
 		<input type="text" name="large_graphic" id="large_graphic" class="graphic" value="<?php echo $large_graphic; ?>" maxlength="200" />
 		<br><a href="#" id="large_graphic_view" class="fancybox view_link" target="_blank"></a>
 	</p>
 
 	<p>
-		<label for="thumbnail">Thumbnail file URL:
-<!--			<p class="explanation">
-			Provide a small file for your email. <br>
-			If you leave this blank, a larger file will be used, increasing bandwidth.</p>
--->
-		</label>
+		<!-- Tooltip -->
+		<a href="#" data-tip-type="text" data-tip-source="Provide a small file for your email. If you leave this blank, a larger file will be used, increasing bandwidth." class="tooltip"><img src="Images/InfoIconTrnsprnt30.png" class="info_button" /></a>
+		
+		<label for="thumbnail">Thumbnail file URL:</label>
 		<input type="text" name="thumbnail" id="thumbnail" class="graphic" value="<?php echo $thumbnail; ?>" maxlength="200"  />
 		<br><a href="#" id="thumbnail_view" class="fancybox view_link" target="_blank"></a>
 	</p>

@@ -146,17 +146,17 @@ form input[type=text] {
 }
 #text_entries input[type=text] {
 	position:absolute;
-	right:	200px;
+	right:	180px;
+}
+#text_entries #position {  /* Gets special positioning due to its different size */
+	width:30px;
+	right:530px;
 }
 
 /*  Graphic entry styles */
 
 #graphic_entries input[type=text], #text_entries input[type=text] {
 	width: 380px;
-}
-#text_entries #position {
-	width:30px;
-	right:550px;
 }
 #graphic_entries input {
 	position:absolute;
@@ -228,6 +228,26 @@ input[type=button] {
 	float: right;
 	padding-right: 25px;
 	text-align: right;
+}
+/*  Styling for tooltip */
+/*  Written by Chris Converse for lynda.com  */
+#tooltip_container {
+	color:#fff;
+	position:absolute;
+	padding:20px;
+	max-width:200px;
+	background-color:rgba(0,0,0,.85);
+	-webkit-border-radius:12px;
+	-moz-border-radius:12px;
+	border-radius:12px;
+	font-size:.8em;
+	display:none;
+}
+/* Styling for info button */
+.info_button {
+	float:left;
+	padding-right: 5px;
+	margin-top:0;
 }
 
 /* Added by Larry Ullman: */

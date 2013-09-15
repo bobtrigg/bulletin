@@ -170,6 +170,8 @@ if (!empty($errors)) {
 		?>
 	</p>
 </form>
-	
+
+<?php include('_includes/footer.inc.php');?>	
+
 </body>
 </html>
