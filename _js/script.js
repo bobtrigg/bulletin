@@ -9,8 +9,12 @@ if the image is .jpg, .gif, or .png, it uses fancybox to pop out the image.
 
 function populatePics(text) {
 	$(".graphic").each(function() {
-		if (this.value === "") {
+	
+		var image_folder = document.getElementById('image_folder').value;
+	
+		if (this.value === "" || this.value === image_folder) {
 			this.value = text;
+			redisplay_view_link(this.id);
 		}
 	});
 }
