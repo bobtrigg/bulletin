@@ -202,6 +202,33 @@ function generate_bookmark($title,$bookmark) {
 	
 	return substr($stripped_title,0,20);
 }
+function get_entered_values($item_object) {
+
+
+}
+
+function get_entered_value($field_name,$item_object) {
+
+	//  Returns the user-entered value of $field_name, stripped of quoted quotes
+	//  Cleans up oft-repeated code
+	
+	$raw_value = $item_object->get_value($field_name);
+
+	$line_feeds_removed = str_replace(array('\n','\r'),'',$raw_value);
+	
+	return fix_quoted_quotes($line_feeds_removed);
+}
+
+function get_bulletin_date($unformatted_date) {
+
+	// Since some versions of PHP do not allow an object reference symbol after a new object declaration,
+	// this code can't be condensed to one line. Hence, since it's reused, it's now a function. WTF!
+
+	$bulletin_date = new DateTime($unformatted_date);	
+	return $bulletin_date->format('n/j/Y');
+}
+
+
 function fix_quoted_quotes($string_with_quotes, $textarea=false) {
 	
 	#  This function accepts a string and fixes quoting for redisplay
@@ -216,17 +243,6 @@ function fix_quoted_quotes($string_with_quotes, $textarea=false) {
 	}
 	
 	return $fixed_string;
-}
-function get_entered_value($field_name,$item_object) {
-
-	//  Returns the user-entered value of $field_name, stripped of quoted quotes
-	//  Cleans up oft-repeated code
-	
-	$raw_value = $item_object->get_value($field_name);
-
-	$line_feeds_removed = str_replace(array('\n','\r'),'',$raw_value);
-	
-	return fix_quoted_quotes($line_feeds_removed);
 }
 function fix_control_chars($in_string) {
 

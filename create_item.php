@@ -37,34 +37,33 @@ if (isset($_POST['submitted'])) {
 				$_SESSION['message'] .= "\n" . $error;
 			}
 		}
-	} else {   // Reset values for redispaly after errors on submit
+	} else {   // Reset values for redisplay after errors on submit
 	
-		$title = get_entered_value('title',$item_object);
-		$subtitle = get_entered_value('subtitle',$item_object);
-		$bookmark = get_entered_value('bookmark',$item_object);
-		$content = get_entered_value('content',$item_object);
-		$excerpt = get_entered_value('excerpt',$item_object);
-		$position = get_entered_value('position',$item_object);
-		$bulletin_date = get_entered_value('bulletin_date',$item_object);
-		$graphic = get_entered_value('graphic',$item_object);
-		$large_graphic = get_entered_value('large_graphic',$item_object);
-		$alt_text = get_entered_value('alt_text',$item_object);
-		$thumbnail = get_entered_value('thumbnail',$item_object);
+		for ($i=0; $i<$item_object->get_col_array_count(); $i++) {
+		
+			$field_name = $item_object->get_col_name($i);
+			$item_object->$field_name = get_entered_value($field_name,$item_object);
 		}
+		
+		$item_object->bulletin_date = get_bulletin_date($item_object->bulletin_date);
+	}
 	
 }  else {  // Form was not yet submitted
 
 	// initialize item name variable
+
+	$item_object = new Item();
 
 	if (isset($_GET['date']) and is_numeric($_GET['date'])) {
 		$date = new DateTime($_GET['date']);
 	} else {
 		$date = new DateTime();
 	}
-	$bulletin_date = $date->format('n/j/Y');
+	$item_object->bulletin_date = $date->format('n/j/Y');
 	
-	$position = $title = $subtitle = $bookmark = $content = $excerpt = $alt_text = '';
-	$graphic = $large_graphic = $thumbnail = parse_date_string(IMAGE_FOLDER,$date);
+	$item_object->position = $item_object->title = $item_object->subtitle = $item_object->bookmark = $item_object->content = $item_object->excerpt = $item_object->alt_text = '';
+
+	$item_object->graphic = $item_object->graphic_link = $item_object->thumbnail = parse_date_string(IMAGE_FOLDER,$date);
 }
 
 $next_item_id = null;

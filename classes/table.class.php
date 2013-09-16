@@ -149,6 +149,12 @@ class Table {
 						
 		return mysqli_query($dbc, $query_string);
 	}
+	public function get_col_array_count() {
+		return count($this->col_array);
+	}
+	public function get_col_name($ndx) {
+		return $this->col_array[$ndx];
+	}
 	public function echo_col_names($ndx=NULL) {
 	
 	#  Displays the elements of the array of column names
@@ -161,7 +167,7 @@ class Table {
 				echo "--" . $col_name . "<br>";
 			}	
 		}
-	}	
+	}
 	public static function get_list($dbc, $table_name, $start_rec = 1, $num_rows = ROWS_PER_PAGE, $sort_field = NULL, $join_clause = NULL, $where_clause=NULL) {
 		
 	#  Creates a query to select a set of rows from specified table for display

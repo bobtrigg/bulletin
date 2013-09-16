@@ -131,12 +131,12 @@ $("document").ready(function() {
 				$height = $dimensions[1];
 				
 				//  Make image target open with fancybox only if it's an image file
-				if (in_array(substr($item['large_graphic'],-3),array("png","jpg","gif"))) {
+				if (in_array(substr($item['graphic_link'],-3),array("png","jpg","gif"))) {
 					$class_name = 'class="fancybox"';
 				}
 
 				//  Write HTML to put image, with link, on page
-				echo '<a href="' . $item['large_graphic'] . '" title="'  . fix_quoted_quotes($item['title']) . '" ' . $class_name . ' target="_blank">' . "\n";				
+				echo '<a href="' . $item['graphic_link'] . '" title="'  . fix_quoted_quotes($item['title']) . '" ' . $class_name . ' target="_blank">' . "\n";				
 				
 				echo '<img src="' . $item['graphic'] . '" alt="' . fix_quoted_quotes($item['alt_text']) . '" width="' . $width . '" height="' . $height . '" class="floatRight">';
 				echo '</a>';

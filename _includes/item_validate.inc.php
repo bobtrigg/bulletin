@@ -73,7 +73,7 @@ function validate_all_items($dbc) {
 	$item->set_value('bulletin_date', $bulletin_date);
 	$item->set_value('position', validate_item($dbc,'position',true,'numeric'));
 	
-	//  Code note: setting $bulletin_date MUST precede setting $graphic, $large_graphic, and $thumbnail
+	//  Code note: setting $bulletin_date MUST precede setting $graphic, $graphic_link, and $thumbnail
 	
 	//  $image_folder is default image folder
 	//  An equal graphic value indicates no entry and should be blanked with clear_default_folder_from_graphic
@@ -82,8 +82,8 @@ function validate_all_items($dbc) {
 	$item->set_value('graphic', validate_item($dbc,'graphic',false,'graphic'));
 	$item->set_value('graphic', clear_default_folder_from_graphic($item->get_value('graphic'), $image_folder));
 
-	$item->set_value('large_graphic', validate_item($dbc,'large_graphic',false));
-	$item->set_value('large_graphic', clear_default_folder_from_graphic($item->get_value('large_graphic'), $image_folder));
+	$item->set_value('graphic_link', validate_item($dbc,'graphic_link',false));
+	$item->set_value('graphic_link', clear_default_folder_from_graphic($item->get_value('graphic_link'), $image_folder));
 
 	$item->set_value('thumbnail', validate_item($dbc,'thumbnail',false,'graphic'));
 	$item->set_value('thumbnail', clear_default_folder_from_graphic($item->get_value('thumbnail'), $image_folder));

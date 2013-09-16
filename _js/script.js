@@ -62,7 +62,7 @@ function propogate_image_url(id) {
 	if (curr_url != '' && curr_url != ' ' && curr_url != default_folder) {
 	
 		update_image_url('graphic',curr_url,default_folder);
-		update_image_url('large_graphic',curr_url,default_folder);
+		update_image_url('graphic_link',curr_url,default_folder);
 		update_image_url('thumbnail',curr_url,default_folder);
 		
 	}
@@ -91,9 +91,9 @@ function prepEventHandlers() {
 		propogate_image_url("graphic");
 	});
 	
-	$( "#large_graphic" ).change(function() {
-		redisplay_view_link("large_graphic");
-		propogate_image_url("large_graphic");
+	$( "#graphic_link" ).change(function() {
+		redisplay_view_link("graphic_link");
+		propogate_image_url("graphic_link");
 	});
 	
 	$( "#thumbnail" ).change(function() {
@@ -103,7 +103,7 @@ function prepEventHandlers() {
 	
 	// Display view links at the start of the program
 	redisplay_view_link("graphic");
-	redisplay_view_link("large_graphic");
+	redisplay_view_link("graphic_link");
 	redisplay_view_link("thumbnail");
 
 };

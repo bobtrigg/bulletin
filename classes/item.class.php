@@ -7,6 +7,20 @@ require_once('classes/table.class.php');
 class Item extends Table {
 
 	protected $data_array;
+	
+	public static $type_array = array('bulletin_date' => 'date', 
+								  'position' => 'numeric',
+								  'title' => 'text',
+								  'subtitle' => 'text',
+								  'bookmark' => 'text',
+								  'content' => 'text',
+								  'excerpt' => 'text',
+								  //'caption' => 'text',
+								  'graphic' => 'graphic',
+								  'graphic_link' => 'graphic',
+								  'alt_text' => 'text',
+								  'thumbnail' => 'graphic'
+								  );
 
 ######  Constructor function creates a new bulletin item
 ######  function assigns primary key value and an array of other column values, then calls parent (table) constructor
@@ -20,10 +34,10 @@ class Item extends Table {
 								$excerpt=NULL, 
 								// $caption=NULL, 
 								$graphic=NULL,
-								$large_graphic=NULL,
+								$graphic_link=NULL,
 								$alt_text=NULL,
 								$thumbnail=NULL,
-								$item_id=NULL	) 
+								$item_id=NULL) 
 	{
 		$this->pk_id = (int)$item_id;
 		
@@ -36,14 +50,17 @@ class Item extends Table {
 								  'excerpt' => (string)$excerpt,
 								  //'caption' => (string)$caption,
 								  'graphic' => $graphic,
-								  'large_graphic' => $large_graphic,
+								  'graphic_link' => $graphic_link,
 								  'alt_text' => $alt_text,
 								  'thumbnail' => $thumbnail
 								  );
 								  
 		parent::__construct('items', 'item_id', 
 		                     array('bulletin_date', 'position','title','subtitle','bookmark','content',
-							       'excerpt'/*,'caption'*/,'graphic','large_graphic','alt_text','thumbnail'));
+							       'excerpt'/*,'caption'*/,'graphic','graphic_link','alt_text','thumbnail'));
+	}
+	public static function get_type($field_name) {
+		return Item::$type_array[$field_name];
 	}
 }
 ?>

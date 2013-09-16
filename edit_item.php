@@ -16,15 +16,6 @@ if (isset($_GET['id'])) {
 	}	
 }
 
-function get_bulletin_date($unformatted_date) {
-
-	// Since some versions of PHP do not allow an object reference symbol after a new object declaration,
-	// this code can't be condensed to one line. Hence, since it's reused, it's now a function. WTF!
-
-	$bulletin_date = new DateTime($unformatted_date);	
-	return $bulletin_date->format('n/j/Y');
-}
-
 function replace_blank_image_url($url,$date) {
 
 	//  This function sets all image URLs to the default folder, if specified, for ease of entry.
@@ -94,21 +85,17 @@ if (isset($_POST['submitted'])) {
 
 	} else {    //  Reset all values for redisplay after error
 	
-		$title = get_entered_value('title',$item_object);
-		$subtitle = get_entered_value('subtitle',$item_object);
-		$bookmark = get_entered_value('bookmark',$item_object);
-		$content = get_entered_value('content',$item_object);
-		$excerpt = get_entered_value('excerpt',$item_object);
-		$position = get_entered_value('position',$item_object);
-		$unformatted_date = get_entered_value('bulletin_date',$item_object);
-		$bulletin_date = get_bulletin_date(get_entered_value('bulletin_date',$item_object));
-		$graphic = get_entered_value('graphic',$item_object);
-		$large_graphic = get_entered_value('large_graphic',$item_object);
-		$alt_text = get_entered_value('alt_text',$item_object);
-		$thumbnail = get_entered_value('thumbnail',$item_object);
+		for ($i=0; $i<$item_object->get_col_array_count(); $i++) {
+			$field_name = $item_object->get_col_name($i);
+			$item_object->$field_name = get_entered_value($field_name,$item_object);
+		}
+
+		$item_object->bulletin_date = get_bulletin_date($item_object->bulletin_date);
 	}
 	
 }  else {
+
+	$item_object = new Item();
 
 	//  Get data for specified primary key
 	if (!$return_row = Table::select_by_unique_key($dbc, 'items', 'item_id', $item_id)) {
@@ -116,22 +103,20 @@ if (isset($_POST['submitted'])) {
 	}
 	
 	//  Assign event data to variables
-
-	$bulletin_date = get_bulletin_date($return_row['bulletin_date']);
-	$position = $return_row['position'];
-	$title = fix_quoted_quotes($return_row['title']);
-	$subtitle = fix_quoted_quotes($return_row['subtitle']);
-	$bookmark = fix_quoted_quotes($return_row['bookmark']);
-	$content = fix_quoted_quotes($return_row['content'],true);
-	$excerpt = fix_quoted_quotes($return_row['excerpt']);
-	$graphic = $return_row['graphic'];
-	$large_graphic = $return_row['large_graphic'];
-	$alt_text = fix_quoted_quotes($return_row['alt_text']);
-	$thumbnail = $return_row['thumbnail'];
 	
-	$graphic = replace_blank_image_url($graphic,$bulletin_date);
-	$large_graphic = replace_blank_image_url($large_graphic,$bulletin_date);
-	$thumbnail = replace_blank_image_url($thumbnail,$bulletin_date);
+	for ($i=0; $i<$item_object->get_col_array_count(); $i++) {
+	
+		$field_name = $item_object->get_col_name($i);
+		$item_object->$field_name = fix_quoted_quotes($return_row[$field_name]);
+		
+		if ($field_name == 'bulletin_date') {
+			$item_object->$field_name = get_bulletin_date($item_object->$field_name);
+		}
+		if (Item::get_type($field_name) == 'graphic') {
+			$item_object->$field_name = replace_blank_image_url($item_object->$field_name,$item_object->bulletin_date);
+		}
+	}
+	$item_object->bulletin_date = get_bulletin_date($item_object->bulletin_date);
 }
 
 //  Display header, and errors if any 
