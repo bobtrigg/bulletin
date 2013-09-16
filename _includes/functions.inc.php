@@ -75,32 +75,6 @@ function resize_picture($graphic, $max_side_len) {
 	}
 	return array($width,$height);
 }
-function fix_quoted_quotes($string_with_quotes, $textarea=false) {
-	
-	#  This function accepts a string and fixes quoting for redisplay
-	#  In textareas and text boxes, backslashes must be removed
-	#  In a text box, double quotes must be converted to ampersand character notation
-	#  Function assumes text box unless textarea is indicated
-	
-	$fixed_string = preg_replace('/\\\\/','',$string_with_quotes);
-	
-	if (!$textarea) {
-		$fixed_string = preg_replace('/\"/','&quot;',$fixed_string);
-	}
-	
-	return $fixed_string;
-}
-function get_entered_value($field_name,$item_object) {
-
-	//  Returns the user-entered value of $field_name, stripped of quoted quotes
-	//  Cleans up oft-repeated code
-	
-	$raw_value = $item_object->get_value($field_name);
-
-	$line_feeds_removed = str_replace(array('\n','\r'),'',$raw_value);
-	
-	return fix_quoted_quotes($line_feeds_removed);
-}
 
 function upload_file($file) {
 
@@ -207,21 +181,12 @@ function make_full_url($filepathname) {
 
 	return $converted_name;
 }
-function fix_control_chars($in_string) {
-
-	//  Replaces pesky control characters which have replaced
-	//  some punctuation characters somewhere in the process.
-	//  Also remove paragraph tags added to excerpt by tinyMCE
-
-	$out_string = preg_replace('/’/','\'',$in_string);
-	$out_string = preg_replace('/<p>/','',$out_string);
-	$out_string = preg_replace('/<\/p>/','',$out_string);
-	$out_string = preg_replace('/\&quot;/','"',$out_string);
+function generate_bookmark($title,$bookmark) {
 	
-	return $out_string;
-}
-function generate_bookmark($title) {
-	
+	if ($bookmark != '' && $bookmark != ' ') {
+		return $bookmark;
+	}
+
 	// Replace quoted single quotes
 	$stripped_title = str_replace(array(' ','\'','’'),'',$title);
 	
@@ -236,5 +201,44 @@ function generate_bookmark($title) {
 	}
 	
 	return substr($stripped_title,0,20);
+}
+function fix_quoted_quotes($string_with_quotes, $textarea=false) {
+	
+	#  This function accepts a string and fixes quoting for redisplay
+	#  In textareas and text boxes, backslashes must be removed
+	#  In a text box, double quotes must be converted to ampersand character notation
+	#  Function assumes text box unless textarea is indicated
+	
+	$fixed_string = preg_replace('/\\\\/','',$string_with_quotes);
+	
+	if (!$textarea) {
+		$fixed_string = preg_replace('/\"/','&quot;',$fixed_string);
+	}
+	
+	return $fixed_string;
+}
+function get_entered_value($field_name,$item_object) {
+
+	//  Returns the user-entered value of $field_name, stripped of quoted quotes
+	//  Cleans up oft-repeated code
+	
+	$raw_value = $item_object->get_value($field_name);
+
+	$line_feeds_removed = str_replace(array('\n','\r'),'',$raw_value);
+	
+	return fix_quoted_quotes($line_feeds_removed);
+}
+function fix_control_chars($in_string) {
+
+	//  Replaces pesky control characters which have replaced
+	//  some punctuation characters somewhere in the process.
+	//  Also remove paragraph tags added to excerpt by tinyMCE
+
+	$out_string = preg_replace('/’/','\'',$in_string);
+	$out_string = preg_replace('/<p>/','',$out_string);
+	$out_string = preg_replace('/<\/p>/','',$out_string);
+	$out_string = preg_replace('/\&quot;/','"',$out_string);
+	
+	return $out_string;
 }
 ?>

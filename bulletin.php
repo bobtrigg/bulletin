@@ -107,18 +107,15 @@ $("document").ready(function() {
 		while ($item = mysqli_fetch_array($item_list)) {
 			
 			//  This class puts a border at the top
-			//  This class puts a border at the top
 			echo '<div class="topRuledBlock">' . "\n"; 	
 			
-			//  Title (with sequence number)
-			if ($item['bookmark'] == '' || $item['bookmark'] == ' ') {
-				$bookmark =  generate_bookmark($item['title']);
-			} else {
-				$bookmark = $item['bookmark'];
-			}
+			//  Get bookmark, either as specified, or generate
+			$bookmark =  generate_bookmark($item['title'],$item['bookmark']);
+			
+			//  Display title (with sequence number)
 			echo '<h4><a name="' . $bookmark . '"></a><strong>' . fix_quoted_quotes($item['title']) . '</strong></h4>' . "\n";
 			
-			//  Subtitle
+			//  Subtitle, if specified
 			if ($item['subtitle'] == '' || $item['subtitle'] == ' ') {
 				echo '<br>';
 			} else {
@@ -129,18 +126,9 @@ $("document").ready(function() {
 			if (!is_null($item['graphic']) && $item['graphic'] != '' && $item['graphic'] != ' ') {
 			
 				//  Set image height and width
-				$image_size_info = getimagesize($item['graphic']);
-				$width = $image_size_info[0];
-				$height = $image_size_info[1];
-				if ($width > 300 || $height > 300) {
-					if ($width > $height) {
-						$height *= (300 / $width);
-						$width = 300;
-					} else {
-						$width *= (300 / $height);
-						$height = 300;
-					}
-				}
+				$dimensions = resize_picture($item['graphic'], 300);
+				$width = $dimensions[0];
+				$height = $dimensions[1];
 				
 				//  Make image target open with fancybox only if it's an image file
 				if (in_array(substr($item['large_graphic'],-3),array("png","jpg","gif"))) {

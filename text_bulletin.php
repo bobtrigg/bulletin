@@ -2,7 +2,6 @@
 //  Set time zone for Bob's house...NOT in L.A.
 date_default_timezone_set('America/Los_Angeles');
 
-// require_once('classes/item.class.php');
 require_once('_includes/db_functions.inc.php');
 require_once('_includes/functions.inc.php');
 include_once('_includes/runtime_parms.inc.php');
@@ -82,9 +81,7 @@ include_once('_includes/runtime_parms.inc.php');
 			echo fix_quoted_quotes($item['content'],true) . "\n";
  	
 			echo "<p>_________________________________________________________________</p>";
-		
 		}
-	
 	?>
  <div id="footer">
 	<?php include(EMAIL_FOOTER);?>

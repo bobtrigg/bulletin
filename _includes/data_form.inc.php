@@ -8,7 +8,6 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 	$bulletin_date = '';
 } else {
 	$components = explode('/',$bulletin_date);
-	// echo '<h1>Components: ' . $components.length . '</h1>';
 	if (count($components) >= 2) {
 		$year = $components[2];
 	} else {
@@ -62,16 +61,7 @@ if ((!isset($bulletin_date)) || is_null($bulletin_date) || ($bulletin_date == ''
 	<h3>Specify image URLs, or upload files:</h3>
 
 	<p>
-		<!--  Non-working code ported to new file
-		// <label for="img_file">Upload</label>
-		// <br>
-
-		// <input type="hidden" name="MAX_FILE_SIZE" value="<?php /*echo $max_file_size;*/?>" />
-		// <p><input type="file" name="file_upload" /></p>
-		-->
-		
 		<a href="upload.php?year=<?php echo $year ?>" target="_blank">Upload a file</a>
-
 	</p>
 
 	<p>

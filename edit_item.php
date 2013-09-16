@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
 
 function get_bulletin_date($unformatted_date) {
 
-	// Since some vsns of PHP do not allow an object reference symbol after a new object declaration,
+	// Since some versions of PHP do not allow an object reference symbol after a new object declaration,
 	// this code can't be condensed to one line. Hence, since it's reused, it's now a function. WTF!
 
 	$bulletin_date = new DateTime($unformatted_date);	
@@ -26,6 +26,8 @@ function get_bulletin_date($unformatted_date) {
 }
 
 function replace_blank_image_url($url,$date) {
+
+	//  This function sets all image URLs to the default folder, if specified, for ease of entry.
 
 	$date_object = new DateTime($date);
 	
@@ -35,12 +37,13 @@ function replace_blank_image_url($url,$date) {
 		return $url;
 	}
 }
-// Obtain previous and next row ids from $_SESSION variable
 
+// Obtain previous and next row ids from $_SESSION variable
 if ($item_ids = $_SESSION['item_ids']) {
 	$curr_item_key = array_search($item_id, $item_ids);
 }
 
+// Find previous and next items for navigation
 if ($curr_item_key === false) {
 	$next_item_id = null;
 	$prev_item_id = null;
@@ -56,8 +59,6 @@ if (isset($_POST['submitted'])) {
 
 	if (empty($errors)) { //  Data is valid
 	
-		// $errors = upload_file($_FILES['file_upload']);
-		
 		if (empty($errors)) {
 	
 			//  Update record
@@ -70,11 +71,8 @@ if (isset($_POST['submitted'])) {
 			$_SESSION['message'] = "\nFile upload failed; update aborted.";		
 		}
 
-		// Return to list page
+		// Go to appropriate page, based on which submit button was clicked.
 		if (!headers_sent($filename, $linenum)) {
-		
-			// echo 'Submit value = ' . $_POST['submit'];
-			// die('die');
 		
 			if ($_POST['submit'] == 'Previous') {
 				$location = "edit_item.php?id=" . $prev_item_id;
@@ -94,7 +92,7 @@ if (isset($_POST['submitted'])) {
 		}
 		
 
-	} else {
+	} else {    //  Reset all values for redisplay after error
 	
 		$title = get_entered_value('title',$item_object);
 		$subtitle = get_entered_value('subtitle',$item_object);
@@ -158,20 +156,6 @@ if (!empty($errors)) {
 	<!--  Copy in boilerplate form fields -->
 	<?php require('_includes/data_form.inc.php'); ?>
 	
-	<!-- Set up links to edit next and previous items  -->
-	<p>
-		<?php
-			if (!is_null($prev_item_id)) {
-				echo "<a href=\"edit_item.php?id=" . $prev_item_id . "\">Previous item</a>&nbsp;&nbsp;&nbsp;";
-			}
-			if (!is_null($next_item_id)) {
-				echo "<a href=\"edit_item.php?id=" . $next_item_id . "\">Next item</a>";
-			}
-		?>
-	</p>
 </form>
 
 <?php include('_includes/footer.inc.php');?>	
-
-</body>
-</html>

@@ -37,7 +37,8 @@ if (isset($_POST['submitted'])) {
 				$_SESSION['message'] .= "\n" . $error;
 			}
 		}
-	} else { 
+	} else {   // Reset values for redispaly after errors on submit
+	
 		$title = get_entered_value('title',$item_object);
 		$subtitle = get_entered_value('subtitle',$item_object);
 		$bookmark = get_entered_value('bookmark',$item_object);
@@ -97,6 +98,3 @@ if (!empty($errors)) {
 <p><a href="create_bulletin.php?date=<?php echo $bulletin_date; ?>" target="_blank">Generate email bulletin</a>
 
 <?php include('_includes/footer.inc.php');?>	
-
-</body>
-</html>

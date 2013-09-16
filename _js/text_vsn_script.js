@@ -1,3 +1,16 @@
+/*
+This script manages several functions used in generating
+the text bulletin.
+
+It removes graphic items (images and iframes).
+It also adds link targets, encased in square brackets, to the displayed text.
+Finally, it generates a table of contents.
+
+The resulting text bulletin is displayed in a browser and should be
+copied directly from the browser window: the HTML still contains many
+tags which should not be included in the text.
+*/
+
 window.onload = function () {
 
 	$("img").each(function() {

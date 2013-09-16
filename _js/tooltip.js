@@ -2,6 +2,7 @@
 /*  Based on code written by Chris Converse for lynda.com  */
 
 $("document").ready(function() {
+
 	$('.tooltip').mouseover(function(e){
 	
 		if($(this).attr('data-tip-type') == 'text'){
@@ -21,13 +22,6 @@ $("document").ready(function() {
 		} else {
 			$('#tooltip_container').css('left',(e.pageX-20)+'px');
 		}
-		
-		// var pageHeight = $('body').height();
-		// if (e.pageY > pageHeight/2){
-			// $('#tooltip_container').css('top',(e.pageY-toolTipHeight+40)+'px');
-		// } else {
-			// $('#tooltip_container').css('top',(e.pageY-0)+'px')	;
-		// }
 		
 		if (e.pageY > 100) {
 			$('#tooltip_container').css('top',(e.pageY-(toolTipHeight+20))+'px');

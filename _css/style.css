@@ -36,6 +36,9 @@ body {
 	-webkit-box-shadow: 10px 10px 20px #20242c;
 	-moz-box-shadow: 10px 10px 20px #20242c;
 	box-shadow: 10px 10px 20px #20242c;
+	-webkit-border-radius:10px 10px 10px 10px;
+	-moz-border-radius:10px 10px 10px 10px;
+	border-radius:10px 10px 10px 10px;	
 }
 /* header */
 #header {

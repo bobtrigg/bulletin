@@ -1,3 +1,12 @@
+/*
+This script contains several functions used to manage the displays
+in the bulletin item web forms (create_item.php and edit_item.php).
+
+It populates all image URLs when the first one is changed to something other than the default.
+When any image URL is changed, it displays or changes the link to display the image;
+if the image is .jpg, .gif, or .png, it uses fancybox to pop out the image.
+*/
+
 function populatePics(text) {
 	$(".graphic").each(function() {
 		if (this.value === "") {
