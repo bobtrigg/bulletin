@@ -8,19 +8,33 @@ class Item extends Table {
 
 	protected $data_array;
 	
-	public static $type_array = array('bulletin_date' => 'date', 
-								  'position' => 'numeric',
-								  'title' => 'text',
-								  'subtitle' => 'text',
-								  'bookmark' => 'text',
-								  'content' => 'text',
-								  'excerpt' => 'text',
-								  //'caption' => 'text',
-								  'graphic' => 'graphic',
-								  'graphic_link' => 'graphic',
-								  'alt_text' => 'text',
-								  'thumbnail' => 'graphic'
-								  );
+	public static $type = array('bulletin_date' => 'date', 
+								'position' => 'numeric',
+								'title' => 'text',
+								'subtitle' => 'text',
+								'bookmark' => 'text',
+								'content' => 'text',
+								'excerpt' => 'text',
+								//'caption' => 'text',
+								'graphic' => 'graphic',
+								'graphic_link' => 'graphic',
+								'alt_text' => 'text',
+								'thumbnail' => 'graphic'
+								);
+
+	public static $required = array('bulletin_date' => true, 
+									'position' => true,
+									'title' => true,
+									'subtitle' => false,
+									'bookmark' => false,
+									'content' => true,
+									'excerpt' => true,
+									//'caption' => false,
+									'graphic' => false,
+									'graphic_link' => false,
+									'alt_text' => false,
+									'thumbnail' => false
+									);
 
 ######  Constructor function creates a new bulletin item
 ######  function assigns primary key value and an array of other column values, then calls parent (table) constructor
@@ -60,7 +74,10 @@ class Item extends Table {
 							       'excerpt'/*,'caption'*/,'graphic','graphic_link','alt_text','thumbnail'));
 	}
 	public static function get_type($field_name) {
-		return Item::$type_array[$field_name];
+		return Item::$type[$field_name];
+	}
+	public static function get_required_yn($field_name) {
+		return Item::$required[$field_name];
 	}
 }
 ?>

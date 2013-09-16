@@ -6,11 +6,28 @@
 require_once('_includes/functions.inc.php'); 
 $image_folder;
 
-function validate_item($dbc,$name,$required=false,$type='text') {
+function validate_item($dbc,$name,$item) {
 
 	global $errors;
-	global $image_folder;
 
+	$type = Item::get_type($name);
+
+	if ($name == 'alt_text') {
+	
+		if ($item->get_value('graphic') != NULL && 
+		    $item->get_value('graphic') != '' 	&& 
+			$item->get_value('graphic') != ' ') {
+				$required = true;
+		} else {
+				$required = false;
+		}
+	} else {
+		$required = Item::get_required_yn($name);
+	}
+	
+	$wb_date = new DateTime($item->get_value('bulletin_date'));
+	$image_folder = parse_date_string(IMAGE_FOLDER,$wb_date);
+	
 	if (isset($_POST[$name]) && (!is_null($_POST[$name])) && ($_POST[$name] != '')) {
 	
 		$value = nl2br(mysqli_real_escape_string($dbc, trim($_POST[$name])));
@@ -27,17 +44,24 @@ function validate_item($dbc,$name,$required=false,$type='text') {
 	}
 	
 	if ($type == 'date') {
+
 		$value = valid_date($value);
 		
 		if (!$value) {
 			$errors[] = "Date is not valid; must be mm/dd/yyyy";
 			$value = NULL;
+		} else {
+			$value = $value->format('Y-m-d');
 		}
 	}
 	
 	if ($type == 'graphic') {
 	
-		if ($value != $image_folder) {
+		if ($value == $image_folder) {
+			
+			$value = '';
+			
+		} elseif ($name == 'graphic' || $name == 'thumbnail') {
 		
 			$suffix = substr($value,-3);
 			if ($suffix && $suffix != "jpg" && $suffix != "gif" && $suffix != "png") {
@@ -45,78 +69,19 @@ function validate_item($dbc,$name,$required=false,$type='text') {
 			}
 		}
 	}
-	
-	return $value;
-}
 
-function clear_default_folder_from_graphic($field_value, $image_folder_name) {
-		
-	if ($field_value == $image_folder_name) {
-		$field_value = '';
-	}
-	return $field_value;
+	return $value;
 }
 
 function validate_all_items($dbc) {
 
-	global $image_folder;
-
 	$item = new Item();
 	
-	$item->set_value('title', validate_item($dbc,'title',true));
-	$item->set_value('subtitle', validate_item($dbc,'subtitle',false));
-	$item->set_value('bookmark', validate_item($dbc,'bookmark',false));
-	$item->set_value('content', validate_item($dbc,'content',true));
-	$item->set_value('excerpt', validate_item($dbc,'excerpt',true));
-	
-	$bulletin_date = ($wb_date = validate_item($dbc,'bulletin_date',true,'date')) ? $wb_date->format('Y-m-d') : NULL;
-	$item->set_value('bulletin_date', $bulletin_date);
-	$item->set_value('position', validate_item($dbc,'position',true,'numeric'));
-	
-	//  Code note: setting $bulletin_date MUST precede setting $graphic, $graphic_link, and $thumbnail
-	
-	//  $image_folder is default image folder
-	//  An equal graphic value indicates no entry and should be blanked with clear_default_folder_from_graphic
-	$image_folder = parse_date_string(IMAGE_FOLDER,$wb_date);
-	
-	$item->set_value('graphic', validate_item($dbc,'graphic',false,'graphic'));
-	$item->set_value('graphic', clear_default_folder_from_graphic($item->get_value('graphic'), $image_folder));
-
-	$item->set_value('graphic_link', validate_item($dbc,'graphic_link',false));
-	$item->set_value('graphic_link', clear_default_folder_from_graphic($item->get_value('graphic_link'), $image_folder));
-
-	$item->set_value('thumbnail', validate_item($dbc,'thumbnail',false,'graphic'));
-	$item->set_value('thumbnail', clear_default_folder_from_graphic($item->get_value('thumbnail'), $image_folder));
-
-	//  graphic validation must precede alt_text validation 
-	if ($item->get_value('graphic') != NULL && $item->get_value('graphic') != '' && $item->get_value('graphic') != ' ') {
-		$item->set_value('alt_text', validate_item($dbc,'alt_text',true));
-	} else {
-		$item->set_value('alt_text', validate_item($dbc,'alt_text',false));
+	for ($i=0; $i<$item->get_col_array_count(); $i++) {
+		$field_name = $item->get_col_name($i);
+		$item->set_value($field_name, validate_item($dbc,$field_name,$item));
 	}
 	
 	return $item;
-}
-# The following function's use has been replaced by a parameter
-# which can be set in the runtime_parms.inc.php file.
-# It's saved here in case a need arises for it in the future.
-
-function set_image_path($filename, $bulletin_date) {
-
-	// Derive full path to image file
-	
-	if (is_null($bulletin_date)) {
-		$year = date('Y');
-	} else {
-		$year = substr($bulletin_date,0,4);
-	}
-
-	if (preg_match('/\//',$filename)) {
-		$image_path = $filename;
-	} else {
-		$image_path = "Images/" . $year . "/" . $filename;
-	}
-	
-	return $image_path;
 }
 ?>
