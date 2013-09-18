@@ -76,9 +76,11 @@ function prepEventHandlers() {
 
 	// Event handler for when subtitle is changed:
 	// If excerpt is blank, default it to new subtitle
+	// Since we're using tinyMCE, need to use its setContent method
 	$("#subtitle").change(function() {
 		var excerpt = document.getElementById('excerpt');
 		if (excerpt.value == '' || excerpt.value == ' ') {
+			tinyMCE.get('excerpt').setContent('<p>' + this.value + '</p>');
 			excerpt.value = this.value;
 		}
 	});

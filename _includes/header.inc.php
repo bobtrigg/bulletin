@@ -19,7 +19,8 @@ tinymce.init({
     selector: "textarea",
     plugins: "link,preview,table,spellchecker,searchreplace,paste,code,charmap,anchor,fullscreen",
     tools: "inserttable",
-    toolbar: "preview,fullscreen,searchreplace,anchor,link"
+    toolbar1: "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent " ,
+	toolbar2: "link,anchor | styleselect,searchreplace,fullscreen,preview"
  });
 </script>
 
