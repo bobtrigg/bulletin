@@ -85,6 +85,12 @@ function prepEventHandlers() {
 		}
 	});
 
+	// Event handler to set excerpt to same value as subtitle when link is clicked
+	$("#dupe_subtitle").click(function() {
+		var subtitle_value = document.getElementById('subtitle').value;
+		tinyMCE.get('excerpt').setContent('<p>' + subtitle_value + '</p>');
+	});
+
 	// If any of the graphics change, default all with no value to the value in the changed field
 	$( ".graphic" ).change(function() {
 		var thisText = this.value;

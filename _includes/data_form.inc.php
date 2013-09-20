@@ -36,6 +36,7 @@ if ((!isset($item_object->bulletin_date)) || is_null($item_object->bulletin_date
 	<p>
 		<label for="subtitle">Subtitle: </label>
 		<input type="text" name="subtitle" id="subtitle" value="<?php echo $item_object->subtitle; ?>" size="40" maxlength="200" />
+		<br><a href="#" id="dupe_subtitle">Use this for the excerpt</a>
 	</p>
 	<p>
 		<!-- Tooltip -->

@@ -2,6 +2,7 @@
 //  Set time zone for Bob's house...NOT in L.A.
 date_default_timezone_set('America/Los_Angeles');
 
+// require_once('classes/item.class.php');
 require_once('_includes/db_functions.inc.php');
 require_once('_includes/functions.inc.php');
 include_once('_includes/runtime_parms.inc.php');
@@ -25,6 +26,13 @@ include_once('_includes/runtime_parms.inc.php');
 	
 	<!-- Include script to render email addresses -->
 	<script type="text/javascript" src="_js/mailguard.js"></script>
+	
+	<!-- Change unordered list indicators from dot to circle -->
+	<script>
+		$("document").ready(function() {
+			$("ul").attr("type","circle");
+		});
+	</script>
 	
 	</head>
 
@@ -54,6 +62,7 @@ include_once('_includes/runtime_parms.inc.php');
 	</div>
 	
 	<p>_________________________________________________________________</p>
+	<p>&nbsp;</p>
 		
 	<?php
 
@@ -81,7 +90,9 @@ include_once('_includes/runtime_parms.inc.php');
 			echo fix_quoted_quotes($item['content'],true) . "\n";
  	
 			echo "<p>_________________________________________________________________</p>";
+		
 		}
+	
 	?>
  <div id="footer">
 	<?php include(EMAIL_FOOTER);?>
