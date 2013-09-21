@@ -91,6 +91,7 @@ echo $_SESSION['message'];
 	<th width="30px">Date</th>
     <th width="15px">Position</th>
 	<th>Title</th>
+	<th>Approved</th>
 	<th>Edit</th>
 	<th>Delete</th>
   </tr>
@@ -114,6 +115,12 @@ while ($item = mysqli_fetch_array($row_resource)) {
 	// echo "    <td>" . (new DateTime($item['bulletin_date']))->format('n/j/Y') . "</td>\n";
 	echo "    <td>" . $item['position'] . "</td>\n";
 	echo "    <td>" . fix_quoted_quotes($item['title']) . "</td>\n";
+
+	echo "    <td halign=\"center\">";
+?>
+	<input name="approved" type="checkbox" id="approved" <?php if ($item['approved']) {echo "checked";} ?>>
+<?php
+	echo "</td>\n";
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";
 	echo "    <td><a href=\"delete_item.php?id=" . $item['item_id'] . "\">Delete</a></td>\n";
 	echo "  </tr>\n\n";

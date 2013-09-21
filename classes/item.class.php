@@ -19,7 +19,8 @@ class Item extends Table {
 								'graphic' => 'graphic',
 								'graphic_link' => 'graphic',
 								'alt_text' => 'text',
-								'thumbnail' => 'graphic'
+								'thumbnail' => 'graphic',
+								'approved' => 'boolean'
 								);
 
 	public static $required = array('bulletin_date' => true, 
@@ -33,7 +34,8 @@ class Item extends Table {
 									'graphic' => false,
 									'graphic_link' => false,
 									'alt_text' => false,
-									'thumbnail' => false
+									'thumbnail' => false,
+									'approved' => false
 									);
 
 ######  Constructor function creates a new bulletin item
@@ -51,6 +53,7 @@ class Item extends Table {
 								$graphic_link=NULL,
 								$alt_text=NULL,
 								$thumbnail=NULL,
+								$approved=false,
 								$item_id=NULL) 
 	{
 		$this->pk_id = (int)$item_id;
@@ -66,12 +69,13 @@ class Item extends Table {
 								  'graphic' => $graphic,
 								  'graphic_link' => $graphic_link,
 								  'alt_text' => $alt_text,
-								  'thumbnail' => $thumbnail
+								  'thumbnail' => $thumbnail,
+								  'approved' => $approved
 								  );
 								  
 		parent::__construct('items', 'item_id', 
 		                     array('bulletin_date', 'position','title','subtitle','bookmark','content',
-							       'excerpt'/*,'caption'*/,'graphic','graphic_link','alt_text','thumbnail'));
+							       'excerpt'/*,'caption'*/,'graphic','graphic_link','alt_text','thumbnail','approved'));
 	}
 	public static function get_type($field_name) {
 		return Item::$type[$field_name];

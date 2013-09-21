@@ -112,6 +112,8 @@ if ((!isset($item_object->bulletin_date)) || is_null($item_object->bulletin_date
 ?>
 
 <p>&nbsp;&nbsp;&nbsp;
+	
+	Approved: <input name="approved" type="checkbox" id="approved" <?php if ($item_object->approved) {echo "checked";} ?>>&nbsp;&nbsp;&nbsp;
 
 	<?php   // Add 'Previouw' button if editing and previous item exists
 		if (!is_null($prev_item_id)) {

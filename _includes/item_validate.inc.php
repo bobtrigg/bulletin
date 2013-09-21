@@ -11,6 +11,11 @@ function validate_item($dbc,$name,$item) {
 	global $errors;
 
 	$type = Item::get_type($name);
+	
+	//  If boolean type, return true or false value and skip remainder of routine
+	if ($type == 'boolean') { 
+		return ($_POST[$name] == 'on') ? 1 : 0;
+	}
 
 	if ($name == 'alt_text') {
 	
@@ -81,7 +86,7 @@ function validate_all_items($dbc) {
 		$field_name = $item->get_col_name($i);
 		$item->set_value($field_name, validate_item($dbc,$field_name,$item));
 	}
-	
+
 	return $item;
 }
 ?>
