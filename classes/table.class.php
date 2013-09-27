@@ -12,6 +12,8 @@ class Table {
 	private $col_array;                //  Array of names of all other columns
 	private $num_cols;                 //  Number of non-key columns
 
+	protected $data_array;             //  Array of data values in the table, indexed by $col_array values
+	
 	public function __construct($table_name, $id_col_name, $col_array) {
 	
 	#  Constructor function creates a new table object

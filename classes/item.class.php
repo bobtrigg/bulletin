@@ -6,8 +6,6 @@ require_once('classes/table.class.php');
 
 class Item extends Table {
 
-	protected $data_array;
-	
 	public static $type = array('bulletin_date' => 'date', 
 								'position' => 'numeric',
 								'title' => 'text',

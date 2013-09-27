@@ -93,6 +93,7 @@ echo $_SESSION['message'];
 	<th class="left_aligned">Title</th>
 	<th>Approved</th>
 	<th>Edit</th>
+	<th>Dupe</th>
 	<th>Delete</th>
   </tr>
  
@@ -122,6 +123,7 @@ while ($item = mysqli_fetch_array($row_resource)) {
 <?php
 	echo "</td>\n";
 	echo "    <td><a href=\"edit_item.php?id=" . $item['item_id'] . "\">Edit</a></td>\n";
+	echo "    <td><a href=\"dupe_item.php?id=" . $item['item_id'] . "\">Dupe</a></td>\n";
 	echo "    <td><a href=\"delete_item.php?id=" . $item['item_id'] . "\">Delete</a></td>\n";
 	echo "  </tr>\n\n";
 	
