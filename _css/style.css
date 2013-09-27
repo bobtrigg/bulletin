@@ -210,13 +210,17 @@ input[type=button] {
 	margin: 5px auto;
 }
 #datatable th {
-	text-align: left;
+	text-align: center;
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
 }
 #datatable td {
+	text-align:center;
 	font-size: 75%;
 	padding: 0 5px;
+}
+#datatable .left_aligned {
+	text-align:left;
 }
 /* footer */
 #footer {

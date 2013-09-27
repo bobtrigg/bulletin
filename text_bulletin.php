@@ -8,7 +8,6 @@ require_once('_includes/functions.inc.php');
 include_once('_includes/runtime_parms.inc.php');
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,16 +23,13 @@ include_once('_includes/runtime_parms.inc.php');
 	<!-- Run script to generate table of contents -->
 	<script type="text/javascript" src="_js/toc.js"></script>
 	
-	<!-- Include script to render email addresses -->
-	<script type="text/javascript" src="_js/mailguard.js"></script>
-	
-	<!-- Change unordered list indicators from dot to circle -->
+	<!-- Change unordered list indicators from dot to circle
 	<script>
 		$("document").ready(function() {
 			$("ul").attr("type","circle");
 		});
 	</script>
-	
+	 -->
 	</head>
 
 <body>
@@ -55,9 +51,9 @@ include_once('_includes/runtime_parms.inc.php');
 			
 		?>
 			
-		<ol id="toc">
+		<p id="toc">
 			<!-- Table of contents will be inserted here by toc.js -->
-		</ol>
+		</p>
 		
 	</div>
 	
@@ -76,7 +72,7 @@ include_once('_includes/runtime_parms.inc.php');
 		while ($item = mysqli_fetch_array($item_list)) {
 			
 			//  Title (with sequence number)
-			echo "<h4 style=\"margin-bottom:0;\">" . fix_quoted_quotes($item['title']) . "</h4>\n";
+			echo "<h4 style=\"margin-bottom:0;\">" . $item_num++ . ". " . fix_quoted_quotes($item['title']) . "</h4>\n";
 			
 			//  Subtitle
 			if ($item['subtitle'] == '' || $item['subtitle'] == ' ') {
@@ -89,7 +85,7 @@ include_once('_includes/runtime_parms.inc.php');
 			//  Print content and close div
 			echo fix_quoted_quotes($item['content'],true) . "\n";
  	
-			echo "<p>_________________________________________________________________</p>";
+			echo "<p>_________________________________________________________________</p>\n<p>&nbsp;</p>";
 		
 		}
 	
