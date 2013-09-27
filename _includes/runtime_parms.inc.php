@@ -1,4 +1,6 @@
 <?php
+#######################################################
+
 // Constants used for website bulletin HTML
 
 //  Use WEB_HEADER for full pathname of file containing company header
@@ -18,6 +20,7 @@ DEFINE('RIGHT_SIDEBAR', '../../_includes/RightCol.htm');
 //  Use CUSTOM_SHARE for full pathname of file containing 
 //    code which will appear at the top of the page (below the header)
 //  This is designed to site links to your social media sites
+//    but can be used for any content to be put at the top of the content area
 DEFINE('CUSTOM_SHARE', '../../_includes/share.htm');
 
 //  Use ORG_NAME for the name of your organization.
@@ -39,7 +42,9 @@ DEFINE('GLOBAL_JS', '../../_js/global.js');
 //  This package contains the fancybox code; you can delete it if you already
 //    have fancybox installed somewhere else. If you do, you'll need to
 //    change this constant.
-DEFINE('FANCY_BOX', '/fancybox/');  
+DEFINE('FANCY_BOX', '/fancybox/'); 
+
+##################################################################### 
 
 //  Constants used for email bulletin HTML
 
@@ -60,6 +65,11 @@ DEFINE('FILE_NAME', '%Y%m%d.shtml');
 //  If not assigned, default is the current working directory.
 //  Like FILE_NAME, the name is parsed according to standard date format codes.
 DEFINE('IMAGE_FOLDER', 'Images/%Y');
+
+//  The file indicated by DEFAULT_IMAGE will appear to the left of any item
+//  in your email bulletin for which an image was not specified.
+//  By default it's a provided transparent image, spacer.gif
+DEFINE('DEFAULT_IMAGE', 'Images/spacer.gif');
 
 //  Use EMAIL_HEADER for full pathname of file containing email HTML header
 DEFINE('EMAIL_HEADER', '_includes/email_header.inc.php');

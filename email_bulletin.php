@@ -33,18 +33,26 @@ while ($item = mysqli_fetch_array($item_list)) {
 	
 	$bookmark =  generate_bookmark($item_title,$item['bookmark']);
 	
-	// If thumbnail size graphic was specified, use it; otherwise use main graphic
-	if (isset($thumbnail) && !is_null($thumbnail)) {
+	// Assign image, with following hierarchy:
+	//    1. specified thumbnail image
+	//    2. specified main image (from HTML bulletin)
+	//    3. specified default image
+	//    4. Images/spacer.gif
+	
+	if (isset($thumbnail) && !is_null($thumbnail) && $thumbnail != '' && $thumbnail != ' ') {
 		$image_url = $thumbnail;
-	} else {
+	} elseif (isset($item['graphic']) && !is_null($item['graphic']) && $item['graphic'] != '' && $item['graphic'] != ' ') {
 		$image_url = $item['graphic'];
+	} elseif (defined('DEFAULT_IMAGE') && (DEFAULT_IMAGE != '')) {
+		$image_url = DEFAULT_IMAGE;
+	} else {
+		$image_url = 'Images/spacer.gif';	
 	}
+	
 	$alt_text = $item['alt_text'];
 	
 	include('_includes/email_item.inc.php');
 }
-
-echo "</ol>\n</div>\n";
 
 include(EMAIL_FOOTER);
 ?>
