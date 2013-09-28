@@ -1,7 +1,156 @@
+/*
+This CSS is basic styles to format the web bulletin.
+Generic page styles are followed by bulletin-specific styles.
+*/
+
+html,body {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	margin: 25px;
+	font-size: 100%;
+	font-family: Calibri, Arial, Helvetica, sans-serif;
+	background: #dfe252 url(/_images/Background.png) repeat-x;
+}
+#wrapper {
+	text-align: left;
+	margin: 0px auto;
+	background-color: white;
+	position: relative;
+	width: 1050px;
+	height: auto;
+}
+#content {
+	width: 980px;
+	padding: 10px;
+	float: left;
+	margin:0px auto;
+}
+
+#footer {
+	width: 1050px;
+	text-align: center;
+	font-size: 0.9em;
+	border-top: 1px solid #aaa;
+	text-align: center;
+	font-size: 0.8em;
+	white-space:nowrap;
+	clear: both;
+	background-color: #FFF;
+}
+#footer p {
+	text-align: center;
+	padding-bottom: 20px;
+}
+h1, h2, h3, h4, h5, h6, p, address, blockquote, ul, li, div {
+	margin: 0px;
+	padding: 0px;
+}
+p, h1, h2, h3, h4 {
+	margin-bottom: 1em;
+}
+h1,h2,h3,h4,dt {
+	color: #543019;
+	font-family: "Trebuchet MS", Verdana, Arial, sans-serif;
+}
+p {
+	font-size: 0.9em;
+	line-height: 1.6;
+}
+h1 {
+	text-align: center;
+	font-size: 1.6em;
+	font-weight: bold;
+}
+h2 {
+	text-align: center;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+h3 {
+	font-size: 1.2em;
+	text-align: left;
+}
+h4 {
+	font-size: 1em;
+	text-align: left;
+	font-weight: bold;
+}
+blockquote {
+	margin-left: 3em;
+}
+a {
+	text-decoration: none;
+	border-bottom: 1px dashed #666;
+	color: #688813;
+}
+a:hover {
+	text-decoration: none;
+	border-bottom: 1px dashed #628413;
+	color: #543019;
+}
+li {
+	font-size: 0.9em;
+	text-align: left;
+	line-height: 1.6em;
+	margin-left: 2em;
+}
+li li {
+	/* This property prevents the relative nature of
+	   the ems measure from shrinking nested lists */
+	font-size:1em;	
+}
+ul ul li {
+	margin-left: 4em;
+}
+
+ul {
+	margin-bottom: 1em;
+}
+img {
+	border: 0px;
+}
+.topRuledBlock {
+	clear: both;
+	height: auto;
+	width: 100%;
+	padding-top: 25px;
+	border-top: 3px ridge #333;
+	margin-top: 25px;
+}
+.center_paragraph {
+	text-align: center;
+}
+
+.right_aligned {
+	text-align: right;
+}
+.Left_just {
+	text-align: left;
+}
+.floatRight {
+	float: right;
+	padding: 10px;
+}
+.floatLeft {
+	float: left;
+	padding: 10px;
+}
+p.clear {
+	clear: both;
+	height: 0;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+/*  Bulletin specific styles */
+
 h3 {
 	margin-bottom:0;
 	color:black;	
-/*	letter-spacing: .15em;*/
 	font-family:Calibri,Arial,Verdana,sans-serif;
 	text-transform:uppercase;
 }

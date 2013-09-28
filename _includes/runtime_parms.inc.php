@@ -42,7 +42,7 @@ DEFINE('GLOBAL_JS', '');
 //  This package contains the fancybox code; you can delete it if you already
 //    have fancybox installed somewhere else. If you do, you'll need to
 //    change this constant.
-DEFINE('FANCY_BOX', '/fancybox/'); 
+DEFINE('FANCY_BOX', 'fancybox/'); 
 
 ##################################################################### 
 
@@ -69,16 +69,16 @@ DEFINE('IMAGE_FOLDER', 'Images/%Y');
 //  The file indicated by DEFAULT_IMAGE will appear to the left of any item
 //  in your email bulletin for which an image was not specified.
 //  By default it's a provided transparent image, spacer.gif
-DEFINE('DEFAULT_IMAGE', '');
+DEFINE('DEFAULT_IMAGE', 'Images/spacer.gif');
 
 //  Use EMAIL_HEADER for full pathname of file containing email HTML header
-DEFINE('EMAIL_HEADER', '');
+DEFINE('EMAIL_HEADER', '_includes/email_header.inc.php');
 
 //  Use BULLETIN_FOOTER for pathname of file containing HTML bulletin footer
 DEFINE('BULLETIN_FOOTER', '');
 
 //  Use EMAIL_FOOTER for full pathname of file containing email HTML footer
-DEFINE('EMAIL_FOOTER', '');
+DEFINE('EMAIL_FOOTER', '_includes/email_footer.inc.php');
 
 //  Use CUSTOM_BAR_BGCOLOR for the bg color on the item title bars
 //  A default color is provided

@@ -11,3 +11,5 @@ _includes/db_info.local.inc.php
 _includes/db_info.mcbc.inc.php
 _includes/mcbc_info.inc.php
 _includes/runtime_parms_mcbc.inc.php
+_includes/email_footer_mcbc.inc.php
+_includes/email_header_mcbc.inc.php
