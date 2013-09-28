@@ -3,10 +3,11 @@ error_log
 readme
 notes.txt
 20130828.shtml
-Images/*
+Images/2013/*
 _js/tinymce
 _js/tinymce/*
 _includes/db_info.bt.inc.php
 _includes/db_info.local.inc.php
 _includes/db_info.mcbc.inc.php
 _includes/mcbc_info.inc.php
+_includes/runtime_parms_mcbc.inc.php
